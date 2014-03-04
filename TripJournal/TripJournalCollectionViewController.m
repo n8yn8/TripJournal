@@ -140,6 +140,7 @@
 {
     TripCollectionViewController *source = [unwindSegue sourceViewController];
     Trip *item = source.selectedTrip;
+    NSLog(@"UndwindToJournal returned uniqueId = %i", item.uniqueId);
     
     if (_chosenIndex >= 0) {
         
@@ -155,6 +156,7 @@
     } else if (item != nil) {
         NSLog(@"returned trip is new");
         [self.tripsJournal addObject:item];
+        //[TripsDatabase database].addToJournal:item;
         [self.collectionView reloadData];
     }
 }

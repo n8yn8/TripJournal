@@ -7,7 +7,6 @@
 //
 
 #import "TripsDatabase.h"
-#import "Trip.h"
 
 @implementation TripsDatabase
 
@@ -22,6 +21,9 @@ static TripsDatabase *_database;
 
 - (id)init {
     if ((self = [super init])) {
+        
+        _format = [[NSDateFormatter alloc] init];
+        [_format setDateFormat:@"mm-dd-yyyy"];
         
         NSLog(@"init of TripsDatabase");
         
@@ -56,7 +58,7 @@ static TripsDatabase *_database;
                 NSLog(@"Failed to open/create database");
             }
         } else {
-            NSLog(@"Database found");
+            NSLog(@"Trips Database found");
         }
     }
     return self;
@@ -69,17 +71,13 @@ static TripsDatabase *_database;
 
 - (NSMutableArray *)tripsJournal {
     
-    _format = [[NSDateFormatter alloc] init];
-    [_format setDateFormat:@"mm-dd-yyyy"];
-    
     NSMutableArray *retval = [[NSMutableArray alloc] init];
     
     const char *dbpath = [_databasePath UTF8String];
     sqlite3_stmt    *statement;
     if (sqlite3_open(dbpath, &_database) == SQLITE_OK)
     {
-        NSString *querySQL = [NSString stringWithFormat:
-                              @"SELECT id, name, description, photo, startdate, enddate FROM trips"];
+        NSString *querySQL = [NSString stringWithFormat:@"SELECT id, name, description, photo, startdate, enddate FROM trips"];
         const char *query_stmt = [querySQL UTF8String];
         
         if (sqlite3_prepare_v2(_database, query_stmt, -1, &statement, NULL) == SQLITE_OK)
@@ -102,6 +100,25 @@ static TripsDatabase *_database;
         }
     }
     return retval;
+}
+
+-(void)addToJournal:(Trip *)trip {
+    
+    const char *dbpath = [_databasePath UTF8String];
+    sqlite3_stmt    *statement;
+    if (sqlite3_open(dbpath, &_database) == SQLITE_OK)
+    {
+        NSString *insertSQL = [NSString stringWithFormat:@"INSERT INTO TRIPS (name, description, photo, startdate, enddate) VALUES (\"%@\", \"%@\", \"%@\", \"%@\", \"%@\")", trip.name, trip.description, trip.photo, trip.startDate, trip.endDate];
+        const char *insert_stmt = [insertSQL UTF8String];
+        sqlite3_prepare_v2(_database, insert_stmt, -1, &statement, NULL);
+        if (sqlite3_step(statement) == SQLITE_DONE) {
+            NSLog(@"Successfully added Trip");
+        } else {
+            NSLog(@"Failed to add Trip");
+        }
+        sqlite3_finalize(statement);
+    }
+    
 }
 
 @end

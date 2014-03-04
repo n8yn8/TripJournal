@@ -327,7 +327,11 @@
                                 <rect key="frame" x="0.0" y="524" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
-                                    <barButtonItem title="Use Camera Roll" id="Wnc-Zf-4RX"/>
+                                    <barButtonItem title="Use Camera Roll" id="Wnc-Zf-4RX">
+                                        <connections>
+                                            <action selector="useCameraRoll:" destination="5Fm-HM-DlW" id="zfB-1n-0xe"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                             </toolbar>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2gU-yB-Xv4">

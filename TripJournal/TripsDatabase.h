@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <sqlite3.h>
+#import "Trip.h"
 
 @interface TripsDatabase : NSObject {
     sqlite3 *_database;
@@ -18,5 +19,6 @@
 
 + (TripsDatabase*)database;
 - (NSMutableArray *)tripsJournal;
+-(void)addToJournal:(Trip*)trip;
 
 @end

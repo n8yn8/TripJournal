@@ -7,10 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MobileCoreServices/MobileCoreServices.h>
 #import "Memory.h"
 
-@interface MemoryViewController : UIViewController
+@interface MemoryViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
+@property BOOL newPic;
+- (IBAction)useCameraRoll:(id)sender;
+@property (strong, nonatomic) NSURL *imageURL;
 @property (nonatomic, strong) Memory *memory;
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
 @property (strong, nonatomic) IBOutlet UITextField *memoryName;

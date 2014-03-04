@@ -33,7 +33,7 @@
 	// Do any additional setup after loading the view.
     
     _refID = [NSNumber numberWithInt:self.selectedTrip.uniqueId];
-    NSLog(@"refID received is %@", _refID);
+    NSLog(@"TripsCollection refID received is %@", _refID);
     self.placesJournal = [[PlacesDatabase database] placesJournal:_refID];
     
     _format = [[NSDateFormatter alloc] init];
@@ -167,7 +167,10 @@
     } else if (sender == self.saveButton){
         if (self.headerView.name.text > 0) {
             NSLog(@"Save Button, name field > 0, name field = %@.", self.headerView.name.text);
-            self.selectedTrip = [[Trip alloc]init];
+            NSLog(@"Displayed trip uniquId = %i", self.selectedTrip.uniqueId);
+            if (!self.selectedTrip) {
+                self.selectedTrip = [[Trip alloc]init];
+            }
             self.selectedTrip.name = self.headerView.name.text;
             self.selectedTrip.description = self.headerView.description.text;
             self.selectedTrip.photo = _tripCoverImage;

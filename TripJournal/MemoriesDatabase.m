@@ -81,18 +81,15 @@ static MemoriesDatabase *_database;
     if (sqlite3_open(dbpath, &_database) == SQLITE_OK)
     {
         NSString *querySQL = [NSString stringWithFormat:@"SELECT id, placeid, name, description, photo, date FROM memories WHERE placeid=%@", placeId];
-        NSLog(@"%@", querySQL);
         const char *query_stmt = [querySQL UTF8String];
         
         if (sqlite3_prepare_v2(_database, query_stmt, -1, &statement, NULL) == SQLITE_OK)
         {
             while (sqlite3_step(statement) == SQLITE_ROW)
             {
-                NSLog(@"A row is returned");
                 int uniqueId = sqlite3_column_int(statement, 0);
                 NSNumber *placeId = [[NSNumber alloc] initWithInt: sqlite3_column_int(statement, 1)];
                 NSString *name = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 2)];
-                NSLog(@"Place found has name %@", name);
                 NSString *description = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 3)];
                 NSString *photo = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 4)];
                 NSDate *date = [_format dateFromString:[[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 5)]];

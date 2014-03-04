@@ -33,7 +33,7 @@
     [super viewDidLoad];
     
     _refID = [NSNumber numberWithInt:self.selectedPlace.uniqueId];
-    NSLog(@"refID received is %@", _refID);
+    NSLog(@"PlacesCollection refID received is %@", _refID);
     self.memoriesJournal = [[MemoriesDatabase database] memoriesJournal:_refID];
     _chosenIndex = -1;
     
@@ -152,7 +152,9 @@
         dvc.currentTripCover = self.tripCoverImage;
     } else if (sender == self.savePlace) {
         if (self.headerView.name.text > 0 ) {
-            self.selectedPlace = [[Place alloc]init];
+            if (!self.selectedPlace) {
+                self.selectedPlace = [[Place alloc]init];
+            }
             self.selectedPlace.name = self.headerView.name.text;
             self.selectedPlace.description = self.headerView.description.text;
             self.selectedPlace.photo = _placeCoverImage;

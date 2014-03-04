@@ -29,6 +29,7 @@
 		4370B81F1898D38F00907C5D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4370B81D1898D38F00907C5D /* InfoPlist.strings */; };
 		4370B8211898D38F00907C5D /* TripJournalTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4370B8201898D38F00907C5D /* TripJournalTests.m */; };
 		4376228C18C5492D002FD0D7 /* MemoriesDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 4376228B18C5492D002FD0D7 /* MemoriesDatabase.m */; };
+		4376228E18C5597A002FD0D7 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4376228D18C5597A002FD0D7 /* MobileCoreServices.framework */; };
 		439EC68518B4906E00BC6EBA /* Trip.m in Sources */ = {isa = PBXBuildFile; fileRef = 439EC68418B4906E00BC6EBA /* Trip.m */; };
 		439EC68818B4B36500BC6EBA /* Place.m in Sources */ = {isa = PBXBuildFile; fileRef = 439EC68718B4B36500BC6EBA /* Place.m */; };
 		439EC68B18B53F8900BC6EBA /* PlacesCollectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 439EC68A18B53F8900BC6EBA /* PlacesCollectionHeaderView.m */; };
@@ -84,6 +85,7 @@
 		4370B8201898D38F00907C5D /* TripJournalTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TripJournalTests.m; sourceTree = "<group>"; };
 		4376228A18C5492D002FD0D7 /* MemoriesDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemoriesDatabase.h; sourceTree = "<group>"; };
 		4376228B18C5492D002FD0D7 /* MemoriesDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemoriesDatabase.m; sourceTree = "<group>"; };
+		4376228D18C5597A002FD0D7 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		439EC68318B4906E00BC6EBA /* Trip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Trip.h; sourceTree = "<group>"; };
 		439EC68418B4906E00BC6EBA /* Trip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Trip.m; sourceTree = "<group>"; };
 		439EC68618B4B36500BC6EBA /* Place.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Place.h; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4376228E18C5597A002FD0D7 /* MobileCoreServices.framework in Frameworks */,
 				43A9965C18C3B56E0083F327 /* libsqlite3.dylib in Frameworks */,
 				433E4EBA18AB5ED4003FC9AA /* CoreLocation.framework in Frameworks */,
 				433E4EB818AB5ECC003FC9AA /* MapKit.framework in Frameworks */,
@@ -151,6 +154,7 @@
 		4370B7F41898D38F00907C5D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4376228D18C5597A002FD0D7 /* MobileCoreServices.framework */,
 				43A9965B18C3B56E0083F327 /* libsqlite3.dylib */,
 				433E4EB918AB5ED4003FC9AA /* CoreLocation.framework */,
 				433E4EB718AB5ECC003FC9AA /* MapKit.framework */,

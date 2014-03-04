@@ -56,7 +56,9 @@
     if (sender == self.saveMemory){
         if (self.memoryName.text > 0) {
             NSLog(@"Save Button, name field > 0, name field = %@.", self.memoryName.text);
-            self.memory = [[Memory alloc]init];
+            if (!self.memory) {
+                self.memory = [[Memory alloc]init];
+            }
             self.memory.name = self.memoryName.text;
             self.memory.description = self.memoryDescription.text;
             self.memory.photo = _currentImage;
@@ -81,7 +83,6 @@
     [super touchesBegan:touches withEvent:event];
 }
 
-/*
 - (IBAction)useCameraRoll:(id)sender {
     if ([UIImagePickerController isSourceTypeAvailable:
          UIImagePickerControllerSourceTypeSavedPhotosAlbum])
@@ -89,12 +90,10 @@
         UIImagePickerController *imagePicker =
         [[UIImagePickerController alloc] init];
         imagePicker.delegate = self;
-        imagePicker.sourceType =
-        UIImagePickerControllerSourceTypePhotoLibrary;
+        imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         imagePicker.mediaTypes = @[(NSString *) kUTTypeImage];
         imagePicker.allowsEditing = NO;
-        [self presentViewController:imagePicker
-                           animated:YES completion:nil];
+        [self presentViewController:imagePicker animated:YES completion:nil];
         _newPic = NO;
     }
 }
@@ -118,7 +117,7 @@
         
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSString *documentsDirectory = [paths objectAtIndex:0];
-        NSString *appendPic = [NSString stringWithFormat:@"%@.png", _detailID];
+        NSString *appendPic = [NSString stringWithFormat:@"%i.png", _memory.uniqueId];
         NSData *data = UIImagePNGRepresentation(image);
         NSString *tmpPathToFile = [[NSString alloc] initWithString:[NSString stringWithFormat:@"%@/%@",documentsDirectory,appendPic]];
         if([data writeToFile:tmpPathToFile atomically:YES]){
@@ -156,5 +155,5 @@
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-*/
+
 @end
