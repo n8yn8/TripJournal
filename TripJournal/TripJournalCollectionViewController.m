@@ -9,6 +9,7 @@
 #import "TripJournalCollectionViewController.h"
 #import "TripCollectionViewController.h"
 #import "Trip.h"
+#import "TripsDatabase.h"
 
 @interface TripJournalCollectionViewController ()
 @property (strong, nonatomic) NSDateFormatter *format;
@@ -18,10 +19,8 @@
 
 -(void)loadInitialData {
     
-    _chosenIndex = -1;
-    _format = [[NSDateFormatter alloc] init];
-    [_format setDateFormat:@"mm-dd-yyyy"];
     
+    /*
     Trip *mexicoCity = [[Trip alloc] init];
     mexicoCity.name = @"Mexico City";
     mexicoCity.photo = @"Place-SunPyramid.png";
@@ -35,7 +34,7 @@
     argentina.photo = @"Main-Argentina.png";
     argentina.description = @"Impromptu trip";
     [self.journalEntries addObject:argentina];
-    
+    */
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -50,9 +49,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.tripsJournal = [TripsDatabase database].tripsJournal;
     
-    self.journalEntries = [[NSMutableArray alloc] init];
-    [self loadInitialData];
+    _chosenIndex = -1;
+    _format = [[NSDateFormatter alloc] init];
+    [_format setDateFormat:@"mm-dd-yyyy"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -63,7 +64,7 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     //count the array
-    return self.journalEntries.count;
+    return [_tripsJournal count];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -78,10 +79,10 @@
     
     //assign the image
     
-    Trip *trip = [self.journalEntries objectAtIndex:indexPath.item];
-    menuPhotoView.image = [UIImage imageNamed:trip.photo];
-    tripName.text = trip.name;
-    tripDesc.text = trip.description;
+    Trip *info = [_tripsJournal objectAtIndex:indexPath.item];
+    menuPhotoView.image = [UIImage imageNamed:info.photo];
+    tripName.text = info.name;
+    tripDesc.text = info.description;
     
     return cell;
 }
@@ -130,8 +131,8 @@
         NSIndexPath *index = [indexPaths objectAtIndex:0];
         
         _chosenIndex = index.item;
-        dvc.selectedTrip = [_journalEntries objectAtIndex:index.item];
-        dvc.refID = [NSNumber numberWithInteger:_chosenIndex];
+        dvc.selectedTrip = [_tripsJournal objectAtIndex:index.item];
+        //dvc.refID = ;
     }
 }
 
@@ -142,18 +143,18 @@
     
     if (_chosenIndex >= 0) {
         
-        if ([item isEqual:[self.journalEntries objectAtIndex:_chosenIndex]]) {
+        if ([item isEqual:[self.tripsJournal objectAtIndex:_chosenIndex]]) {
             NSLog(@"returned trip is equal to selected trip.");
         } else {
             NSLog(@"returned trip was edited.");
-            [self.journalEntries replaceObjectAtIndex:_chosenIndex withObject:item];
+            [self.tripsJournal replaceObjectAtIndex:_chosenIndex withObject:item];
             [self.collectionView reloadData];
         }
         _chosenIndex = -1;
         
     } else if (item != nil) {
         NSLog(@"returned trip is new");
-        [self.journalEntries addObject:item];
+        [self.tripsJournal addObject:item];
         [self.collectionView reloadData];
     }
 }

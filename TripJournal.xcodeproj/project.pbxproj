@@ -28,12 +28,16 @@
 		4370B8171898D38F00907C5D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4370B7F91898D38F00907C5D /* UIKit.framework */; };
 		4370B81F1898D38F00907C5D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4370B81D1898D38F00907C5D /* InfoPlist.strings */; };
 		4370B8211898D38F00907C5D /* TripJournalTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4370B8201898D38F00907C5D /* TripJournalTests.m */; };
+		4376228C18C5492D002FD0D7 /* MemoriesDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 4376228B18C5492D002FD0D7 /* MemoriesDatabase.m */; };
 		439EC68518B4906E00BC6EBA /* Trip.m in Sources */ = {isa = PBXBuildFile; fileRef = 439EC68418B4906E00BC6EBA /* Trip.m */; };
 		439EC68818B4B36500BC6EBA /* Place.m in Sources */ = {isa = PBXBuildFile; fileRef = 439EC68718B4B36500BC6EBA /* Place.m */; };
 		439EC68B18B53F8900BC6EBA /* PlacesCollectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 439EC68A18B53F8900BC6EBA /* PlacesCollectionHeaderView.m */; };
 		439EC68E18B541FF00BC6EBA /* Memory.m in Sources */ = {isa = PBXBuildFile; fileRef = 439EC68D18B541FF00BC6EBA /* Memory.m */; };
 		439EC69118B582E300BC6EBA /* MemoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 439EC69018B582E300BC6EBA /* MemoryViewController.m */; };
 		439EC69318B5D6A700BC6EBA /* Journal.plist in Resources */ = {isa = PBXBuildFile; fileRef = 439EC69218B5D6A700BC6EBA /* Journal.plist */; };
+		43A9965C18C3B56E0083F327 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 43A9965B18C3B56E0083F327 /* libsqlite3.dylib */; };
+		43A9965F18C3BFEA0083F327 /* TripsDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A9965E18C3BFEA0083F327 /* TripsDatabase.m */; };
+		43A9966218C402D40083F327 /* PlacesDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A9966118C402D40083F327 /* PlacesDatabase.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +82,8 @@
 		4370B81C1898D38F00907C5D /* TripJournalTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TripJournalTests-Info.plist"; sourceTree = "<group>"; };
 		4370B81E1898D38F00907C5D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4370B8201898D38F00907C5D /* TripJournalTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TripJournalTests.m; sourceTree = "<group>"; };
+		4376228A18C5492D002FD0D7 /* MemoriesDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemoriesDatabase.h; sourceTree = "<group>"; };
+		4376228B18C5492D002FD0D7 /* MemoriesDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemoriesDatabase.m; sourceTree = "<group>"; };
 		439EC68318B4906E00BC6EBA /* Trip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Trip.h; sourceTree = "<group>"; };
 		439EC68418B4906E00BC6EBA /* Trip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Trip.m; sourceTree = "<group>"; };
 		439EC68618B4B36500BC6EBA /* Place.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Place.h; sourceTree = "<group>"; };
@@ -89,6 +95,11 @@
 		439EC68F18B582E300BC6EBA /* MemoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemoryViewController.h; sourceTree = "<group>"; };
 		439EC69018B582E300BC6EBA /* MemoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemoryViewController.m; sourceTree = "<group>"; };
 		439EC69218B5D6A700BC6EBA /* Journal.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Journal.plist; sourceTree = "<group>"; };
+		43A9965B18C3B56E0083F327 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		43A9965D18C3BFEA0083F327 /* TripsDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TripsDatabase.h; sourceTree = "<group>"; };
+		43A9965E18C3BFEA0083F327 /* TripsDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TripsDatabase.m; sourceTree = "<group>"; };
+		43A9966018C402D40083F327 /* PlacesDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlacesDatabase.h; sourceTree = "<group>"; };
+		43A9966118C402D40083F327 /* PlacesDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlacesDatabase.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -96,6 +107,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43A9965C18C3B56E0083F327 /* libsqlite3.dylib in Frameworks */,
 				433E4EBA18AB5ED4003FC9AA /* CoreLocation.framework in Frameworks */,
 				433E4EB818AB5ECC003FC9AA /* MapKit.framework in Frameworks */,
 				4370B7F81898D38F00907C5D /* CoreGraphics.framework in Frameworks */,
@@ -139,6 +151,7 @@
 		4370B7F41898D38F00907C5D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				43A9965B18C3B56E0083F327 /* libsqlite3.dylib */,
 				433E4EB918AB5ED4003FC9AA /* CoreLocation.framework */,
 				433E4EB718AB5ECC003FC9AA /* MapKit.framework */,
 				4370B7F51898D38F00907C5D /* Foundation.framework */,
@@ -191,6 +204,12 @@
 				439EC68C18B541FF00BC6EBA /* Memory.h */,
 				439EC68D18B541FF00BC6EBA /* Memory.m */,
 				439EC69218B5D6A700BC6EBA /* Journal.plist */,
+				43A9965D18C3BFEA0083F327 /* TripsDatabase.h */,
+				43A9965E18C3BFEA0083F327 /* TripsDatabase.m */,
+				43A9966018C402D40083F327 /* PlacesDatabase.h */,
+				43A9966118C402D40083F327 /* PlacesDatabase.m */,
+				4376228A18C5492D002FD0D7 /* MemoriesDatabase.h */,
+				4376228B18C5492D002FD0D7 /* MemoriesDatabase.m */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -315,10 +334,13 @@
 				433E4EAD18AB34B1003FC9AA /* PlacesCollectionViewController.m in Sources */,
 				4370B8021898D38F00907C5D /* main.m in Sources */,
 				433E4EB618AB5E97003FC9AA /* MyAnnotation.m in Sources */,
+				4376228C18C5492D002FD0D7 /* MemoriesDatabase.m in Sources */,
 				433E4EB018AB5540003FC9AA /* TripCollectionHeaderView.m in Sources */,
 				439EC68E18B541FF00BC6EBA /* Memory.m in Sources */,
+				43A9966218C402D40083F327 /* PlacesDatabase.m in Sources */,
 				433E4EB318AB5D0C003FC9AA /* JournalCollectionHeaderView.m in Sources */,
 				439EC68818B4B36500BC6EBA /* Place.m in Sources */,
+				43A9965F18C3BFEA0083F327 /* TripsDatabase.m in Sources */,
 				433E4E9118AB1D5C003FC9AA /* TripJournalCollectionViewController.m in Sources */,
 				4370B8061898D38F00907C5D /* TripJournalAppDelegate.m in Sources */,
 				439EC69118B582E300BC6EBA /* MemoryViewController.m in Sources */,

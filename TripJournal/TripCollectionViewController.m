@@ -7,7 +7,7 @@
 //
 
 #import "TripCollectionViewController.h"
-
+#import "PlacesDatabase.h"
 
 @interface TripCollectionViewController ()
 
@@ -32,10 +32,14 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
+    _refID = [NSNumber numberWithInt:self.selectedTrip.uniqueId];
+    NSLog(@"refID received is %@", _refID);
+    self.placesJournal = [[PlacesDatabase database] placesJournal:_refID];
+    
     _format = [[NSDateFormatter alloc] init];
     [_format setDateFormat:@"mm-dd-yyyy"];
     _chosenIndex = -1;
-    
+    /*
     Place *teo = [[Place alloc] init];
     teo.name = @"Teotihuacan";
     teo.photo = @"Place-SunPyramid.png";
@@ -68,8 +72,8 @@
     if ([_selectedTrip.name isEqualToString:@"Mexico City"]) {
         _placeEntries = [NSMutableArray arrayWithObjects:teo, coyo, art, casa, nil];
     }
+     */
     _tripCoverImage = _selectedTrip.photo;
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -80,7 +84,7 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     //same as before….count the array
-    return _placeEntries.count;
+    return [_placesJournal count];
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -94,7 +98,7 @@
     UILabel *placeDesc = (UILabel *)[cell viewWithTag:202];
     //assign the image
     
-    Place *place = [_placeEntries objectAtIndex:indexPath.row];
+    Place *place = [_placesJournal objectAtIndex:indexPath.row];
     menuPhotoView.image = [UIImage imageNamed:place.photo];
     placeName.text = place.name;
     placeDesc.text = place.description;
@@ -153,13 +157,13 @@
         UINavigationController *navigationController = segue.destinationViewController;
 		PlacesCollectionViewController *dvc = [[navigationController viewControllers] objectAtIndex:0];
         
-        
         NSArray *indexPaths = [self.collectionView indexPathsForSelectedItems];
         NSIndexPath *index = [indexPaths objectAtIndex:0];
         
         _chosenIndex = index.item;
-        dvc.selectedPlace = [_placeEntries objectAtIndex:_chosenIndex];
+        dvc.selectedPlace = [_placesJournal objectAtIndex:_chosenIndex];
         dvc.tripCoverImage = self.tripCoverImage;
+        
     } else if (sender == self.saveButton){
         if (self.headerView.name.text > 0) {
             NSLog(@"Save Button, name field > 0, name field = %@.", self.headerView.name.text);
@@ -178,15 +182,15 @@
     
     if (_chosenIndex >= 0) {
         
-        if ([item isEqual:[self.placeEntries objectAtIndex:_chosenIndex]]) {
+        if ([item isEqual:[self.placesJournal objectAtIndex:_chosenIndex]]) {
             NSLog(@"returned place is equal to selected place.");
         } else {
-            [self.placeEntries replaceObjectAtIndex:_chosenIndex withObject:item];
+            [self.placesJournal replaceObjectAtIndex:_chosenIndex withObject:item];
             [self.collectionView reloadData];
         }
         _chosenIndex = -1;
     } else if (item != nil) {
-        [self.placeEntries addObject:item];
+        [self.placesJournal addObject:item];
         [self.collectionView reloadData];
     }
     

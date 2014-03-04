@@ -14,10 +14,12 @@
 #import "MyAnnotation.h"
 
 
-@interface TripCollectionViewController : UICollectionViewController
+@interface TripCollectionViewController : UICollectionViewController {
+    NSMutableArray *_placesJournal;
+}
+@property (nonatomic, retain) NSMutableArray *placesJournal;
 @property (strong, nonatomic) NSNumber *refID;
 @property (nonatomic, strong) Trip *selectedTrip;
-@property (nonatomic, strong) NSMutableArray *placeEntries;
 @property (nonatomic, strong) TripCollectionHeaderView *headerView;
 @property (nonatomic, strong) NSString *tripCoverImage;
 @property NSInteger chosenIndex;

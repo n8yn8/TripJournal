@@ -10,8 +10,13 @@
 #import "JournalCollectionHeaderView.h"
 #import "MyAnnotation.h"
 #import "TripCollectionViewController.h"
+#import <sqlite3.h>
 
-@interface TripJournalCollectionViewController : UICollectionViewController
+@interface TripJournalCollectionViewController : UICollectionViewController {
+    NSMutableArray *_tripsJournal;
+}
+
+@property (nonatomic, retain) NSMutableArray *tripsJournal;
 @property NSMutableArray *journalEntries;
 @property NSInteger chosenIndex;
 

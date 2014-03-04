@@ -10,4 +10,25 @@
 
 @implementation Trip
 
+- (id)initWithUniqueId:(int)uniqueId name:(NSString *)name description:(NSString *)description photo:(NSString *)photo startDate:(NSDate *)startDate endDate:(NSDate *)endDate {
+    if ((self = [super init])) {
+        self.uniqueId = uniqueId;
+        self.name = name;
+        self.description = description;
+        self.photo = photo;
+        self.startDate = startDate;
+        self.endDate = endDate;
+    }
+    return self;
+}
+
+-(void) dealloc {
+    self.name = nil;
+    self.description = nil;
+    self.photo = nil;
+    self.startDate = nil;
+    self.endDate = nil;
+    //[super dealloc];
+}
+
 @end

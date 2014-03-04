@@ -8,11 +8,22 @@
 
 #import <Foundation/Foundation.h>
 
-@interface Memory : NSObject
-@property (strong, nonatomic) NSNumber *refID;
-@property (strong, nonatomic) NSString *name;
-@property (strong, nonatomic) NSString *photo;
-@property (strong, nonatomic) NSString *description;
-@property (strong, nonatomic) NSDate *date;
-//@property (nonatomic, assign, getter=isTripCover) BOOL tripCover;
+@interface Memory : NSObject {
+    int _uniqueId;
+    NSNumber *_placeId;
+    NSString *_name;
+    NSString *_description;
+    NSString *_photo;
+    NSDate *_date;
+}
+
+@property (nonatomic, assign) int uniqueId;
+@property (copy, nonatomic) NSNumber *placeId;
+@property (copy, nonatomic) NSString *name;
+@property (copy, nonatomic) NSString *description;
+@property (copy, nonatomic) NSString *photo;
+@property (copy, nonatomic) NSDate *date;
+
+- (id)initWithUniqueId:(int)uniqueId placeId:(NSNumber *)placeId name:(NSString *)name description:(NSString *)description photo:(NSString *)photo date:(NSDate *)date;
+
 @end

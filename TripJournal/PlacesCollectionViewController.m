@@ -7,6 +7,7 @@
 //
 
 #import "PlacesCollectionViewController.h"
+#import "MemoriesDatabase.h"
 
 @interface PlacesCollectionViewController ()
 
@@ -31,15 +32,15 @@
 {
     [super viewDidLoad];
     
-    // Holds memories associated with the current place.
-    _memoryEntries = [[NSMutableArray alloc] init];
-    
+    _refID = [NSNumber numberWithInt:self.selectedPlace.uniqueId];
+    NSLog(@"refID received is %@", _refID);
+    self.memoriesJournal = [[MemoriesDatabase database] memoriesJournal:_refID];
     _chosenIndex = -1;
     
     _format = [[NSDateFormatter alloc] init];
     [_format setDateFormat:@"mm-dd-yyyy"];
-    //NSString *dateString = [format stringFromDate:date];
     
+    /*
     Memory *one = [[Memory alloc] init];
     one.name = @"Sun Pyramids";
     one.photo = @"Place-SunPyramid.png";
@@ -67,8 +68,8 @@
     if ([_selectedPlace.name isEqualToString:@"Teotihuacan"]) {
         [_memoryEntries addObjectsFromArray:@[one,two,three,four]];
     }
+     */
     _placeCoverImage = _selectedPlace.photo;
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -79,7 +80,7 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     //same as before….count the array
-    return _memoryEntries.count;
+    return _memoriesJournal.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
@@ -92,7 +93,7 @@
     UILabel *memoryName = (UILabel *)[cell viewWithTag:301];
     UILabel *memoryDesc = (UILabel *)[cell viewWithTag:302];
     //assign the image
-    Memory *memory = [_memoryEntries objectAtIndex:indexPath.item];
+    Memory *memory = [_memoriesJournal objectAtIndex:indexPath.item];
     menuPhotoView.image = [UIImage imageNamed:memory.photo];
     memoryName.text = memory.name;
     memoryDesc.text = memory.description;
@@ -146,9 +147,9 @@
         NSArray *indexPaths = [self.collectionView indexPathsForSelectedItems];
         NSIndexPath *index = [indexPaths objectAtIndex:0];
         _chosenIndex = index.item;
-        dvc.memory = [_memoryEntries objectAtIndex: _chosenIndex];
-        dvc.currentPlaceCover = _placeCoverImage;
-        dvc.currentTripCover = _tripCoverImage;
+        dvc.memory = [_memoriesJournal objectAtIndex: _chosenIndex];
+        dvc.currentPlaceCover = self.placeCoverImage;
+        dvc.currentTripCover = self.tripCoverImage;
     } else if (sender == self.savePlace) {
         if (self.headerView.name.text > 0 ) {
             self.selectedPlace = [[Place alloc]init];
@@ -169,13 +170,13 @@
     if (_chosenIndex >= 0) {
         
         // If the the chosen memory was unchanged, do nothing.
-        if ([item isEqual:[self.memoryEntries objectAtIndex:_chosenIndex]]){
+        if ([item isEqual:[self.memoriesJournal objectAtIndex:_chosenIndex]]){
             NSLog(@"returned memory is equal to selected memory");
         
         // Else update the chosen memory.
         } else {
             NSLog(@"returned memory is NOT equal to selected memory");
-            [self.memoryEntries replaceObjectAtIndex:_chosenIndex withObject:item];
+            [self.memoriesJournal replaceObjectAtIndex:_chosenIndex withObject:item];
             [self.collectionView reloadData];
         }
         
@@ -186,7 +187,7 @@
     // Else the memory is a new memory. Save the new memory if it contains data.
     else if (item != nil) {
         NSLog(@"returned memory is a new memory");
-        [self.memoryEntries addObject:item];
+        [self.memoriesJournal addObject:item];
         [self.collectionView reloadData];
     }
     

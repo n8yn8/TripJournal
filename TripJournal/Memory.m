@@ -10,4 +10,24 @@
 
 @implementation Memory
 
+-(id)initWithUniqueId:(int)uniqueId placeId:(NSNumber *)placeId name:(NSString *)name description:(NSString *)description photo:(NSString *)photo date:(NSDate *)date {
+    if ((self = [super init])) {
+        self.uniqueId = uniqueId;
+        self.placeId = placeId;
+        self.name = name;
+        self.description = description;
+        self.photo = photo;
+        self.date = date;
+    }
+    return self;
+}
+
+-(void) dealloc {
+    self.name = nil;
+    self.description = nil;
+    self.photo = nil;
+    self.date = nil;
+    //[super dealloc];
+}
+
 @end

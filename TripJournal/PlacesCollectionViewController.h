@@ -13,11 +13,14 @@
 #import "Memory.h"
 
 @interface PlacesCollectionViewController : UICollectionViewController
+{
+    NSMutableArray *_memoriesJournal;
+}
+@property (nonatomic, retain) NSMutableArray *memoriesJournal;
 @property (strong, nonatomic) NSNumber *refID;
 @property (nonatomic, strong) Place *selectedPlace;
 @property (nonatomic, strong) NSString *placeCoverImage;
 @property (nonatomic, strong) NSString *tripCoverImage;
-@property (nonatomic, strong) NSMutableArray *memoryEntries;
 @property (nonatomic, strong) PlacesCollectionHeaderView *headerView;
 @property NSInteger chosenIndex;
 - (IBAction)unwindToPlace:(UIStoryboardSegue *)unwindSegue;
