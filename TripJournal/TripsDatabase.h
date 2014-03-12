@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <sqlite3.h>
 #import "Trip.h"
+#import "Place.h"
+#import "Memory.h"
 
 @interface TripsDatabase : NSObject {
     sqlite3 *_database;
@@ -18,7 +20,17 @@
 @property (strong, nonatomic) NSString *databasePath;
 
 + (TripsDatabase*)database;
+
 - (NSMutableArray *)tripsJournal;
--(void)addToJournal:(Trip*)trip;
+-(long long)addTripToJournal:(Trip*)trip;
+-(void)updateTrip:(Trip *)trip;
+
+- (NSMutableArray *)placesJournal:(NSNumber*)tripId;
+-(long long)addPlaceToJournal:(Place*)place;
+-(void)updatePlace:(Place *)place;
+
+- (NSMutableArray *)memoriesJournal:(NSNumber*)placeId;
+-(long long)addMemoryToJournal:(Memory*)memory;
+-(void)updateMemory:(Memory *)memory;
 
 @end

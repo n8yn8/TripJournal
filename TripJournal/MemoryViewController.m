@@ -7,11 +7,14 @@
 //
 
 #import "MemoryViewController.h"
+#import "TripsDatabase.h"
+#import <AssetsLibrary/AssetsLibrary.h>
 
 @interface MemoryViewController ()
 
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *saveMemory;
 @property (strong, nonatomic) NSString *currentImage;
+@property (strong, nonatomic) NSDateFormatter *format;
 
 @end
 
@@ -31,18 +34,28 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    NSDateFormatter *format = [[NSDateFormatter alloc] init];
-    [format setDateFormat:@"mm-dd-yyyy"];
+    _format = [[NSDateFormatter alloc] init];
+    [_format setDateStyle:NSDateFormatterMediumStyle];
+    [_format setTimeStyle:NSDateFormatterNoStyle];
     
-    _currentImage = _memory.photo;
+    //if (_selectedMemory.photo) {
+        //NSLog(@"%@", self.selectedMemory.photo);
+        NSData *imageData = [[NSFileManager defaultManager] contentsAtPath:self.selectedMemory.photo];
+    /*
+    } else if (_selectedMemory.photoURL) {
+        ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+        [library assetForURL:_selectedMemory.photoURL resultBlock:<#^(ALAsset *asset)resultBlock#> failureBlock:^(NSError *error)]
+    }*/
+    UIImage *myImage = [[UIImage alloc] initWithData:imageData];
+    _imageView.image = myImage;
+    
+    _currentImage = _selectedMemory.photo;
     [_placeCoverSwitch setOn:[_currentPlaceCover isEqualToString:_currentImage]];
     [_tripCoverSwitch setOn:[_currentTripCover isEqualToString:_currentImage]];
-
-    _imageView.image = [UIImage imageNamed:_currentImage];
-    _memoryName.text = _memory.name;
-    _memoryDescription.text = _memory.description;
-    
-    _memoryDate.text = [format stringFromDate:_memory.date];
+    _coord = _selectedMemory.latlng;
+    _memoryName.text = _selectedMemory.name;
+    _memoryDescription.text = _selectedMemory.description;
+    _memoryDate.text = [_format stringFromDate:_selectedMemory.date];
 }
 
 - (void)didReceiveMemoryWarning
@@ -54,20 +67,54 @@
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     
     if (sender == self.saveMemory){
-        if (self.memoryName.text > 0) {
-            NSLog(@"Save Button, name field > 0, name field = %@.", self.memoryName.text);
-            if (!self.memory) {
-                self.memory = [[Memory alloc]init];
+        
+        if (_placeCoverSwitch.isOn) {
+            self.currentPlaceCover = _currentImage;
+            self.currentPlaceCoord = _coord;
+            NSLog(@"Place cover switched on, self.currentPlaceCoord.latitude = %f", self.currentPlaceCoord.latitude);
+        }
+        if (_tripCoverSwitch.isOn) {
+            self.currentTripCover = _currentImage;
+            self.currentTripCoord = _coord;
+            //NSLog(@"Trip cover switched on");
+        }
+        
+        if (![self.memoryName.text isEqualToString:@""]) {
+            //There is something in the name field
+            //NSLog(@"name is not blank");
+            if (![self.selectedMemory.name isEqualToString: self.memoryName.text] ||
+                ![self.selectedMemory.description isEqualToString: self.memoryDescription.text] ||
+                ![self.selectedMemory.photo isEqualToString:self.currentImage])
+            {
+                //Something is not what it used to be.
+               // NSLog(@"a field was modified from the original.");
+                
+                if (!self.selectedMemory.name) {
+                    //This is a new trip.
+                    _newMemory = YES;
+                    _editedMemory = NO;
+                    self.selectedMemory.name = self.memoryName.text;
+                    self.selectedMemory.description = self.memoryDescription.text;
+                    self.selectedMemory.latlng = self.coord;
+                    self.selectedMemory.uniqueId = [[TripsDatabase database] addMemoryToJournal:self.selectedMemory];
+                    //NSLog(@"New memory added to database with uniqueId = %lld", self.selectedMemory.uniqueId);
+                    
+                } else {
+                    //This is an updated trip.
+                    _editedMemory = YES;
+                    _newMemory = NO;
+                    self.selectedMemory.name = self.memoryName.text;
+                    self.selectedMemory.description = self.memoryDescription.text;
+                    self.selectedMemory.latlng = self.coord;
+                    [[TripsDatabase database] updateMemory:self.selectedMemory];
+                    //NSLog(@"Update the old one");
+                }
+                
+            } else {
+                //NSLog(@"Existing memory was not modified");
             }
-            self.memory.name = self.memoryName.text;
-            self.memory.description = self.memoryDescription.text;
-            self.memory.photo = _currentImage;
-            if (_placeCoverSwitch.isOn) {
-                self.currentPlaceCover = _currentImage;
-            }
-            if (_tripCoverSwitch.isOn) {
-                self.currentTripCover = _currentImage;
-            }
+        } else {
+            //NSLog(@"New memory was not modified");
         }
     }
 }
@@ -115,11 +162,48 @@
         //_imageURL = info[UIImagePickerControllerReferenceURL];
         _imageView.image = image;
         
+        void (^ALAssetsLibraryAssetForURLResultBlock)(ALAsset *) = ^(ALAsset *asset)
+        {
+            
+            CLLocation *location = [asset valueForProperty:ALAssetPropertyLocation];
+            self.coord = location.coordinate;
+            //NSLog(@"Location: %@, /nLatitude:%f, Longitude: %f",location, self.coord.latitude, self.coord.longitude);
+            NSDate *retDate = [asset valueForProperty:ALAssetPropertyDate];
+            NSString *retDateString = [_format stringFromDate:retDate];
+            _selectedMemory.date = retDate;
+            _memoryDate.text = retDateString;
+
+            // lat is negative if direction is south
+            /*if ([[gpsdata valueForKey:@"LatitudeRef"] isEqualToString:@"S"]) {
+                self.latitude = -self.latitude;
+            }
+            
+            // lng is negative if direction is west
+            if ([[gpsdata valueForKey:@"LongitudeRef"] isEqualToString:@"W"]) {
+                self.longitude = -self.longitude;
+            }
+            */
+            
+        };
+        
+        
+        NSURL *assetURL = [info objectForKey:UIImagePickerControllerReferenceURL];
+        ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+        [library assetForURL:assetURL
+                 resultBlock:ALAssetsLibraryAssetForURLResultBlock
+                failureBlock:^(NSError *error) {
+                }];
+        
+        //_selectedMemory.photoURL = assetURL;
+        //NSLog(@"%@", [assetURL absoluteString]);
+        
+         //Writes a small version of selected pic to this app's sandbox.
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSString *documentsDirectory = [paths objectAtIndex:0];
-        NSString *appendPic = [NSString stringWithFormat:@"%i.png", _memory.uniqueId];
+        NSString *appendPic = [NSString stringWithFormat:@"%@.png", [NSDate date]];
         NSData *data = UIImagePNGRepresentation(image);
         NSString *tmpPathToFile = [[NSString alloc] initWithString:[NSString stringWithFormat:@"%@/%@",documentsDirectory,appendPic]];
+        self.selectedMemory.photo = tmpPathToFile;
         if([data writeToFile:tmpPathToFile atomically:YES]){
             NSLog(@"Success");
         }
@@ -131,6 +215,7 @@
                                            self,
                                            @selector(image:finishedSavingWithError:contextInfo:),
                                            nil);
+        
     }
     else if ([mediaType isEqualToString:(NSString *)kUTTypeMovie])
     {

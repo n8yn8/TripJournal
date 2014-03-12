@@ -10,7 +10,7 @@
 
 @implementation Memory
 
--(id)initWithUniqueId:(int)uniqueId placeId:(NSNumber *)placeId name:(NSString *)name description:(NSString *)description photo:(NSString *)photo date:(NSDate *)date {
+-(id)initWithUniqueId:(long long)uniqueId placeId:(NSNumber *)placeId name:(NSString *)name description:(NSString *)description photo:(NSString *)photo date:(NSDate *)date latlng:(CLLocationCoordinate2D)latlng{
     if ((self = [super init])) {
         self.uniqueId = uniqueId;
         self.placeId = placeId;
@@ -18,6 +18,7 @@
         self.description = description;
         self.photo = photo;
         self.date = date;
+        self.latlng = latlng;
     }
     return self;
 }

@@ -17,11 +17,13 @@
 @interface TripCollectionViewController : UICollectionViewController {
     NSMutableArray *_placesJournal;
 }
+@property (nonatomic, assign, getter=isEdited) BOOL editedTrip;
+@property (nonatomic, assign, getter=isNewTrip) BOOL newTrip;
 @property (nonatomic, retain) NSMutableArray *placesJournal;
-@property (strong, nonatomic) NSNumber *refID;
 @property (nonatomic, strong) Trip *selectedTrip;
 @property (nonatomic, strong) TripCollectionHeaderView *headerView;
 @property (nonatomic, strong) NSString *tripCoverImage;
+@property CLLocationCoordinate2D tripCoord;
 @property NSInteger chosenIndex;
 - (IBAction)unwindToTrip:(UIStoryboardSegue *)unwindSegue;
 @end

@@ -7,7 +7,7 @@
 //
 
 #import "PlacesCollectionViewController.h"
-#import "MemoriesDatabase.h"
+#import "TripsDatabase.h"
 
 @interface PlacesCollectionViewController ()
 
@@ -32,43 +32,13 @@
 {
     [super viewDidLoad];
     
-    _refID = [NSNumber numberWithInt:self.selectedPlace.uniqueId];
-    NSLog(@"PlacesCollection refID received is %@", _refID);
-    self.memoriesJournal = [[MemoriesDatabase database] memoriesJournal:_refID];
+    self.memoriesJournal = [[TripsDatabase database] memoriesJournal:[NSNumber numberWithLongLong:_selectedPlace.uniqueId]];
     _chosenIndex = -1;
     
     _format = [[NSDateFormatter alloc] init];
-    [_format setDateFormat:@"mm-dd-yyyy"];
+    [_format setDateStyle:NSDateFormatterMediumStyle];
+    [_format setTimeStyle:NSDateFormatterNoStyle];
     
-    /*
-    Memory *one = [[Memory alloc] init];
-    one.name = @"Sun Pyramids";
-    one.photo = @"Place-SunPyramid.png";
-    one.description = @"North end overlook of Avenida de los Muertos.";
-    one.date = [_format dateFromString:@"11-28-2013"];
-    
-    Memory *two = [[Memory alloc] init];
-    two.name = @"From the top";
-    two.photo = @"Place-FromTheTop.png";
-    two.description = @"View from the top of the Sun Pyramid";
-    two.date = [_format dateFromString:@"11-28-2013"];
-    
-    Memory *three = [[Memory alloc] init];
-    three.name = @"Ruins";
-    three.photo = @"Place-Ruins.png";
-    three.description = @"The ruins on the North end next to the Sun Pyramids";
-    three.date = [_format dateFromString:@"11-28-2013"];
-    
-    Memory *four = [[Memory alloc] init];
-    four.name = @"Walking up";
-    four.photo = @"Place-WalkingUp.png";
-    four.description = @"There were many merchants selling all sorts of things. Gotta haggle them down in price!";
-    four.date = [_format dateFromString:@"11-29-2013"];
-    
-    if ([_selectedPlace.name isEqualToString:@"Teotihuacan"]) {
-        [_memoryEntries addObjectsFromArray:@[one,two,three,four]];
-    }
-     */
     _placeCoverImage = _selectedPlace.photo;
 }
 
@@ -94,19 +64,24 @@
     UILabel *memoryDesc = (UILabel *)[cell viewWithTag:302];
     //assign the image
     Memory *memory = [_memoriesJournal objectAtIndex:indexPath.item];
-    menuPhotoView.image = [UIImage imageNamed:memory.photo];
+    
+    if (![memory.photo isEqualToString: @"(null)"] ) {
+        NSData *imageData = [[NSFileManager defaultManager] contentsAtPath:memory.photo];
+        UIImage *myImage = [[UIImage alloc] initWithData:imageData];
+        menuPhotoView.image = myImage;
+    }
     memoryName.text = memory.name;
     memoryDesc.text = memory.description;
     
     // Compare dates of the memories to determine start date and end date.
     if (indexPath.item == 0) {
-        _selectedPlace.startDate = memory.date;
-        _selectedPlace.endDate = memory.date;
+        _tempStartDate = memory.date;
+        _tempEndDate = memory.date;
     } else {
-        _selectedPlace.startDate = [_selectedPlace.startDate earlierDate:memory.date];
-        //NSLog(@"Start date = %@",[_format stringFromDate:_selectedPlace.startDate]);
-        _selectedPlace.endDate = [_selectedPlace.endDate laterDate:memory.date];
-        //NSLog(@"End date = %@",[_format stringFromDate:_selectedPlace.endDate]);
+        _tempStartDate = [_tempStartDate earlierDate:memory.date];
+        //NSLog(@"Start date = %@",[_format stringFromDate:_tempStartDate]);
+        _tempEndDate = [_tempEndDate laterDate:memory.date];
+        //NSLog(@"End date = %@",[_format stringFromDate:_tempEndDate]);
     }
     
     return cell;
@@ -116,12 +91,16 @@
     UICollectionReusableView *reusableview = nil;
     
     if (kind == UICollectionElementKindSectionHeader) {
-         _headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"PlacesHeaderView" forIndexPath:indexPath];
-        NSString *placeDates = [[NSString alloc]initWithFormat:@"%@ - %@", [_format stringFromDate:_selectedPlace.startDate], [_format stringFromDate:_selectedPlace.endDate]];
+        _headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"PlacesHeaderView" forIndexPath:indexPath];
+        NSString *placeDates = [[NSString alloc]initWithFormat:@"%@ - %@", [_format stringFromDate:_tempStartDate], [_format stringFromDate:_tempEndDate]];
         _headerView.date.text = placeDates;
         _headerView.name.text = _selectedPlace.name;
         _headerView.description.text = _selectedPlace.description;
-        _headerView.placeCoverImageView.image = [UIImage imageNamed:_placeCoverImage];
+        /*
+        NSData *imageData = [[NSFileManager defaultManager] contentsAtPath:_placeCoverImage];
+        UIImage *myImage = [[UIImage alloc] initWithData:imageData];
+        _headerView.placeCoverImageView.image = myImage;
+         */
         
         reusableview = _headerView;
     }
@@ -136,28 +115,73 @@
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    //If a Trip is selected. Otherwise +Place was selected.
-    if ([segue.identifier isEqualToString:@"MemoryDetails"]) {
+    
+    //Prepare to save current state of current trip.
+    //Test for edited trip or new trip.
+    if (![self.headerView.name.text isEqualToString:@""]) {
+        //There is something in the name field
+        NSLog(@"name is not blank");
+        if (![self.selectedPlace.name isEqualToString: self.headerView.name.text] ||
+            ![self.selectedPlace.description isEqualToString: self.headerView.description.text] ||
+            ![self.selectedPlace.photo isEqualToString:self.placeCoverImage] /*||
+            ![self.selectedPlace.startDate isEqualToDate:self.tempStartDate] ||
+            ![self.selectedPlace.endDate isEqualToDate:self.tempEndDate]*/)
+        {
+            //Something is not what it used to be.
+            NSLog(@"a field was modified from the original.");
+            
+            if (!self.selectedPlace.name) {
+                //This is a new place.
+                _newPlace = YES;
+                _editedPlace = NO;
+                self.selectedPlace.name = self.headerView.name.text;
+                self.selectedPlace.description = self.headerView.description.text;
+                self.selectedPlace.photo = _placeCoverImage;
+                self.selectedPlace.latlng = _placeCoord;
+                self.selectedPlace.startDate = _tempStartDate;
+                self.selectedPlace.endDate = _tempEndDate;
+                self.selectedPlace.uniqueId = [[TripsDatabase database] addPlaceToJournal:self.selectedPlace];
+                NSLog(@"New place added to database with uniqueId = %lld", self.selectedPlace.uniqueId);
+                
+            } else {
+                //This is an updated place.
+                _editedPlace = YES;
+                _newPlace = NO;
+                self.selectedPlace.name = self.headerView.name.text;
+                self.selectedPlace.description = self.headerView.description.text;
+                self.selectedPlace.photo = _placeCoverImage;
+                self.selectedPlace.latlng = _placeCoord;
+                self.selectedPlace.startDate = _tempStartDate;
+                self.selectedPlace.endDate = _tempEndDate;
+                [[TripsDatabase database] updatePlace:self.selectedPlace];
+                NSLog(@"Update the old one");
+            }
+            
+        } else {
+            NSLog(@"Existing place was not modified");
+        }
+    } else {
+        NSLog(@"New place was not modified");
+    }
+    
+    if (sender != self.savePlace) {
         
         //Get destination view controller
         UINavigationController *navigationController = segue.destinationViewController;
-		MemoryViewController *dvc = [[navigationController viewControllers] objectAtIndex:0];
+        MemoryViewController *dvc = [[navigationController viewControllers] objectAtIndex:0];
         
-        //Get item at selected path
-        NSArray *indexPaths = [self.collectionView indexPathsForSelectedItems];
-        NSIndexPath *index = [indexPaths objectAtIndex:0];
-        _chosenIndex = index.item;
-        dvc.memory = [_memoriesJournal objectAtIndex: _chosenIndex];
-        dvc.currentPlaceCover = self.placeCoverImage;
-        dvc.currentTripCover = self.tripCoverImage;
-    } else if (sender == self.savePlace) {
-        if (self.headerView.name.text > 0 ) {
-            if (!self.selectedPlace) {
-                self.selectedPlace = [[Place alloc]init];
-            }
-            self.selectedPlace.name = self.headerView.name.text;
-            self.selectedPlace.description = self.headerView.description.text;
-            self.selectedPlace.photo = _placeCoverImage;
+        if ([segue.identifier isEqualToString:@"MemoryDetails"]) {
+            
+            //Get item at selected path
+            NSArray *indexPaths = [self.collectionView indexPathsForSelectedItems];
+            NSIndexPath *index = [indexPaths objectAtIndex:0];
+            _chosenIndex = index.item;
+            dvc.selectedMemory = [_memoriesJournal objectAtIndex: _chosenIndex];
+            dvc.currentPlaceCover = self.placeCoverImage;
+            dvc.currentTripCover = self.tripCoverImage;
+        } else if ([segue.identifier isEqualToString:@"NewMemory"]) {
+            dvc.selectedMemory = [[Memory alloc] init];
+            dvc.selectedMemory.placeId = [NSNumber numberWithLongLong:self.selectedPlace.uniqueId];
         }
     }
 }
@@ -165,42 +189,65 @@
 - (IBAction)unwindToPlace:(UIStoryboardSegue *)unwindSegue
 {
     MemoryViewController *source = [unwindSegue sourceViewController];
-    Memory *item = source.memory;
-    NSLog(@"Chosen index = %i", _chosenIndex);
-    
-    // If an existing memory was chosen
-    if (_chosenIndex >= 0) {
-        
-        // If the the chosen memory was unchanged, do nothing.
-        if ([item isEqual:[self.memoriesJournal objectAtIndex:_chosenIndex]]){
-            NSLog(@"returned memory is equal to selected memory");
-        
-        // Else update the chosen memory.
-        } else {
-            NSLog(@"returned memory is NOT equal to selected memory");
-            [self.memoriesJournal replaceObjectAtIndex:_chosenIndex withObject:item];
-            [self.collectionView reloadData];
-        }
-        
-        // Clear the index of the previously chosen memory.
-        _chosenIndex = -1;
-        
-    }
-    // Else the memory is a new memory. Save the new memory if it contains data.
-    else if (item != nil) {
-        NSLog(@"returned memory is a new memory");
-        [self.memoriesJournal addObject:item];
-        [self.collectionView reloadData];
-    }
+    Memory *item = source.selectedMemory;
     
     // If the returned item is marked but is not the previous cover photo
     if (![source.currentPlaceCover isEqualToString:_placeCoverImage]) {
         // Replace the current cover photo
         _placeCoverImage = source.currentPlaceCover;
+        _placeCoord = source.currentPlaceCoord;
+        NSLog(@"Place latitude on unwind %f", source.currentPlaceCoord.latitude);
     }
     if (![source.currentTripCover isEqualToString:_tripCoverImage]) {
         _tripCoverImage = source.currentTripCover;
+        _tripCoord = source.currentTripCoord;
+        NSLog(@"Trip location on unwind %f", _tripCoord.latitude);
     }
+    
+    if (source.newMemory) {
+        [self.memoriesJournal addObject:item];
+        [self.collectionView reloadData];
+    }
+    if (source.editedMemory) {
+        [self.memoriesJournal replaceObjectAtIndex:_chosenIndex withObject:item];
+        [self.collectionView reloadData];
+    }
+    
+    /*    if (_chosenIndex >= 0) {
+     
+     // If the the chosen memory was unchanged, do nothing.
+     if ([item isEqual:[self.memoriesJournal objectAtIndex:_chosenIndex]]){
+     NSLog(@"returned memory is equal to selected memory");
+     
+     // Else update the chosen memory.
+     } else {
+     NSLog(@"returned memory is NOT equal to selected memory");
+     [self.memoriesJournal replaceObjectAtIndex:_chosenIndex withObject:item];
+     [self.collectionView reloadData];
+     }
+     
+     // Clear the index of the previously chosen memory.
+     _chosenIndex = -1;
+     
+     }
+     // Else the memory is a new memory. Save the new memory if it contains data.
+     else if (item != nil) {
+     NSLog(@"returned memory is a new memory");
+     item.placeId = [NSNumber numberWithInt: self.selectedPlace.uniqueId ];
+     [self.memoriesJournal addObject:item];
+     [[TripsDatabase database] addMemoryToJournal:item];
+     [self.collectionView reloadData];
+     }
+     
+     // If the returned item is marked but is not the previous cover photo
+     if (![source.currentPlaceCover isEqualToString:_placeCoverImage]) {
+     // Replace the current cover photo
+     _placeCoverImage = source.currentPlaceCover;
+     }
+     if (![source.currentTripCover isEqualToString:_tripCoverImage]) {
+     _tripCoverImage = source.currentTripCover;
+     }
+     */
 }
 
 @end

@@ -10,7 +10,7 @@
 
 @implementation Place
 
-- (id)initWithUniqueId:(int)uniqueId tripId:(NSNumber *)tripId name:(NSString *)name description:(NSString *)description photo:(NSString *)photo startDate:(NSDate *)startDate endDate:(NSDate *)endDate {
+- (id)initWithUniqueId:(long long)uniqueId tripId:(NSNumber *)tripId name:(NSString *)name description:(NSString *)description photo:(NSString *)photo startDate:(NSDate *)startDate endDate:(NSDate *)endDate {
     if ((self = [super init])) {
         self.uniqueId = uniqueId;
         self.tripId = tripId;

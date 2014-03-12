@@ -13,9 +13,11 @@
 @interface MemoryViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 
 @property BOOL newPic;
+@property (nonatomic, assign, getter=isEdited) BOOL editedMemory;
+@property (nonatomic, assign, getter=isNewTrip) BOOL newMemory;
 - (IBAction)useCameraRoll:(id)sender;
 @property (strong, nonatomic) NSURL *imageURL;
-@property (nonatomic, strong) Memory *memory;
+@property (strong, nonatomic) Memory *selectedMemory;
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
 @property (strong, nonatomic) IBOutlet UITextField *memoryName;
 @property (strong, nonatomic) IBOutlet UITextView *memoryDescription;
@@ -24,5 +26,8 @@
 @property (strong, nonatomic) IBOutlet UISwitch *tripCoverSwitch;
 @property (strong, nonatomic) NSString *currentPlaceCover;
 @property (strong, nonatomic) NSString *currentTripCover;
+@property CLLocationCoordinate2D currentPlaceCoord;
+@property CLLocationCoordinate2D currentTripCoord;
+@property CLLocationCoordinate2D coord;
 
 @end

@@ -16,11 +16,16 @@
 {
     NSMutableArray *_memoriesJournal;
 }
+@property (nonatomic, assign, getter=isEdited) BOOL editedPlace;
+@property (nonatomic, assign, getter=isNewTrip) BOOL newPlace;
 @property (nonatomic, retain) NSMutableArray *memoriesJournal;
-@property (strong, nonatomic) NSNumber *refID;
 @property (nonatomic, strong) Place *selectedPlace;
+@property (nonatomic, strong) NSDate *tempStartDate;
+@property (nonatomic, strong) NSDate *tempEndDate;
 @property (nonatomic, strong) NSString *placeCoverImage;
 @property (nonatomic, strong) NSString *tripCoverImage;
+@property CLLocationCoordinate2D placeCoord;
+@property CLLocationCoordinate2D tripCoord;
 @property (nonatomic, strong) PlacesCollectionHeaderView *headerView;
 @property NSInteger chosenIndex;
 - (IBAction)unwindToPlace:(UIStoryboardSegue *)unwindSegue;
