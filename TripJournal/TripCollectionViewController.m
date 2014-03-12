@@ -129,17 +129,8 @@
         _headerView.name.text = _selectedTrip.name;
         _headerView.description.text = _selectedTrip.description;
         
-        CLLocationCoordinate2D mexicoCity = CLLocationCoordinate2DMake(19.4328, -99.1333);
-        CLLocationCoordinate2D teotihuacan = CLLocationCoordinate2DMake(19.6925, -98.8438);
-        CLLocationCoordinate2D coyoacan = CLLocationCoordinate2DMake(19.3500, -99.1617);
-        CLLocationCoordinate2D casaAzul = CLLocationCoordinate2DMake(19.3550509, -99.1623655);
-        CLLocationCoordinate2D artMuseum = CLLocationCoordinate2DMake(19.4361475, -99.1400875);
-        MyAnnotation *mexCityAnnot = [[MyAnnotation alloc] initWithTitle: @"Mexico City" andCoordinate:mexicoCity];
-        MyAnnotation *teoAnnot = [[MyAnnotation alloc] initWithTitle: @"Teotihuacan" andCoordinate:teotihuacan];
-        MyAnnotation *coyoAnnot = [[MyAnnotation alloc] initWithTitle: @"Coyoacan" andCoordinate:coyoacan];
-        MyAnnotation *casaAnnot = [[MyAnnotation alloc] initWithTitle: @"Casa Azul" andCoordinate:casaAzul];
-        MyAnnotation *artAnnot = [[MyAnnotation alloc] initWithTitle: @"National Art Museum" andCoordinate:artMuseum];
-        [_headerView.TripMapView showAnnotations:@[mexCityAnnot, teoAnnot, coyoAnnot, casaAnnot, artAnnot] animated:NO];
+        NSMutableArray *annotations = [[TripsDatabase database] placesAnnotations: [NSNumber numberWithLongLong:_selectedTrip.uniqueId]];
+        [_headerView.TripMapView showAnnotations:annotations animated:NO];
         
         reusableview = _headerView;
     }

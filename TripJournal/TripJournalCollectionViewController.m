@@ -13,6 +13,7 @@
 
 @interface TripJournalCollectionViewController ()
 @property (strong, nonatomic) NSDateFormatter *format;
+@property (strong, nonatomic) NSMutableArray *annotations;
 @end
 
 @implementation TripJournalCollectionViewController
@@ -87,12 +88,8 @@
         JournalCollectionHeaderView *headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"JournalHeaderView" forIndexPath:indexPath];
         
         headerView.JournalMapView.showsUserLocation = YES;
-        CLLocationCoordinate2D mexicoCity = CLLocationCoordinate2DMake(19.4328, -99.1333);
-        CLLocationCoordinate2D buenosAires = CLLocationCoordinate2DMake(-34.6033, -58.3817);
-        MyAnnotation *mcAnnot = [[MyAnnotation alloc] initWithTitle: @"Mexico City" andCoordinate:mexicoCity];
-        MyAnnotation *baAnnot = [[MyAnnotation alloc] initWithTitle: @"Argentina" andCoordinate:buenosAires];
-        [headerView.JournalMapView showAnnotations:@[mcAnnot,baAnnot] animated:NO];
-        
+        NSMutableArray *annotations = [[TripsDatabase database] tripsAnnotations];
+        [headerView.JournalMapView showAnnotations:annotations animated:NO];
         reusableview = headerView;
     }
     

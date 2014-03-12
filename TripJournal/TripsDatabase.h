@@ -11,6 +11,7 @@
 #import "Trip.h"
 #import "Place.h"
 #import "Memory.h"
+#import "MyAnnotation.h"
 
 @interface TripsDatabase : NSObject {
     sqlite3 *_database;
@@ -22,10 +23,12 @@
 + (TripsDatabase*)database;
 
 - (NSMutableArray *)tripsJournal;
+- (NSMutableArray *)tripsAnnotations;
 -(long long)addTripToJournal:(Trip*)trip;
 -(void)updateTrip:(Trip *)trip;
 
 - (NSMutableArray *)placesJournal:(NSNumber*)tripId;
+- (NSMutableArray *)placesAnnotations:(NSNumber*) tripId;
 -(long long)addPlaceToJournal:(Place*)place;
 -(void)updatePlace:(Place *)place;
 

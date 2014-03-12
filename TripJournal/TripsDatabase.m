@@ -86,7 +86,7 @@ static TripsDatabase *_database;
     sqlite3_stmt    *statement;
     if (sqlite3_open(dbpath, &_database) == SQLITE_OK)
     {
-        NSString *querySQL = [NSString stringWithFormat:@"SELECT id, name, description, photo, startdate, enddate, latitude, longitude FROM trips"];
+        NSString *querySQL = [NSString stringWithFormat:@"SELECT id, name, description, photo, startdate, enddate FROM trips"];
         const char *query_stmt = [querySQL UTF8String];
         
         if (sqlite3_prepare_v2(_database, query_stmt, -1, &statement, NULL) == SQLITE_OK)
@@ -99,13 +99,40 @@ static TripsDatabase *_database;
                 NSString *photo = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 3)];
                 NSDate *startdate = [_format dateFromString:[[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 4)]];
                 NSDate *enddate = [_format dateFromString:[[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 5)]];
-                CLLocationDegrees latitude = sqlite3_column_double(statement, 6);
-                CLLocationDegrees longitude = sqlite3_column_double(statement, 7);
-                NSLog(@"Retrieved Trip lat = %f and retrieved lng = %f", latitude, longitude);
-                CLLocationCoordinate2D latlng = CLLocationCoordinate2DMake(latitude, longitude);
                 Trip *trip = [[Trip alloc] initWithUniqueId:uniqueId name:name description:description photo:photo startDate:startdate endDate:enddate];
-                trip.latlng = latlng;
                 [retval addObject:trip];
+            }
+            sqlite3_finalize(statement);
+        }
+        else {
+            NSLog(@"Query returned nothing.");
+        }
+    }
+    return retval;
+}
+
+- (NSMutableArray *)tripsAnnotations {
+    
+    NSMutableArray *retval = [[NSMutableArray alloc] init];
+    
+    const char *dbpath = [_databasePath UTF8String];
+    sqlite3_stmt    *statement;
+    if (sqlite3_open(dbpath, &_database) == SQLITE_OK)
+    {
+        NSString *querySQL = [NSString stringWithFormat:@"SELECT name, latitude, longitude FROM trips"];
+        const char *query_stmt = [querySQL UTF8String];
+        
+        if (sqlite3_prepare_v2(_database, query_stmt, -1, &statement, NULL) == SQLITE_OK)
+        {
+            while (sqlite3_step(statement) == SQLITE_ROW)
+            {
+                NSString *name = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 0)];
+                CLLocationDegrees latitude = sqlite3_column_double(statement, 1);
+                CLLocationDegrees longitude = sqlite3_column_double(statement, 2);
+                //NSLog(@"Retrieved Trip lat = %f and retrieved lng = %f", latitude, longitude);
+                CLLocationCoordinate2D latlng = CLLocationCoordinate2DMake(latitude, longitude);
+                MyAnnotation *annot = [[MyAnnotation alloc] initWithTitle: name andCoordinate:latlng];
+                [retval addObject:annot];
             }
             sqlite3_finalize(statement);
         }
@@ -142,11 +169,42 @@ static TripsDatabase *_database;
                 NSDate *enddate = [_format dateFromString:[[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 6)]];
                 CLLocationDegrees latitude = sqlite3_column_double(statement, 7);
                 CLLocationDegrees longitude = sqlite3_column_double(statement, 8);
-                NSLog(@"Retrieved Place lat = %f and retrieved lng = %f", latitude, longitude);
+                //NSLog(@"Retrieved Place lat = %f and retrieved lng = %f", latitude, longitude);
                 CLLocationCoordinate2D latlng = CLLocationCoordinate2DMake(latitude, longitude);
                 Place *place = [[Place alloc] initWithUniqueId:uniqueId tripId:tripId name:name description:description photo:photo startDate:startdate endDate:enddate];
                 place.latlng = latlng;
                 [retval addObject:place];
+            }
+            sqlite3_finalize(statement);
+        }
+        else {
+            NSLog(@"Query returned nothing.");
+        }
+    }
+    return retval;
+}
+- (NSMutableArray *)placesAnnotations:(NSNumber*) tripId {
+    
+    NSMutableArray *retval = [[NSMutableArray alloc] init];
+    
+    const char *dbpath = [_databasePath UTF8String];
+    sqlite3_stmt    *statement;
+    if (sqlite3_open(dbpath, &_database) == SQLITE_OK)
+    {
+        NSString *querySQL = [NSString stringWithFormat:@"SELECT name, latitude, longitude FROM places WHERE tripid=%@", tripId];
+        const char *query_stmt = [querySQL UTF8String];
+        
+        if (sqlite3_prepare_v2(_database, query_stmt, -1, &statement, NULL) == SQLITE_OK)
+        {
+            while (sqlite3_step(statement) == SQLITE_ROW)
+            {
+                NSString *name = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 0)];
+                CLLocationDegrees latitude = sqlite3_column_double(statement, 1);
+                CLLocationDegrees longitude = sqlite3_column_double(statement, 2);
+                //NSLog(@"Retrieved Trip lat = %f and retrieved lng = %f", latitude, longitude);
+                CLLocationCoordinate2D latlng = CLLocationCoordinate2DMake(latitude, longitude);
+                MyAnnotation *annot = [[MyAnnotation alloc] initWithTitle: name andCoordinate:latlng];
+                [retval addObject:annot];
             }
             sqlite3_finalize(statement);
         }
