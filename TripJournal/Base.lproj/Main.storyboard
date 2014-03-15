@@ -15,7 +15,7 @@
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="zzc-zA-wze">
                             <size key="itemSize" width="155" height="155"/>
                             <size key="headerReferenceSize" width="320" height="161"/>
-                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="50" height="102"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
@@ -74,6 +74,20 @@
                                 <outlet property="JournalMapView" destination="8MG-f2-BYV" id="UfO-Bn-3Il"/>
                             </connections>
                         </collectionReusableView>
+                        <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="JournalFooterView" id="Sgs-VZ-06l">
+                            <rect key="frame" x="0.0" y="380" width="320" height="102"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                            <subviews>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="UPJ-cX-oW4">
+                                    <rect key="frame" x="20" y="14" width="280" height="68"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <string key="text">Add a new trip, a new place and a new memory. Once a memory is set as the cover photo for a trip, its location will show in the map.</string>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <color key="textColor" red="0.51457002740000002" green="0.83573791060000002" blue="0.42697878649999998" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                        </collectionReusableView>
                         <connections>
                             <outlet property="dataSource" destination="F7x-uk-ItR" id="bU8-Gf-xBK"/>
                             <outlet property="delegate" destination="F7x-uk-ItR" id="yr7-Bh-bZv"/>
@@ -102,7 +116,7 @@
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="EEu-nX-KD7">
                             <size key="itemSize" width="155" height="155"/>
                             <size key="headerReferenceSize" width="50" height="236"/>
-                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="50" height="115"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
@@ -183,6 +197,20 @@
                                 <outlet property="name" destination="BC2-WE-fmU" id="Ru9-lC-ZnP"/>
                             </connections>
                         </collectionReusableView>
+                        <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TripFooterView" id="rRF-K0-Dkd">
+                            <rect key="frame" x="0.0" y="455" width="320" height="115"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                            <subviews>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="qh9-WC-bhU">
+                                    <rect key="frame" x="20" y="14" width="280" height="86"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <string key="text">Add a new place and a new memory. Once a memory is set as the cover photo for a trip, its location will show in the map. Adding memories will also create dates for this trip.</string>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <color key="textColor" red="0.51457002740000002" green="0.83573791060000002" blue="0.42697878649999998" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                        </collectionReusableView>
                         <connections>
                             <outlet property="dataSource" destination="aQ4-Qc-Ako" id="Bcc-Kj-ipq"/>
                             <outlet property="delegate" destination="aQ4-Qc-Ako" id="hLg-kc-aXf"/>
@@ -220,7 +248,7 @@
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="oha-Aa-RYi">
                             <size key="itemSize" width="155" height="155"/>
                             <size key="headerReferenceSize" width="50" height="100"/>
-                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="50" height="75"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
@@ -295,6 +323,19 @@
                                 <outlet property="description" destination="cS9-sm-rRC" id="bTn-8v-GdG"/>
                                 <outlet property="name" destination="eoo-UA-5hc" id="TdZ-Th-qXC"/>
                             </connections>
+                        </collectionReusableView>
+                        <collectionReusableView key="sectionFooterView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PlaceFooterView" id="d3x-fi-bZz">
+                            <rect key="frame" x="0.0" y="319" width="320" height="75"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                            <subviews>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Add a new memory. Adding memories will also create dates for this trip." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="280" translatesAutoresizingMaskIntoConstraints="NO" id="3V8-sU-aqh">
+                                    <rect key="frame" x="20" y="20" width="280" height="35"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <color key="textColor" red="0.51457002740000002" green="0.83573791060000002" blue="0.42697878649999998" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
                         </collectionReusableView>
                         <connections>
                             <outlet property="dataSource" destination="BNA-Wk-et0" id="iS1-Yl-Ebk"/>
