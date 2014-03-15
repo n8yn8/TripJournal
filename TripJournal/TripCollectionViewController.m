@@ -32,47 +32,12 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
-    // NSLog(@"uniqueId of selected trip is %lld", _selectedTrip.uniqueId);
     self.placesJournal = [[TripsDatabase database] placesJournal: [NSNumber numberWithLongLong:_selectedTrip.uniqueId]];
     
     _format = [[NSDateFormatter alloc] init];
     [_format setDateStyle:NSDateFormatterMediumStyle];
     [_format setTimeStyle:NSDateFormatterNoStyle];
     _chosenIndex = -1;
-    /*
-     Place *teo = [[Place alloc] init];
-     teo.name = @"Teotihuacan";
-     teo.photo = @"Place-SunPyramid.png";
-     teo.description = @"The pyramidas outside of Mexico City.";
-     teo.startDate = [_format dateFromString:@"Nov 28, 2013"];
-     
-     Place *coyo = [[Place alloc] init];
-     coyo.name = @"Coyoacan";
-     coyo.photo = @"Trip-Coyoacan.png";
-     coyo.description = @"This part of the city is name after cayotes.";
-     coyo.startDate = [_format dateFromString:@"Nov 29, 2013"];
-     
-     Place *art = [[Place alloc] init];
-     art.name = @"Art Museum";
-     art.photo = @"Trip-ArtMuseum.png";
-     art.description = @"National Art Museum";
-     art.startDate = [_format dateFromString:@"Nov 30, 2013"];
-     
-     Place *casa = [[Place alloc] init];
-     casa.name = @"Casa Azul";
-     casa.photo = @"Trip-CasaAzul.png";
-     casa.description = @"The garden of Frida's house.";
-     casa.startDate = [_format dateFromString:@"Dec 1, 2013"];
-     
-     Place *blank = [[Place alloc] init];
-     blank.name = @"";
-     blank.photo = @"";
-     blank.description = @"";
-     
-     if ([_selectedTrip.name isEqualToString:@"Mexico City"]) {
-     _placeEntries = [NSMutableArray arrayWithObjects:teo, coyo, art, casa, nil];
-     }
-     */
     _tripCoverImage = _selectedTrip.photo;
 }
 
@@ -99,7 +64,7 @@
     //assign the image
     
     Place *place = [_placesJournal objectAtIndex:indexPath.row];
-    if (![place.photo isEqualToString: @"(null)"] ) {
+    if (!([place.photo isEqualToString:@""])) {
         NSData *imageData = [[NSFileManager defaultManager] contentsAtPath:place.photo];
         UIImage *myImage = [[UIImage alloc] initWithData:imageData];
         menuPhotoView.image = myImage;
@@ -219,37 +184,14 @@
         self.tripCoord = source.tripCoord;
     }
     
-    if (source.newPlace) {
+    if (source.newPlace || (source.editedPlace && (_chosenIndex == -1))) {
         [self.placesJournal addObject:item];
         [self.collectionView reloadData];
     }
-    if (source.editedPlace) {
+    if (source.editedPlace && (_chosenIndex != -1)) {
         [self.placesJournal replaceObjectAtIndex:_chosenIndex withObject:item];
         [self.collectionView reloadData];
     }
-    
-    /*
-     if (_chosenIndex >= 0) {
-     
-     if ([item isEqual:[self.placesJournal objectAtIndex:_chosenIndex]]) {
-     NSLog(@"returned place is equal to selected place.");
-     } else {
-     [self.placesJournal replaceObjectAtIndex:_chosenIndex withObject:item];
-     [self.collectionView reloadData];
-     }
-     _chosenIndex = -1;
-     } else if (item != nil) {
-     item.tripId = [NSNumber numberWithInt: self.selectedTrip.uniqueId ];
-     [self.placesJournal addObject:item];
-     NSLog(@"%@", self.placesJournal.description);
-     [[TripsDatabase database] addPlaceToJournal:item];
-     [self.collectionView reloadData];
-     }
-     
-     if (![source.tripCoverImage isEqualToString:self.tripCoverImage]) {
-     self.tripCoverImage = source.tripCoverImage;
-     }
-     */
 }
 
 @end

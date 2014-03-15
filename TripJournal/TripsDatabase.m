@@ -129,7 +129,6 @@ static TripsDatabase *_database;
                 NSString *name = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 0)];
                 CLLocationDegrees latitude = sqlite3_column_double(statement, 1);
                 CLLocationDegrees longitude = sqlite3_column_double(statement, 2);
-                //NSLog(@"Retrieved Trip lat = %f and retrieved lng = %f", latitude, longitude);
                 CLLocationCoordinate2D latlng = CLLocationCoordinate2DMake(latitude, longitude);
                 MyAnnotation *annot = [[MyAnnotation alloc] initWithTitle: name andCoordinate:latlng];
                 [retval addObject:annot];
@@ -144,8 +143,6 @@ static TripsDatabase *_database;
 }
 
 - (NSMutableArray *)placesJournal:(NSNumber*) tripId {
-    
-    //NSLog(@"Began search for places with tripId %@", tripId);
     
     NSMutableArray *retval = [[NSMutableArray alloc] init];
     
@@ -169,7 +166,6 @@ static TripsDatabase *_database;
                 NSDate *enddate = [_format dateFromString:[[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 6)]];
                 CLLocationDegrees latitude = sqlite3_column_double(statement, 7);
                 CLLocationDegrees longitude = sqlite3_column_double(statement, 8);
-                //NSLog(@"Retrieved Place lat = %f and retrieved lng = %f", latitude, longitude);
                 CLLocationCoordinate2D latlng = CLLocationCoordinate2DMake(latitude, longitude);
                 Place *place = [[Place alloc] initWithUniqueId:uniqueId tripId:tripId name:name description:description photo:photo startDate:startdate endDate:enddate];
                 place.latlng = latlng;
@@ -201,7 +197,6 @@ static TripsDatabase *_database;
                 NSString *name = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 0)];
                 CLLocationDegrees latitude = sqlite3_column_double(statement, 1);
                 CLLocationDegrees longitude = sqlite3_column_double(statement, 2);
-                //NSLog(@"Retrieved Trip lat = %f and retrieved lng = %f", latitude, longitude);
                 CLLocationCoordinate2D latlng = CLLocationCoordinate2DMake(latitude, longitude);
                 MyAnnotation *annot = [[MyAnnotation alloc] initWithTitle: name andCoordinate:latlng];
                 [retval addObject:annot];
@@ -221,7 +216,7 @@ static TripsDatabase *_database;
     sqlite3_stmt    *statement;
     if (sqlite3_open(dbpath, &_database) == SQLITE_OK)
     {
-        NSString *insertSQL = [NSString stringWithFormat:@"INSERT INTO TRIPS (name, description, photo, startdate, enddate) VALUES (\"%@\", \"%@\", \"%@\", \"%@\", \"%@\")", trip.name, trip.description, trip.photo, trip.startDate, trip.endDate];
+        NSString *insertSQL = [NSString stringWithFormat:@"INSERT INTO TRIPS (name, description, photo, startdate, enddate) VALUES (\"%@\", \"%@\", \"%@\", \"%@\", \"%@\")", trip.name, trip.description, trip.photo, [_format stringFromDate:trip.startDate], [_format stringFromDate:trip.endDate]];
         const char *insert_stmt = [insertSQL UTF8String];
         sqlite3_prepare_v2(_database, insert_stmt, -1, &statement, NULL);
         if (sqlite3_step(statement) == SQLITE_DONE) {
@@ -240,12 +235,12 @@ static TripsDatabase *_database;
     sqlite3_stmt    *statement;
     if (sqlite3_open(dbpath, &_database) == SQLITE_OK)
     {
-        NSString *insertSQL = [NSString stringWithFormat:@"UPDATE trips SET name=\'%@\', description=\'%@\', photo=\'%@\', startdate=\'%@\', enddate=\'%@\', latitude=\'%f\', longitude=\'%f\' WHERE id=%lld", trip.name, trip.description, trip.photo, trip.startDate, trip.endDate, trip.latlng.latitude, trip.latlng.longitude, trip.uniqueId];
-        NSLog(@"%@", insertSQL);
+        NSString *insertSQL = [NSString stringWithFormat:@"UPDATE trips SET name=\'%@\', description=\'%@\', photo=\'%@\', startdate=\'%@\', enddate=\'%@\', latitude=\'%f\', longitude=\'%f\' WHERE id=%lld", trip.name, trip.description, trip.photo, [_format stringFromDate:trip.startDate], [_format stringFromDate:trip.endDate], trip.latlng.latitude, trip.latlng.longitude, trip.uniqueId];
+        //NSLog(@"%@", insertSQL);
         const char *insert_stmt = [insertSQL UTF8String];
         sqlite3_prepare_v2(_database, insert_stmt, -1, &statement, NULL);
         if (sqlite3_step(statement) == SQLITE_DONE) {
-            NSLog(@"Trip updated");
+            //NSLog(@"Trip updated");
         } else {
             NSLog(@"Failed to update Trip");
         }
@@ -259,9 +254,8 @@ static TripsDatabase *_database;
     sqlite3_stmt    *statement;
     if (sqlite3_open(dbpath, &_database) == SQLITE_OK)
     {
-        NSString *insertSQL = [NSString stringWithFormat:@"INSERT INTO PLACES (tripid, name, description, photo, startdate, enddate, latitude, longitude) VALUES (\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%f\", \"%f\")", place.tripId, place.name, place.description, place.photo, place.startDate, place.endDate, place.latlng.latitude, place.latlng.longitude];
-        //NSString *insertSQL = [NSString stringWithFormat:@"INSERT INTO PLACES (name, description) VALUES (\"%@\", \"%@\")", place.name, place.description];
-        NSLog(@"%@", insertSQL);
+        NSString *insertSQL = [NSString stringWithFormat:@"INSERT INTO PLACES (tripid, name, description, photo, startdate, enddate, latitude, longitude) VALUES (\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%f\", \"%f\")", place.tripId, place.name, place.description, place.photo, [_format stringFromDate:place.startDate], [_format stringFromDate:place.endDate], place.latlng.latitude, place.latlng.longitude];
+        //NSLog(@"%@", insertSQL);
         const char *insert_stmt = [insertSQL UTF8String];
         sqlite3_prepare_v2(_database, insert_stmt, -1, &statement, NULL);
         if (sqlite3_step(statement) == SQLITE_DONE) {
@@ -279,13 +273,12 @@ static TripsDatabase *_database;
     sqlite3_stmt    *statement;
     if (sqlite3_open(dbpath, &_database) == SQLITE_OK)
     {
-        NSLog(@"Updated Place lat is %f and lng is %f", place.latlng.latitude, place.latlng.longitude);
-        NSString *insertSQL = [NSString stringWithFormat:@"UPDATE places SET name=\'%@\', description=\'%@\', photo=\'%@\', startdate=\'%@\', enddate=\'%@\', latitude=\'%f\', longitude=\'%f\' WHERE id=%lld", place.name, place.description, place.photo, place.startDate, place.endDate, place.latlng.latitude, place.latlng.longitude, place.uniqueId];
-        NSLog(@"%@", insertSQL);
+        NSString *insertSQL = [NSString stringWithFormat:@"UPDATE places SET name=\'%@\', description=\'%@\', photo=\'%@\', startdate=\'%@\', enddate=\'%@\', latitude=\'%f\', longitude=\'%f\' WHERE id=%lld", place.name, place.description, place.photo, [_format stringFromDate:place.startDate], [_format stringFromDate:place.endDate], place.latlng.latitude, place.latlng.longitude, place.uniqueId];
+        //NSLog(@"%@", insertSQL);
         const char *insert_stmt = [insertSQL UTF8String];
         sqlite3_prepare_v2(_database, insert_stmt, -1, &statement, NULL);
         if (sqlite3_step(statement) == SQLITE_DONE) {
-            NSLog(@"Place updated");
+            //NSLog(@"Place updated");
         } else {
             NSLog(@"Failed to update place");
         }
@@ -294,8 +287,6 @@ static TripsDatabase *_database;
 }
 
 - (NSMutableArray *)memoriesJournal:(NSNumber *)placeId {
-    
-    //NSLog(@"Began search for places with placeID %@", placeId);
     
     NSMutableArray *retval = [[NSMutableArray alloc] init];
     
@@ -317,10 +308,8 @@ static TripsDatabase *_database;
                 NSString *photo = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 4)];
                 NSString *dateString =[[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 5)];
                 NSDate *date = [_format dateFromString:dateString];
-                //NSLog(@"Memory date is %@", [_format stringFromDate:date]);
                 CLLocationDegrees latitude = sqlite3_column_double(statement, 6);
                 CLLocationDegrees longitude = sqlite3_column_double(statement, 7);
-                NSLog(@"Retrieved Memory lat = %f and retrieved lng = %f", latitude, longitude);
                 CLLocationCoordinate2D latlng = CLLocationCoordinate2DMake(latitude, longitude);
                 
                 Memory *memory = [[Memory alloc] initWithUniqueId:uniqueId placeId:placeId name:name description:description photo:photo date:date latlng:latlng];
@@ -341,7 +330,7 @@ static TripsDatabase *_database;
     sqlite3_stmt    *statement;
     if (sqlite3_open(dbpath, &_database) == SQLITE_OK)
     {
-        NSString *insertSQL = [NSString stringWithFormat:@"INSERT INTO MEMORIES (placeid, name, description, photo, date, latitude, longitude) VALUES (\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%f\", \"%f\")", memory.placeId, memory.name, memory.description, memory.photo, [memory.date description], memory.latlng.latitude, memory.latlng.longitude];
+        NSString *insertSQL = [NSString stringWithFormat:@"INSERT INTO MEMORIES (placeid, name, description, photo, date, latitude, longitude) VALUES (\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%f\", \"%f\")", memory.placeId, memory.name, memory.description, memory.photo, [_format stringFromDate:memory.date], memory.latlng.latitude, memory.latlng.longitude];
         //NSLog(@"%@", insertSQL);
         const char *insert_stmt = [insertSQL UTF8String];
         sqlite3_prepare_v2(_database, insert_stmt, -1, &statement, NULL);
@@ -361,11 +350,11 @@ static TripsDatabase *_database;
     sqlite3_stmt    *statement;
     if (sqlite3_open(dbpath, &_database) == SQLITE_OK)
     {
-        NSString *insertSQL = [NSString stringWithFormat:@"UPDATE memories SET name=\'%@\', description=\'%@\', photo=\'%@\', date=\'%@\', latitude=\'%f\', longitude=\'%f\' WHERE id=%lld", memory.name, memory.description, memory.photo, [memory.date description], memory.latlng.latitude, memory.latlng.longitude, memory.uniqueId];
+        NSString *insertSQL = [NSString stringWithFormat:@"UPDATE memories SET name=\'%@\', description=\'%@\', photo=\'%@\', date=\'%@\', latitude=\'%f\', longitude=\'%f\' WHERE id=%lld", memory.name, memory.description, memory.photo, [_format stringFromDate:memory.date], memory.latlng.latitude, memory.latlng.longitude, memory.uniqueId];
         const char *insert_stmt = [insertSQL UTF8String];
         sqlite3_prepare_v2(_database, insert_stmt, -1, &statement, NULL);
         if (sqlite3_step(statement) == SQLITE_DONE) {
-            NSLog(@"Memory updated");
+            //NSLog(@"Memory updated");
         } else {
             NSLog(@"Failed to update Memory");
         }

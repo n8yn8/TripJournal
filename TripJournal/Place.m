@@ -10,6 +10,11 @@
 
 @implementation Place
 
+-(id)init {
+    self.photo = @"";
+    return self;
+}
+
 - (id)initWithUniqueId:(long long)uniqueId tripId:(NSNumber *)tripId name:(NSString *)name description:(NSString *)description photo:(NSString *)photo startDate:(NSDate *)startDate endDate:(NSDate *)endDate {
     if ((self = [super init])) {
         self.uniqueId = uniqueId;

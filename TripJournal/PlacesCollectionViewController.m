@@ -64,8 +64,7 @@
     UILabel *memoryDesc = (UILabel *)[cell viewWithTag:302];
     //assign the image
     Memory *memory = [_memoriesJournal objectAtIndex:indexPath.item];
-    
-    if (![memory.photo isEqualToString: @"(null)"] ) {
+    if (!([memory.photo isEqualToString:@""])) {
         NSData *imageData = [[NSFileManager defaultManager] contentsAtPath:memory.photo];
         UIImage *myImage = [[UIImage alloc] initWithData:imageData];
         menuPhotoView.image = myImage;
@@ -79,9 +78,7 @@
         _tempEndDate = memory.date;
     } else {
         _tempStartDate = [_tempStartDate earlierDate:memory.date];
-        //NSLog(@"Start date = %@",[_format stringFromDate:_tempStartDate]);
         _tempEndDate = [_tempEndDate laterDate:memory.date];
-        //NSLog(@"End date = %@",[_format stringFromDate:_tempEndDate]);
     }
     
     return cell;
@@ -120,7 +117,7 @@
     //Test for edited trip or new trip.
     if (![self.headerView.name.text isEqualToString:@""]) {
         //There is something in the name field
-        NSLog(@"name is not blank");
+        //NSLog(@"name is not blank");
         if (![self.selectedPlace.name isEqualToString: self.headerView.name.text] ||
             ![self.selectedPlace.description isEqualToString: self.headerView.description.text] ||
             ![self.selectedPlace.photo isEqualToString:self.placeCoverImage] /*||
@@ -128,7 +125,7 @@
             ![self.selectedPlace.endDate isEqualToDate:self.tempEndDate]*/)
         {
             //Something is not what it used to be.
-            NSLog(@"a field was modified from the original.");
+            //NSLog(@"a field was modified from the original.");
             
             if (!self.selectedPlace.name) {
                 //This is a new place.
@@ -141,7 +138,7 @@
                 self.selectedPlace.startDate = _tempStartDate;
                 self.selectedPlace.endDate = _tempEndDate;
                 self.selectedPlace.uniqueId = [[TripsDatabase database] addPlaceToJournal:self.selectedPlace];
-                NSLog(@"New place added to database with uniqueId = %lld", self.selectedPlace.uniqueId);
+                //NSLog(@"New place added to database with uniqueId = %lld", self.selectedPlace.uniqueId);
                 
             } else {
                 //This is an updated place.
@@ -154,14 +151,14 @@
                 self.selectedPlace.startDate = _tempStartDate;
                 self.selectedPlace.endDate = _tempEndDate;
                 [[TripsDatabase database] updatePlace:self.selectedPlace];
-                NSLog(@"Update the old one");
+                //NSLog(@"Update the old one");
             }
             
         } else {
-            NSLog(@"Existing place was not modified");
+            //NSLog(@"Existing place was not modified");
         }
     } else {
-        NSLog(@"New place was not modified");
+        //NSLog(@"New place was not modified");
     }
     
     if (sender != self.savePlace) {
@@ -192,16 +189,15 @@
     Memory *item = source.selectedMemory;
     
     // If the returned item is marked but is not the previous cover photo
-    if (![source.currentPlaceCover isEqualToString:_placeCoverImage]) {
+    if (source.placeCoverSwitch.isOn && ![source.currentPlaceCover isEqualToString:_placeCoverImage]) {
         // Replace the current cover photo
         _placeCoverImage = source.currentPlaceCover;
+        NSLog(@"PlaceCoverImage on unwind is %@", _placeCoverImage);
         _placeCoord = source.currentPlaceCoord;
-        NSLog(@"Place latitude on unwind %f", source.currentPlaceCoord.latitude);
     }
-    if (![source.currentTripCover isEqualToString:_tripCoverImage]) {
+    if (source.tripCoverSwitch.isOn && ![source.currentTripCover isEqualToString:_tripCoverImage]) {
         _tripCoverImage = source.currentTripCover;
         _tripCoord = source.currentTripCoord;
-        NSLog(@"Trip location on unwind %f", _tripCoord.latitude);
     }
     
     if (source.newMemory) {
@@ -212,42 +208,6 @@
         [self.memoriesJournal replaceObjectAtIndex:_chosenIndex withObject:item];
         [self.collectionView reloadData];
     }
-    
-    /*    if (_chosenIndex >= 0) {
-     
-     // If the the chosen memory was unchanged, do nothing.
-     if ([item isEqual:[self.memoriesJournal objectAtIndex:_chosenIndex]]){
-     NSLog(@"returned memory is equal to selected memory");
-     
-     // Else update the chosen memory.
-     } else {
-     NSLog(@"returned memory is NOT equal to selected memory");
-     [self.memoriesJournal replaceObjectAtIndex:_chosenIndex withObject:item];
-     [self.collectionView reloadData];
-     }
-     
-     // Clear the index of the previously chosen memory.
-     _chosenIndex = -1;
-     
-     }
-     // Else the memory is a new memory. Save the new memory if it contains data.
-     else if (item != nil) {
-     NSLog(@"returned memory is a new memory");
-     item.placeId = [NSNumber numberWithInt: self.selectedPlace.uniqueId ];
-     [self.memoriesJournal addObject:item];
-     [[TripsDatabase database] addMemoryToJournal:item];
-     [self.collectionView reloadData];
-     }
-     
-     // If the returned item is marked but is not the previous cover photo
-     if (![source.currentPlaceCover isEqualToString:_placeCoverImage]) {
-     // Replace the current cover photo
-     _placeCoverImage = source.currentPlaceCover;
-     }
-     if (![source.currentTripCover isEqualToString:_tripCoverImage]) {
-     _tripCoverImage = source.currentTripCover;
-     }
-     */
 }
 
 @end

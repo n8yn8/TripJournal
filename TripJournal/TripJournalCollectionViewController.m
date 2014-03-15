@@ -32,7 +32,6 @@
 {
     [super viewDidLoad];
     self.tripsJournal = [TripsDatabase database].tripsJournal;
-    //NSLog(@"%@", self.tripsJournal.description);
     
     _chosenIndex = -1;
     _format = [[NSDateFormatter alloc] init];
@@ -64,7 +63,7 @@
     //assign the image
     
     Trip *info = [_tripsJournal objectAtIndex:indexPath.item];
-    if (![info.photo isEqualToString: @"(null)"] ) {
+    if (!([info.photo isEqualToString:@""])) {
         NSData *imageData = [[NSFileManager defaultManager] contentsAtPath:info.photo];
         UIImage *myImage = [[UIImage alloc] initWithData:imageData];
         menuPhotoView.image = myImage;
@@ -115,13 +114,9 @@
         NSArray *indexPaths = [self.collectionView indexPathsForSelectedItems];
         NSIndexPath *index = [indexPaths objectAtIndex:0];
         _chosenIndex = index.item;
-        //NSLog(@"Trip detail selected at index %ld", (long)_chosenIndex);
         dvc.selectedTrip = [_tripsJournal objectAtIndex:index.item];
     } else {
         dvc.selectedTrip = [[Trip alloc] init];
-        //dvc.selectedTrip.name = @"";
-        //dvc.selectedTrip.description = @"";
-        //NSLog(@"%@", dvc.refID);
     }
 }
 
@@ -129,35 +124,14 @@
 {
     TripCollectionViewController *source = [unwindSegue sourceViewController];
     Trip *item = source.selectedTrip;
-    //NSLog(@"UndwindToJournal returned uniqueId = %i", item.uniqueId);
-    if (source.newTrip) {
+    if (source.newTrip || (source.editedTrip && (_chosenIndex == -1))) {
         [self.tripsJournal addObject:item];
         [self.collectionView reloadData];
     }
-    if (source.editedTrip) {
+    if (source.editedTrip && (_chosenIndex != -1)) {
         [self.tripsJournal replaceObjectAtIndex:_chosenIndex withObject:item];
         [self.collectionView reloadData];
     }
-    
-    /*
-    if (_chosenIndex >= 0) {
-        
-        if ([item isEqual:[self.tripsJournal objectAtIndex:_chosenIndex]]) {
-            //NSLog(@"returned trip is equal to selected trip.");
-        } else {
-            //NSLog(@"returned trip was edited.");
-            [self.tripsJournal replaceObjectAtIndex:_chosenIndex withObject:item];
-            [self.collectionView reloadData];
-        }
-        _chosenIndex = -1;
-        
-    } else if (item != nil) {
-        //NSLog(@"returned trip is new");
-        [self.tripsJournal addObject:item];
-        //[[TripsDatabase database] addTripToJournal:item];
-        [self.collectionView reloadData];
-    }
-     */
 }
 
 @end

@@ -10,6 +10,11 @@
 
 @implementation Memory
 
+-(id)init {
+    self.photo = @"";
+    return self;
+}
+
 -(id)initWithUniqueId:(long long)uniqueId placeId:(NSNumber *)placeId name:(NSString *)name description:(NSString *)description photo:(NSString *)photo date:(NSDate *)date latlng:(CLLocationCoordinate2D)latlng{
     if ((self = [super init])) {
         self.uniqueId = uniqueId;

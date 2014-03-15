@@ -36,7 +36,7 @@
     
     _format = [[NSDateFormatter alloc] init];
     [_format setDateStyle:NSDateFormatterMediumStyle];
-    [_format setTimeStyle:NSDateFormatterNoStyle];
+    //[_format setTimeStyle:NSDateFormatterNoStyle];
     
     //if (_selectedMemory.photo) {
         //NSLog(@"%@", self.selectedMemory.photo);
@@ -69,14 +69,15 @@
     if (sender == self.saveMemory){
         
         if (_placeCoverSwitch.isOn) {
-            self.currentPlaceCover = _currentImage;
+            self.currentPlaceCover = _selectedMemory.photo;
             self.currentPlaceCoord = _coord;
-            NSLog(@"Place cover switched on, self.currentPlaceCoord.latitude = %f", self.currentPlaceCoord.latitude);
+            NSLog(@"prepare for segue currentPlaceCover = %@", self.currentPlaceCover);
+            
         }
         if (_tripCoverSwitch.isOn) {
-            self.currentTripCover = _currentImage;
+            self.currentTripCover = _selectedMemory.photo;
             self.currentTripCoord = _coord;
-            //NSLog(@"Trip cover switched on");
+            NSLog(@"prepare for segue currentTripCover = %@", self.currentTripCover);
         }
         
         if (![self.memoryName.text isEqualToString:@""]) {
@@ -167,22 +168,10 @@
             
             CLLocation *location = [asset valueForProperty:ALAssetPropertyLocation];
             self.coord = location.coordinate;
-            //NSLog(@"Location: %@, /nLatitude:%f, Longitude: %f",location, self.coord.latitude, self.coord.longitude);
             NSDate *retDate = [asset valueForProperty:ALAssetPropertyDate];
             NSString *retDateString = [_format stringFromDate:retDate];
             _selectedMemory.date = retDate;
             _memoryDate.text = retDateString;
-
-            // lat is negative if direction is south
-            /*if ([[gpsdata valueForKey:@"LatitudeRef"] isEqualToString:@"S"]) {
-                self.latitude = -self.latitude;
-            }
-            
-            // lng is negative if direction is west
-            if ([[gpsdata valueForKey:@"LongitudeRef"] isEqualToString:@"W"]) {
-                self.longitude = -self.longitude;
-            }
-            */
             
         };
         
@@ -205,10 +194,10 @@
         NSString *tmpPathToFile = [[NSString alloc] initWithString:[NSString stringWithFormat:@"%@/%@",documentsDirectory,appendPic]];
         self.selectedMemory.photo = tmpPathToFile;
         if([data writeToFile:tmpPathToFile atomically:YES]){
-            NSLog(@"Success");
+            //NSLog(@"Success");
         }
         else{
-            NSLog(@"Fail");
+            NSLog(@"Failed to write file");
         }
         if (_newPic)
             UIImageWriteToSavedPhotosAlbum(image,
