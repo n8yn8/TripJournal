@@ -169,8 +169,10 @@
             dvc.tripCoverImage = self.tripCoverImage;
             
         } else if ([segue.identifier isEqualToString:@"NewPlace"]){
+            _chosenIndex = _placesJournal.count;
             dvc.selectedPlace = [[Place alloc] init];
             dvc.selectedPlace.tripId = [NSNumber numberWithLongLong:self.selectedTrip.uniqueId];
+            dvc.tripCoverImage = self.tripCoverImage;
         }
     }
 }
@@ -185,14 +187,14 @@
         self.tripCoord = source.tripCoord;
     }
     
-    if (source.newPlace || (source.editedPlace && (_chosenIndex == -1))) {
+    if (source.newPlace || (source.editedPlace && (_chosenIndex == _placesJournal.count))) {
         [self.placesJournal addObject:item];
         [self.collectionView reloadData];
-    }
-    if (source.editedPlace && (_chosenIndex != -1)) {
+    }else if (source.editedPlace) {
         [self.placesJournal replaceObjectAtIndex:_chosenIndex withObject:item];
         [self.collectionView reloadData];
     }
+    
 }
 
 @end

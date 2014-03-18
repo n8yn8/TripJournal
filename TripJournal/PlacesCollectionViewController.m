@@ -179,6 +179,8 @@
         } else if ([segue.identifier isEqualToString:@"NewMemory"]) {
             dvc.selectedMemory = [[Memory alloc] init];
             dvc.selectedMemory.placeId = [NSNumber numberWithLongLong:self.selectedPlace.uniqueId];
+            dvc.currentPlaceCover = self.placeCoverImage;
+            dvc.currentTripCover = self.tripCoverImage;
         }
     }
 }

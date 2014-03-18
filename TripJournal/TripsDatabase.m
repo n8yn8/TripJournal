@@ -129,9 +129,11 @@ static TripsDatabase *_database;
                 NSString *name = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 0)];
                 CLLocationDegrees latitude = sqlite3_column_double(statement, 1);
                 CLLocationDegrees longitude = sqlite3_column_double(statement, 2);
-                CLLocationCoordinate2D latlng = CLLocationCoordinate2DMake(latitude, longitude);
-                MyAnnotation *annot = [[MyAnnotation alloc] initWithTitle:name andCoordinate:latlng];
-                [retval addObject:annot];
+                if (latitude !=0 || longitude != 0) {
+                    CLLocationCoordinate2D latlng = CLLocationCoordinate2DMake(latitude, longitude);
+                    MyAnnotation *annot = [[MyAnnotation alloc] initWithTitle:name andCoordinate:latlng];
+                    [retval addObject:annot];
+                }
             }
             sqlite3_finalize(statement);
         }
@@ -197,9 +199,11 @@ static TripsDatabase *_database;
                 NSString *name = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 0)];
                 CLLocationDegrees latitude = sqlite3_column_double(statement, 1);
                 CLLocationDegrees longitude = sqlite3_column_double(statement, 2);
-                CLLocationCoordinate2D latlng = CLLocationCoordinate2DMake(latitude, longitude);
-                MyAnnotation *annot = [[MyAnnotation alloc] initWithTitle: name andCoordinate:latlng];
-                [retval addObject:annot];
+                if (latitude !=0 || longitude != 0) {
+                    CLLocationCoordinate2D latlng = CLLocationCoordinate2DMake(latitude, longitude);
+                    MyAnnotation *annot = [[MyAnnotation alloc] initWithTitle: name andCoordinate:latlng];
+                    [retval addObject:annot];
+                }
             }
             sqlite3_finalize(statement);
         }

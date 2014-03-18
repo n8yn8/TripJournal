@@ -64,7 +64,7 @@
     //assign the image
     
     Trip *info = [_tripsJournal objectAtIndex:indexPath.item];
-    if (!([info.photo isEqualToString:@""])) {
+    if (![info.photo isEqualToString:@""] /*|| ![info.photo isEqualToString:@"(null)"]*/) {
         NSData *imageData = [[NSFileManager defaultManager] contentsAtPath:info.photo];
         UIImage *myImage = [[UIImage alloc] initWithData:imageData];
         menuPhotoView.image = myImage;
@@ -118,6 +118,7 @@
         dvc.selectedTrip = [_tripsJournal objectAtIndex:index.item];
     } else {
         dvc.selectedTrip = [[Trip alloc] init];
+        _chosenIndex = _tripsJournal.count;
     }
 }
 
@@ -125,11 +126,10 @@
 {
     TripCollectionViewController *source = [unwindSegue sourceViewController];
     Trip *item = source.selectedTrip;
-    if (source.newTrip || (source.editedTrip && (_chosenIndex == -1))) {
+    if (source.newTrip || (source.editedTrip && (_chosenIndex == _tripsJournal.count))) {
         [self.tripsJournal addObject:item];
         [self.collectionView reloadData];
-    }
-    if (source.editedTrip && (_chosenIndex != -1)) {
+    } else if (source.editedTrip) {
         [self.tripsJournal replaceObjectAtIndex:_chosenIndex withObject:item];
         [self.collectionView reloadData];
     }
