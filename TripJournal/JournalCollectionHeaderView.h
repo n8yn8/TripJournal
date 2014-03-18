@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 #import <MapKit/MapKit.h>
+#import "MyAnnotation.h"
 
 @interface JournalCollectionHeaderView : UICollectionReusableView <MKMapViewDelegate>
 @property (strong, nonatomic) IBOutlet MKMapView *JournalMapView;

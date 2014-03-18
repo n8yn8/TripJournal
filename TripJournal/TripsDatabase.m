@@ -24,7 +24,7 @@ static TripsDatabase *_database;
         
         _format = [[NSDateFormatter alloc] init];
         [_format setDateStyle:NSDateFormatterMediumStyle];
-        [_format setTimeStyle:NSDateFormatterNoStyle];
+        [_format setTimeStyle:NSDateFormatterMediumStyle];
         
         NSString *docsDir;
         NSArray *dirPaths;
@@ -130,7 +130,7 @@ static TripsDatabase *_database;
                 CLLocationDegrees latitude = sqlite3_column_double(statement, 1);
                 CLLocationDegrees longitude = sqlite3_column_double(statement, 2);
                 CLLocationCoordinate2D latlng = CLLocationCoordinate2DMake(latitude, longitude);
-                MyAnnotation *annot = [[MyAnnotation alloc] initWithTitle: name andCoordinate:latlng];
+                MyAnnotation *annot = [[MyAnnotation alloc] initWithTitle:name andCoordinate:latlng];
                 [retval addObject:annot];
             }
             sqlite3_finalize(statement);

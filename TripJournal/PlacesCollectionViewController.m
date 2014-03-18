@@ -192,7 +192,6 @@
     if (source.placeCoverSwitch.isOn && ![source.currentPlaceCover isEqualToString:_placeCoverImage]) {
         // Replace the current cover photo
         _placeCoverImage = source.currentPlaceCover;
-        NSLog(@"PlaceCoverImage on unwind is %@", _placeCoverImage);
         _placeCoord = source.currentPlaceCoord;
     }
     if (source.tripCoverSwitch.isOn && ![source.currentTripCover isEqualToString:_tripCoverImage]) {

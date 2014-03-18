@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
+#import "MyAnnotation.h"
 
 @interface TripCollectionHeaderView : UICollectionReusableView <MKMapViewDelegate>
 @property (strong, nonatomic) IBOutlet UILabel *date;

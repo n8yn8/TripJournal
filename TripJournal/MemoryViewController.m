@@ -8,6 +8,7 @@
 
 #import "MemoryViewController.h"
 #import "TripsDatabase.h"
+#import "SetLocationViewController.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 
 @interface MemoryViewController ()
@@ -36,16 +37,9 @@
     
     _format = [[NSDateFormatter alloc] init];
     [_format setDateStyle:NSDateFormatterMediumStyle];
-    //[_format setTimeStyle:NSDateFormatterNoStyle];
+    [_format setTimeStyle:NSDateFormatterMediumStyle];
     
-    //if (_selectedMemory.photo) {
-        //NSLog(@"%@", self.selectedMemory.photo);
-        NSData *imageData = [[NSFileManager defaultManager] contentsAtPath:self.selectedMemory.photo];
-    /*
-    } else if (_selectedMemory.photoURL) {
-        ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
-        [library assetForURL:_selectedMemory.photoURL resultBlock:<#^(ALAsset *asset)resultBlock#> failureBlock:^(NSError *error)]
-    }*/
+    NSData *imageData = [[NSFileManager defaultManager] contentsAtPath:self.selectedMemory.photo];
     UIImage *myImage = [[UIImage alloc] initWithData:imageData];
     _imageView.image = myImage;
     
@@ -71,13 +65,10 @@
         if (_placeCoverSwitch.isOn) {
             self.currentPlaceCover = _selectedMemory.photo;
             self.currentPlaceCoord = _coord;
-            NSLog(@"prepare for segue currentPlaceCover = %@", self.currentPlaceCover);
-            
         }
         if (_tripCoverSwitch.isOn) {
             self.currentTripCover = _selectedMemory.photo;
             self.currentTripCoord = _coord;
-            NSLog(@"prepare for segue currentTripCover = %@", self.currentTripCover);
         }
         
         if (![self.memoryName.text isEqualToString:@""]) {
@@ -85,10 +76,11 @@
             //NSLog(@"name is not blank");
             if (![self.selectedMemory.name isEqualToString: self.memoryName.text] ||
                 ![self.selectedMemory.description isEqualToString: self.memoryDescription.text] ||
-                ![self.selectedMemory.photo isEqualToString:self.currentImage])
+                ![self.selectedMemory.photo isEqualToString:self.currentImage] ||
+                (self.selectedMemory.latlng.latitude != self.coord.latitude))
             {
                 //Something is not what it used to be.
-               // NSLog(@"a field was modified from the original.");
+                //NSLog(@"a field was modified from the original.");
                 
                 if (!self.selectedMemory.name) {
                     //This is a new trip.
@@ -99,7 +91,6 @@
                     self.selectedMemory.latlng = self.coord;
                     self.selectedMemory.uniqueId = [[TripsDatabase database] addMemoryToJournal:self.selectedMemory];
                     //NSLog(@"New memory added to database with uniqueId = %lld", self.selectedMemory.uniqueId);
-                    
                 } else {
                     //This is an updated trip.
                     _editedMemory = YES;
@@ -117,6 +108,18 @@
         } else {
             //NSLog(@"New memory was not modified");
         }
+    } else if ([[segue identifier] isEqualToString:@"setLocation"]) {
+        SetLocationViewController *dvc = segue.destinationViewController;
+        dvc.latlng = _selectedMemory.latlng;
+    }
+}
+
+- (IBAction)unwindToMemory:(UIStoryboardSegue *)unwindSegue
+{
+    SetLocationViewController *source = [unwindSegue sourceViewController];
+    if ((source.latlng.latitude != _selectedMemory.latlng.latitude) || (source.latlng.longitude != _selectedMemory.latlng.longitude))
+    {
+        _coord = source.latlng;
     }
 }
 
@@ -167,6 +170,14 @@
         {
             
             CLLocation *location = [asset valueForProperty:ALAssetPropertyLocation];
+            if (!location) {
+                UIAlertView *noLocationAlert = [[UIAlertView alloc] initWithTitle:@"No location data."
+                                                                                message:@"Click on Set Location below to set the location of this photo."
+                                                                               delegate:nil
+                                                                      cancelButtonTitle:@"OK"
+                                                                      otherButtonTitles:nil];
+                [noLocationAlert show];
+            }
             self.coord = location.coordinate;
             NSDate *retDate = [asset valueForProperty:ALAssetPropertyDate];
             NSString *retDateString = [_format stringFromDate:retDate];

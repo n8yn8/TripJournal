@@ -14,5 +14,6 @@
 }
 @property (nonatomic, readwrite) CLLocationCoordinate2D coordinate;
 @property (nonatomic, copy) NSString *title;
+//@property (nonatomic, retain) UIImage *image;
 - (id)initWithTitle:(NSString *)title andCoordinate: (CLLocationCoordinate2D)coordinate;
 @end

@@ -29,5 +29,6 @@
 @property CLLocationCoordinate2D currentPlaceCoord;
 @property CLLocationCoordinate2D currentTripCoord;
 @property CLLocationCoordinate2D coord;
+- (IBAction)unwindToMemory:(UIStoryboardSegue *)unwindSegue;
 
 @end

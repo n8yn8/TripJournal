@@ -94,6 +94,7 @@
         _headerView.name.text = _selectedTrip.name;
         _headerView.description.text = _selectedTrip.description;
         
+        _headerView.TripMapView.showsUserLocation = YES;
         NSMutableArray *annotations = [[TripsDatabase database] placesAnnotations: [NSNumber numberWithLongLong:_selectedTrip.uniqueId]];
         [_headerView.TripMapView showAnnotations:annotations animated:NO];
         

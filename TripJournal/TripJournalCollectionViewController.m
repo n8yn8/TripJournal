@@ -45,6 +45,7 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - UICollectionViewDelegate
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     //count the array
     return [_tripsJournal count];
