@@ -31,6 +31,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
     self.tripsJournal = [TripsDatabase database].tripsJournal;
     
     _chosenIndex = -1;
@@ -46,6 +47,7 @@
 }
 
 #pragma mark - UICollectionViewDelegate
+
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     //count the array
     return [_tripsJournal count];

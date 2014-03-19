@@ -120,9 +120,10 @@
         //NSLog(@"name is not blank");
         if (![self.selectedPlace.name isEqualToString: self.headerView.name.text] ||
             ![self.selectedPlace.description isEqualToString: self.headerView.description.text] ||
-            ![self.selectedPlace.photo isEqualToString:self.placeCoverImage] /*||
+            ![self.selectedPlace.photo isEqualToString:self.placeCoverImage] ||
+            !(self.selectedPlace.latlng.latitude != self.placeCoord.latitude) ||
             ![self.selectedPlace.startDate isEqualToDate:self.tempStartDate] ||
-            ![self.selectedPlace.endDate isEqualToDate:self.tempEndDate]*/)
+            ![self.selectedPlace.endDate isEqualToDate:self.tempEndDate])
         {
             //Something is not what it used to be.
             //NSLog(@"a field was modified from the original.");

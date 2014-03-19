@@ -15,7 +15,7 @@
     return self;
 }
 
-- (id)initWithUniqueId:(long long)uniqueId tripId:(NSNumber *)tripId name:(NSString *)name description:(NSString *)description photo:(NSString *)photo startDate:(NSDate *)startDate endDate:(NSDate *)endDate {
+- (id)initWithUniqueId:(long long)uniqueId tripId:(NSNumber *)tripId name:(NSString *)name description:(NSString *)description photo:(NSString *)photo startDate:(NSDate *)startDate endDate:(NSDate *)endDate coordinate:(CLLocationCoordinate2D)latlng{
     if ((self = [super init])) {
         self.uniqueId = uniqueId;
         self.tripId = tripId;
@@ -24,6 +24,7 @@
         self.photo = photo;
         self.startDate = startDate;
         self.endDate = endDate;
+        self.latlng = latlng;
     }
     return self;
 }

@@ -26,6 +26,6 @@
 @property (copy, nonatomic) NSDate *endDate;
 @property CLLocationCoordinate2D latlng;
 
-- (id)initWithUniqueId:(long long)uniqueId name:(NSString *)name description:(NSString *)description photo:(NSString *)photo startDate:(NSDate *)startDate endDate:(NSDate *)endDate;
+- (id)initWithUniqueId:(long long)uniqueId name:(NSString *)name description:(NSString *)description photo:(NSString *)photo startDate:(NSDate *)startDate endDate:(NSDate *)endDate coordinate:(CLLocationCoordinate2D)latlng;
 
 @end

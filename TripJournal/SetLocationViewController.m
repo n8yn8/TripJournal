@@ -7,6 +7,7 @@
 //
 
 #import "SetLocationViewController.h"
+#import "MemoryViewController.h"
 
 static NSString *kCellIdentifier = @"cellIdentifier";
 
@@ -151,6 +152,7 @@ static NSString *kCellIdentifier = @"cellIdentifier";
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
 {
     _latlng = view.annotation.coordinate;
+    
     //[self dismissViewControllerAnimated:YES completion:nil];
     
 }

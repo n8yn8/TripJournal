@@ -86,7 +86,7 @@ static TripsDatabase *_database;
     sqlite3_stmt    *statement;
     if (sqlite3_open(dbpath, &_database) == SQLITE_OK)
     {
-        NSString *querySQL = [NSString stringWithFormat:@"SELECT id, name, description, photo, startdate, enddate FROM trips"];
+        NSString *querySQL = [NSString stringWithFormat:@"SELECT id, name, description, photo, startdate, enddate, latitude, longitude FROM trips"];
         const char *query_stmt = [querySQL UTF8String];
         
         if (sqlite3_prepare_v2(_database, query_stmt, -1, &statement, NULL) == SQLITE_OK)
@@ -99,7 +99,10 @@ static TripsDatabase *_database;
                 NSString *photo = [[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 3)];
                 NSDate *startdate = [_format dateFromString:[[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 4)]];
                 NSDate *enddate = [_format dateFromString:[[NSString alloc] initWithUTF8String: (const char *) sqlite3_column_text(statement, 5)]];
-                Trip *trip = [[Trip alloc] initWithUniqueId:uniqueId name:name description:description photo:photo startDate:startdate endDate:enddate];
+                CLLocationDegrees latitude = sqlite3_column_double(statement, 6);
+                CLLocationDegrees longitude = sqlite3_column_double(statement, 7);
+                CLLocationCoordinate2D latlng = CLLocationCoordinate2DMake(latitude, longitude);
+                Trip *trip = [[Trip alloc] initWithUniqueId:uniqueId name:name description:description photo:photo startDate:startdate endDate:enddate coordinate:latlng];
                 [retval addObject:trip];
             }
             sqlite3_finalize(statement);
@@ -169,8 +172,7 @@ static TripsDatabase *_database;
                 CLLocationDegrees latitude = sqlite3_column_double(statement, 7);
                 CLLocationDegrees longitude = sqlite3_column_double(statement, 8);
                 CLLocationCoordinate2D latlng = CLLocationCoordinate2DMake(latitude, longitude);
-                Place *place = [[Place alloc] initWithUniqueId:uniqueId tripId:tripId name:name description:description photo:photo startDate:startdate endDate:enddate];
-                place.latlng = latlng;
+                Place *place = [[Place alloc] initWithUniqueId:uniqueId tripId:tripId name:name description:description photo:photo startDate:startdate endDate:enddate coordinate:latlng];
                 [retval addObject:place];
             }
             sqlite3_finalize(statement);
@@ -245,6 +247,42 @@ static TripsDatabase *_database;
         sqlite3_prepare_v2(_database, insert_stmt, -1, &statement, NULL);
         if (sqlite3_step(statement) == SQLITE_DONE) {
             //NSLog(@"Trip updated");
+        } else {
+            NSLog(@"Failed to update Trip");
+        }
+        sqlite3_finalize(statement);
+    }
+}
+
+-(void)deleteTrip:(long long)tripId {
+    const char *dbpath = [_databasePath UTF8String];
+    sqlite3_stmt    *statement;
+    if (sqlite3_open(dbpath, &_database) == SQLITE_OK)
+    {
+        NSString *insertSQL = [NSString stringWithFormat:@"DELETE from trips where id=%lld", tripId];
+        //NSLog(@"%@", insertSQL);
+        const char *insert_stmt = [insertSQL UTF8String];
+        sqlite3_prepare_v2(_database, insert_stmt, -1, &statement, NULL);
+        if (sqlite3_step(statement) == SQLITE_DONE) {
+            //NSLog(@"Trip deleted");
+        } else {
+            NSLog(@"Failed to delete Trip");
+        }
+        sqlite3_finalize(statement);
+    }
+}
+
+-(void)deletePlace:(long long)placeId {
+    const char *dbpath = [_databasePath UTF8String];
+    sqlite3_stmt    *statement;
+    if (sqlite3_open(dbpath, &_database) == SQLITE_OK)
+    {
+        NSString *insertSQL = [NSString stringWithFormat:@"DELETE from places where id=%lld", placeId];
+        //NSLog(@"%@", insertSQL);
+        const char *insert_stmt = [insertSQL UTF8String];
+        sqlite3_prepare_v2(_database, insert_stmt, -1, &statement, NULL);
+        if (sqlite3_step(statement) == SQLITE_DONE) {
+            //NSLog(@"Trip deleted");
         } else {
             NSLog(@"Failed to update Trip");
         }
@@ -360,6 +398,7 @@ static TripsDatabase *_database;
         if (sqlite3_step(statement) == SQLITE_DONE) {
             //NSLog(@"Memory updated");
         } else {
+            NSLog(@"%s SQLITE_ERROR '%s' (%1d)", __FUNCTION__, sqlite3_errmsg(_database), sqlite3_errcode(_database));
             NSLog(@"Failed to update Memory");
         }
         sqlite3_finalize(statement);

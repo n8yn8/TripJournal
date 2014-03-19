@@ -12,7 +12,7 @@
 #import "TripCollectionViewController.h"
 #import <sqlite3.h>
 
-@interface TripJournalCollectionViewController : UICollectionViewController {
+@interface TripJournalCollectionViewController : UICollectionViewController{
     NSMutableArray *_tripsJournal;
 }
 

@@ -119,7 +119,10 @@
         //NSLog(@"name is not blank");
         if (![self.selectedTrip.name isEqualToString: self.headerView.name.text] ||
             ![self.selectedTrip.description isEqualToString: self.headerView.description.text] ||
-            ![self.selectedTrip.photo isEqualToString: _tripCoverImage])
+            ![self.selectedTrip.photo isEqualToString: _tripCoverImage] ||
+            !(self.selectedTrip.latlng.latitude != self.tripCoord.latitude) /*||
+            ![self.selectedTrip.startDate isEqualToDate:self.tempStartDate] ||
+            ![self.selectedTrip.endDate isEqualToDate:self.tempEndDate]*/)
         {
             //Something is not what it used to be.
             //NSLog(@"a field was modified from the original.");

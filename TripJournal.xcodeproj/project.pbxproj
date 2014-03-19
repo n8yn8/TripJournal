@@ -37,7 +37,6 @@
 		439EC68E18B541FF00BC6EBA /* Memory.m in Sources */ = {isa = PBXBuildFile; fileRef = 439EC68D18B541FF00BC6EBA /* Memory.m */; };
 		439EC69118B582E300BC6EBA /* MemoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 439EC69018B582E300BC6EBA /* MemoryViewController.m */; };
 		439EC69318B5D6A700BC6EBA /* Journal.plist in Resources */ = {isa = PBXBuildFile; fileRef = 439EC69218B5D6A700BC6EBA /* Journal.plist */; };
-		43A88BB818D81159006AE805 /* MyPoint.png in Resources */ = {isa = PBXBuildFile; fileRef = 43A88BB718D81159006AE805 /* MyPoint.png */; };
 		43A9965C18C3B56E0083F327 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 43A9965B18C3B56E0083F327 /* libsqlite3.dylib */; };
 		43A9965F18C3BFEA0083F327 /* TripsDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A9965E18C3BFEA0083F327 /* TripsDatabase.m */; };
 /* End PBXBuildFile section */
@@ -99,7 +98,6 @@
 		439EC68F18B582E300BC6EBA /* MemoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemoryViewController.h; sourceTree = "<group>"; };
 		439EC69018B582E300BC6EBA /* MemoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemoryViewController.m; sourceTree = "<group>"; };
 		439EC69218B5D6A700BC6EBA /* Journal.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Journal.plist; sourceTree = "<group>"; };
-		43A88BB718D81159006AE805 /* MyPoint.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = MyPoint.png; path = "../../Design/Lecture09 2/MyPoint.png"; sourceTree = "<group>"; };
 		43A9965B18C3B56E0083F327 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		43A9965D18C3BFEA0083F327 /* TripsDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TripsDatabase.h; sourceTree = "<group>"; };
 		43A9965E18C3BFEA0083F327 /* TripsDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TripsDatabase.m; sourceTree = "<group>"; };
@@ -194,7 +192,6 @@
 		4370B7FC1898D38F00907C5D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				43A88BB718D81159006AE805 /* MyPoint.png */,
 				433E4EB118AB5D0C003FC9AA /* JournalCollectionHeaderView.h */,
 				433E4EB218AB5D0C003FC9AA /* JournalCollectionHeaderView.m */,
 				433E4EAE18AB5540003FC9AA /* TripCollectionHeaderView.h */,
@@ -322,7 +319,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				43A88BB818D81159006AE805 /* MyPoint.png in Resources */,
 				4370B80E1898D38F00907C5D /* Images.xcassets in Resources */,
 				4370B8001898D38F00907C5D /* InfoPlist.strings in Resources */,
 				439EC69318B5D6A700BC6EBA /* Journal.plist in Resources */,
