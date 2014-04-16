@@ -51,6 +51,16 @@
     [super touchesBegan:touches withEvent:event];
 }
 
+- (BOOL) textFieldShouldReturn:(UITextField *)textField {
+    if ([textField isEqual:_name]) {
+        [_description becomeFirstResponder];
+    }
+    if ([textField isEqual:_description]) {
+        [_description resignFirstResponder];
+    }
+    return YES;
+}
+
 /*
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.

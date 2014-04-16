@@ -99,7 +99,7 @@
                     self.selectedMemory.description = self.memoryDescription.text;
                     self.selectedMemory.latlng = self.coord;
                     [[TripsDatabase database] updateMemory:self.selectedMemory];
-                    //NSLog(@"Update the old one");
+                    NSLog(@"Update the old memory");
                 }
                 
             } else {
@@ -132,6 +132,16 @@
         [_memoryDescription resignFirstResponder];
     }
     [super touchesBegan:touches withEvent:event];
+}
+
+- (BOOL) textFieldShouldReturn:(UITextField *)textField {
+    if ([textField isEqual:_memoryName]) {
+        [_memoryDescription becomeFirstResponder];
+    }
+    if ([textField isEqual:_memoryDescription]) {
+        [_memoryDescription resignFirstResponder];
+    }
+    return YES;
 }
 
 - (IBAction)useCameraRoll:(id)sender {

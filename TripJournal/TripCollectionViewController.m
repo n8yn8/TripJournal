@@ -89,7 +89,18 @@
     
     if (kind == UICollectionElementKindSectionHeader) {
         _headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"TripHeaderView" forIndexPath:indexPath];
-        NSString *tripDates = [[NSString alloc]initWithFormat:@"%@ - %@", [_format stringFromDate:_selectedTrip.startDate], [_format stringFromDate:_selectedTrip.endDate]];
+        
+        NSString *thisStartDate = [_format stringFromDate:_selectedTrip.startDate];
+        NSString *thisEndDate = [_format stringFromDate:_selectedTrip.endDate];
+        NSMutableString *tripDates;
+        if (thisStartDate) {
+            tripDates = [[NSMutableString alloc] initWithString:thisStartDate];
+            if (thisEndDate) {
+                [tripDates appendString:@" - "];
+                [tripDates appendString:thisEndDate];
+            }
+        }
+        //NSString *tripDates = [[NSString alloc]initWithFormat:@"%@ - %@", [_format stringFromDate:_selectedTrip.startDate], [_format stringFromDate:_selectedTrip.endDate]];
         _headerView.date.text = tripDates;
         _headerView.name.text = _selectedTrip.name;
         _headerView.description.text = _selectedTrip.description;
@@ -198,6 +209,17 @@
         [self.collectionView reloadData];
     }
     
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    
+    UITouch *touch = [[event allTouches] anyObject];
+    if ([_headerView.name isFirstResponder] && [touch view] != _headerView.name) {
+        [_headerView.name resignFirstResponder];
+    } else if ([_headerView.description isFirstResponder] && [touch view] != _headerView.description) {
+        [_headerView.description resignFirstResponder];
+    }
+    [super touchesBegan:touches withEvent:event];
 }
 
 @end

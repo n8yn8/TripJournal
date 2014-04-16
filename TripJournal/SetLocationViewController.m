@@ -135,7 +135,7 @@ static NSString *kCellIdentifier = @"cellIdentifier";
         annotationView.canShowCallout = YES;
         UIButton *detailButton = [UIButton buttonWithType:UIButtonTypeContactAdd];
         annotationView.rightCalloutAccessoryView=detailButton;
-        annotationView.image = [UIImage imageNamed:@"MyPoint.png"];//here we use a nice image instead of the default pins
+        annotationView.image = [UIImage imageNamed:@"MyPoint.png"];
         annotationView.centerOffset = CGPointMake(0, -20);
     } else {
         annotationView.annotation = annotation;

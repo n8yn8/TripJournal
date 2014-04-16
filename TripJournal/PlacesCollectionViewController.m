@@ -89,7 +89,17 @@
     
     if (kind == UICollectionElementKindSectionHeader) {
         _headerView = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"PlacesHeaderView" forIndexPath:indexPath];
-        NSString *placeDates = [[NSString alloc]initWithFormat:@"%@ - %@", [_format stringFromDate:_tempStartDate], [_format stringFromDate:_tempEndDate]];
+        
+        NSString *thisStartDate = [_format stringFromDate:_selectedPlace.startDate];
+        NSString *thisEndDate = [_format stringFromDate:_selectedPlace.endDate];
+        NSMutableString *placeDates;
+        if (thisStartDate) {
+            placeDates = [[NSMutableString alloc] initWithString:thisStartDate];
+            if (thisEndDate) {
+                [placeDates appendString:@" - "];
+                [placeDates appendString:thisEndDate];
+            }
+        }
         _headerView.date.text = placeDates;
         _headerView.name.text = _selectedPlace.name;
         _headerView.description.text = _selectedPlace.description;
