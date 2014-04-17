@@ -19,6 +19,8 @@
 
 @implementation PlacesCollectionViewController
 
+NSIndexPath *deletePath;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -40,12 +42,48 @@
     [_format setTimeStyle:NSDateFormatterNoStyle];
     
     _placeCoverImage = _selectedPlace.photo;
+    
+    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
+    [self.collectionView addGestureRecognizer:longPress];
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer
+{
+    if (gestureRecognizer.state != UIGestureRecognizerStateEnded) {
+        return;
+    }
+    
+    CGPoint p = [gestureRecognizer locationInView:self.collectionView];
+    
+    deletePath = [self.collectionView indexPathForItemAtPoint:p];
+    if (deletePath == nil){
+        NSLog(@"couldn't find index path");
+    } else {
+        
+        UIAlertView *alert = [[UIAlertView alloc]
+                              initWithTitle: @"Delete"
+                              message: @"Delete the selected Memory?"
+                              delegate: self
+                              cancelButtonTitle:@"Cancel"
+                              otherButtonTitles:@"OK", nil];
+        [alert show];
+    }
+}
+
+- (void)alertView:(UIAlertView *)theAlert clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if ([[theAlert buttonTitleAtIndex:buttonIndex] isEqualToString:@"OK"]) {
+        long long deleteIndex = [[self.memoriesJournal objectAtIndex:deletePath.item] uniqueId];
+        [self.memoriesJournal removeObjectAtIndex:deletePath.item];
+        [[TripsDatabase database] deleteMemory:deleteIndex];
+        [self.collectionView reloadData];
+    }
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {

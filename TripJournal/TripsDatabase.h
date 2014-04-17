@@ -26,14 +26,17 @@
 - (NSMutableArray *)tripsAnnotations;
 -(long long)addTripToJournal:(Trip*)trip;
 -(void)updateTrip:(Trip *)trip;
+-(void)deleteTrip:(long long)tripId;
 
 - (NSMutableArray *)placesJournal:(NSNumber*)tripId;
 - (NSMutableArray *)placesAnnotations:(NSNumber*) tripId;
 -(long long)addPlaceToJournal:(Place*)place;
 -(void)updatePlace:(Place *)place;
+-(void)deletePlace:(long long)placeId;
 
 - (NSMutableArray *)memoriesJournal:(NSNumber*)placeId;
 -(long long)addMemoryToJournal:(Memory*)memory;
 -(void)updateMemory:(Memory *)memory;
+-(void)deleteMemory:(long long)memoryId;
 
 @end

@@ -18,6 +18,7 @@
 
 @implementation TripJournalCollectionViewController
 
+NSIndexPath *deletePath;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -38,6 +39,9 @@
     _format = [[NSDateFormatter alloc] init];
     [_format setDateStyle:NSDateFormatterMediumStyle];
     [_format setTimeStyle:NSDateFormatterNoStyle];
+    
+    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(handleLongPress:)];
+    [self.collectionView addGestureRecognizer:longPress];
 }
 
 - (void)didReceiveMemoryWarning
@@ -46,8 +50,40 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - UICollectionViewDelegate
+-(void)handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer
+{
+    if (gestureRecognizer.state != UIGestureRecognizerStateEnded) {
+        return;
+    }
+    
+    CGPoint p = [gestureRecognizer locationInView:self.collectionView];
+    
+    deletePath = [self.collectionView indexPathForItemAtPoint:p];
+    if (deletePath == nil){
+        NSLog(@"couldn't find index path");
+    } else {
+        
+        UIAlertView *alert = [[UIAlertView alloc]
+                              initWithTitle: @"Delete"
+                              message: @"Delete the selected Trip?"
+                              delegate: self
+                              cancelButtonTitle:@"Cancel"
+                              otherButtonTitles:@"OK", nil];
+        [alert show];
+    }
+}
 
+- (void)alertView:(UIAlertView *)theAlert clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if ([[theAlert buttonTitleAtIndex:buttonIndex] isEqualToString:@"OK"]) {
+        long long deleteIndex = [[self.tripsJournal objectAtIndex:deletePath.item] uniqueId];
+        [self.tripsJournal removeObjectAtIndex:deletePath.item];
+        [[TripsDatabase database] deleteTrip:deleteIndex];
+        [self.collectionView reloadData];
+    }
+}
+
+#pragma mark - UICollectionViewDelegate
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     //count the array
     return [_tripsJournal count];
@@ -106,21 +142,24 @@
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     
-    //Get destination view controller
-    UINavigationController *navigationController = segue.destinationViewController;
-    TripCollectionViewController *dvc = [[navigationController viewControllers] objectAtIndex:0];
-    
-    //If a Trip is selected. Otherwise +Trip was selected.
-    if ([segue.identifier isEqualToString:@"TripDetails"]) {
+    if (![segue.identifier isEqualToString:@"QuickAdd"]) {
         
-        //Get item at selected path
-        NSArray *indexPaths = [self.collectionView indexPathsForSelectedItems];
-        NSIndexPath *index = [indexPaths objectAtIndex:0];
-        _chosenIndex = index.item;
-        dvc.selectedTrip = [_tripsJournal objectAtIndex:index.item];
-    } else {
-        dvc.selectedTrip = [[Trip alloc] init];
-        _chosenIndex = _tripsJournal.count;
+        //Get destination view controller
+        UINavigationController *navigationController = segue.destinationViewController;
+        TripCollectionViewController *dvc = [[navigationController viewControllers] objectAtIndex:0];
+        
+        //If a Trip is selected. Otherwise +Trip was selected.
+        if ([segue.identifier isEqualToString:@"TripDetails"]) {
+            
+            //Get item at selected path
+            NSArray *indexPaths = [self.collectionView indexPathsForSelectedItems];
+            NSIndexPath *index = [indexPaths objectAtIndex:0];
+            _chosenIndex = index.item;
+            dvc.selectedTrip = [_tripsJournal objectAtIndex:index.item];
+        } else if ([segue.identifier isEqualToString:@"AddTrip"]) {
+            dvc.selectedTrip = [[Trip alloc] init];
+            _chosenIndex = _tripsJournal.count;
+        }
     }
 }
 
