@@ -26,6 +26,7 @@
 @property (nonatomic, strong) NSString *tripCoverImage;
 @property CLLocationCoordinate2D placeCoord;
 @property CLLocationCoordinate2D tripCoord;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *memoryAdd;
 @property (nonatomic, strong) PlacesCollectionHeaderView *headerView;
 @property NSInteger chosenIndex;
 - (IBAction)unwindToPlace:(UIStoryboardSegue *)unwindSegue;

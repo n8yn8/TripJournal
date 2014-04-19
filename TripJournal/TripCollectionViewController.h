@@ -25,5 +25,6 @@
 @property (nonatomic, strong) NSString *tripCoverImage;
 @property CLLocationCoordinate2D tripCoord;
 @property NSInteger chosenIndex;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *placeAdd;
 - (IBAction)unwindToTrip:(UIStoryboardSegue *)unwindSegue;
 @end

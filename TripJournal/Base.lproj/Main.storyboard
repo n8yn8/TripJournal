@@ -312,7 +312,7 @@
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" returnKeyType="next"/>
                                     <connections>
-                                        <outlet property="delegate" destination="65f-Hf-XDK" id="gE7-ZD-Xbs"/>
+                                        <outlet property="delegate" destination="aQ4-Qc-Ako" id="xMl-kJ-39M"/>
                                     </connections>
                                 </textField>
                                 <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="aRM-pG-zPO">
@@ -329,7 +329,7 @@
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                     <connections>
-                                        <outlet property="delegate" destination="65f-Hf-XDK" id="8Ec-ay-19q"/>
+                                        <outlet property="delegate" destination="aQ4-Qc-Ako" id="o8N-OM-Ahl"/>
                                     </connections>
                                 </textField>
                             </subviews>
@@ -365,13 +365,14 @@
                                 <segue destination="nWU-H5-3Ss" kind="unwind" unwindAction="unwindToJournal:" id="htN-LR-GJM"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" title="+Place" id="hO7-Mo-G9u">
+                        <barButtonItem key="rightBarButtonItem" tag="202" enabled="NO" title="+Place" id="hO7-Mo-G9u">
                             <connections>
                                 <segue destination="XfK-9e-lrj" kind="modal" identifier="NewPlace" id="LQj-Ap-cQo"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="placeAdd" destination="hO7-Mo-G9u" id="dOe-Z3-Q9W"/>
                         <outlet property="saveButton" destination="TZS-Ej-WWN" id="ZL9-mp-AyN"/>
                     </connections>
                 </collectionViewController>
@@ -446,7 +447,7 @@
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" returnKeyType="next"/>
                                     <connections>
-                                        <outlet property="delegate" destination="YOa-oh-doI" id="bSo-Kf-LUa"/>
+                                        <outlet property="delegate" destination="BNA-Wk-et0" id="vOE-Vp-qML"/>
                                     </connections>
                                 </textField>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.49999999999999961" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Dates" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="122" translatesAutoresizingMaskIntoConstraints="NO" id="5js-g4-3Rs">
@@ -463,7 +464,7 @@
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" returnKeyType="done"/>
                                     <connections>
-                                        <outlet property="delegate" destination="YOa-oh-doI" id="M10-XK-3JL"/>
+                                        <outlet property="delegate" destination="BNA-Wk-et0" id="fNg-qF-2lW"/>
                                     </connections>
                                 </textField>
                             </subviews>
@@ -504,6 +505,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="memoryAdd" destination="vrI-al-HSZ" id="bHM-9d-rFE"/>
                         <outlet property="savePlace" destination="R5b-xe-LQa" id="WyD-Pa-ZAs"/>
                     </connections>
                 </collectionViewController>

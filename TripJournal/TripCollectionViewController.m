@@ -141,6 +141,7 @@ NSIndexPath *deletePath;
         //NSString *tripDates = [[NSString alloc]initWithFormat:@"%@ - %@", [_format stringFromDate:_selectedTrip.startDate], [_format stringFromDate:_selectedTrip.endDate]];
         _headerView.date.text = tripDates;
         _headerView.name.text = _selectedTrip.name;
+        _placeAdd.enabled = _headerView.name.hasText;
         _headerView.description.text = _selectedTrip.description;
         
         _headerView.TripMapView.showsUserLocation = YES;
@@ -157,6 +158,17 @@ NSIndexPath *deletePath;
     }
     
     return reusableview;
+}
+
+- (BOOL) textFieldShouldReturn:(UITextField *)textField {
+    if ([textField isEqual:_headerView.name]) {
+        [_headerView.description becomeFirstResponder];
+        _placeAdd.enabled = _headerView.name.hasText;
+    }
+    if ([textField isEqual:_headerView.description]) {
+        [_headerView.description resignFirstResponder];
+    }
+    return YES;
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{

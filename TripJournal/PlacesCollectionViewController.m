@@ -140,6 +140,7 @@ NSIndexPath *deletePath;
         }
         _headerView.date.text = placeDates;
         _headerView.name.text = _selectedPlace.name;
+        _memoryAdd.enabled = _headerView.name.hasText;
         _headerView.description.text = _selectedPlace.description;
         /*
         NSData *imageData = [[NSFileManager defaultManager] contentsAtPath:_placeCoverImage];
@@ -157,6 +158,17 @@ NSIndexPath *deletePath;
     }
     
     return reusableview;
+}
+
+- (BOOL) textFieldShouldReturn:(UITextField *)textField {
+    if ([textField isEqual:_headerView.name]) {
+        [_headerView.description becomeFirstResponder];
+        _memoryAdd.enabled = _headerView.name.hasText;
+    }
+    if ([textField isEqual:_headerView.description]) {
+        [_headerView.description resignFirstResponder];
+    }
+    return YES;
 }
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
