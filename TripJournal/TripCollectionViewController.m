@@ -8,6 +8,7 @@
 
 #import "TripCollectionViewController.h"
 #import "TripsDatabase.h"
+#import <AssetsLibrary/AssetsLibrary.h>
 
 @interface TripCollectionViewController ()
 
@@ -103,9 +104,22 @@ NSIndexPath *deletePath;
     
     Place *place = [_placesJournal objectAtIndex:indexPath.row];
     if (!([place.photo isEqualToString:@""])) {
-        NSData *imageData = [[NSFileManager defaultManager] contentsAtPath:place.photo];
-        UIImage *myImage = [[UIImage alloc] initWithData:imageData];
-        menuPhotoView.image = myImage;
+        
+        ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *myasset)
+        {
+            [menuPhotoView setImage:[UIImage imageWithCGImage:[myasset thumbnail]]];
+        };
+        
+        ALAssetsLibraryAccessFailureBlock failureblock  = ^(NSError *myerror)
+        {
+            NSLog(@"can't get image");
+            
+        };
+        
+        ALAssetsLibrary* assetslibrary = [[ALAssetsLibrary alloc] init];
+        [assetslibrary assetForURL:[NSURL URLWithString:place.photo]
+                       resultBlock:resultblock
+                      failureBlock:failureblock];
     }
     placeName.text = place.name;
     placeDesc.text = place.description;
@@ -158,6 +172,10 @@ NSIndexPath *deletePath;
     }
     
     return reusableview;
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    _placeAdd.enabled = _headerView.name.hasText;
 }
 
 - (BOOL) textFieldShouldReturn:(UITextField *)textField {

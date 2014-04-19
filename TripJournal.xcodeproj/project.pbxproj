@@ -37,6 +37,8 @@
 		439EC68E18B541FF00BC6EBA /* Memory.m in Sources */ = {isa = PBXBuildFile; fileRef = 439EC68D18B541FF00BC6EBA /* Memory.m */; };
 		439EC69118B582E300BC6EBA /* MemoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 439EC69018B582E300BC6EBA /* MemoryViewController.m */; };
 		439EC69318B5D6A700BC6EBA /* Journal.plist in Resources */ = {isa = PBXBuildFile; fileRef = 439EC69218B5D6A700BC6EBA /* Journal.plist */; };
+		43A0A223190243C80005CEB9 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43A0A222190243C80005CEB9 /* libTestFlight.a */; };
+		43A0A225190243F20005CEB9 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 43A0A224190243F20005CEB9 /* libz.dylib */; };
 		43A9965C18C3B56E0083F327 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 43A9965B18C3B56E0083F327 /* libsqlite3.dylib */; };
 		43A9965F18C3BFEA0083F327 /* TripsDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A9965E18C3BFEA0083F327 /* TripsDatabase.m */; };
 /* End PBXBuildFile section */
@@ -98,6 +100,11 @@
 		439EC68F18B582E300BC6EBA /* MemoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemoryViewController.h; sourceTree = "<group>"; };
 		439EC69018B582E300BC6EBA /* MemoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemoryViewController.m; sourceTree = "<group>"; };
 		439EC69218B5D6A700BC6EBA /* Journal.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Journal.plist; sourceTree = "<group>"; };
+		43A0A21F190243820005CEB9 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
+		43A0A220190243820005CEB9 /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
+		43A0A221190243820005CEB9 /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+ManualSessions.h"; sourceTree = "<group>"; };
+		43A0A222190243C80005CEB9 /* libTestFlight.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libTestFlight.a; sourceTree = "<group>"; };
+		43A0A224190243F20005CEB9 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		43A9965B18C3B56E0083F327 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		43A9965D18C3BFEA0083F327 /* TripsDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TripsDatabase.h; sourceTree = "<group>"; };
 		43A9965E18C3BFEA0083F327 /* TripsDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TripsDatabase.m; sourceTree = "<group>"; };
@@ -108,6 +115,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43A0A225190243F20005CEB9 /* libz.dylib in Frameworks */,
+				43A0A223190243C80005CEB9 /* libTestFlight.a in Frameworks */,
 				4326AA3218CA998E008ED1E2 /* AssetsLibrary.framework in Frameworks */,
 				4376228E18C5597A002FD0D7 /* MobileCoreServices.framework in Frameworks */,
 				43A9965C18C3B56E0083F327 /* libsqlite3.dylib in Frameworks */,
@@ -154,6 +163,7 @@
 		4370B7F41898D38F00907C5D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				43A0A224190243F20005CEB9 /* libz.dylib */,
 				4326AA3118CA998E008ED1E2 /* AssetsLibrary.framework */,
 				4376228D18C5597A002FD0D7 /* MobileCoreServices.framework */,
 				43A9965B18C3B56E0083F327 /* libsqlite3.dylib */,
@@ -170,8 +180,12 @@
 		4370B7FB1898D38F00907C5D /* TripJournal */ = {
 			isa = PBXGroup;
 			children = (
+				43A0A222190243C80005CEB9 /* libTestFlight.a */,
 				4370B8041898D38F00907C5D /* TripJournalAppDelegate.h */,
 				4370B8051898D38F00907C5D /* TripJournalAppDelegate.m */,
+				43A0A21F190243820005CEB9 /* TestFlight.h */,
+				43A0A220190243820005CEB9 /* TestFlight+AsyncLogging.h */,
+				43A0A221190243820005CEB9 /* TestFlight+ManualSessions.h */,
 				4370B8071898D38F00907C5D /* Main.storyboard */,
 				4370B80D1898D38F00907C5D /* Images.xcassets */,
 				4370B7FC1898D38F00907C5D /* Supporting Files */,
@@ -485,6 +499,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TripJournal/TripJournal-Prefix.pch";
 				INFOPLIST_FILE = "TripJournal/TripJournal-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/TripJournal",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -499,6 +517,10 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TripJournal/TripJournal-Prefix.pch";
 				INFOPLIST_FILE = "TripJournal/TripJournal-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/TripJournal",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

@@ -7,6 +7,7 @@
 //
 
 #import "TripsDatabase.h"
+#import "TestFlight.h"
 
 @implementation TripsDatabase
 
@@ -227,6 +228,7 @@ static TripsDatabase *_database;
         sqlite3_prepare_v2(_database, insert_stmt, -1, &statement, NULL);
         if (sqlite3_step(statement) == SQLITE_DONE) {
             return sqlite3_last_insert_rowid(_database);
+            [TestFlight passCheckpoint:@"Added Trip to Journal"];
         } else {
             NSLog(@"Failed to add Trip");
             return -1;
@@ -246,6 +248,7 @@ static TripsDatabase *_database;
         const char *insert_stmt = [insertSQL UTF8String];
         sqlite3_prepare_v2(_database, insert_stmt, -1, &statement, NULL);
         if (sqlite3_step(statement) == SQLITE_DONE) {
+            [TestFlight passCheckpoint:@"Updated a trip"];
             //NSLog(@"Trip updated");
         } else {
             NSLog(@"Failed to update Trip");
@@ -264,7 +267,7 @@ static TripsDatabase *_database;
         const char *insert_stmt = [insertSQL UTF8String];
         sqlite3_prepare_v2(_database, insert_stmt, -1, &statement, NULL);
         if (sqlite3_step(statement) == SQLITE_DONE) {
-            NSLog(@"Trip deleted");
+            [TestFlight passCheckpoint:@"Deleted a Trip"];
             //Search for places with this tripId.
             NSMutableArray *places = [self placesJournal:[NSNumber numberWithLongLong:tripId]];
             for (NSUInteger i = 0; i < places.count; i++) {
@@ -287,7 +290,8 @@ static TripsDatabase *_database;
         const char *insert_stmt = [insertSQL UTF8String];
         sqlite3_prepare_v2(_database, insert_stmt, -1, &statement, NULL);
         if (sqlite3_step(statement) == SQLITE_DONE) {
-            NSLog(@"Place deleted with id %lld", placeId);
+            [TestFlight passCheckpoint:@"Deleted a place"];
+            //NSLog(@"Place deleted with id %lld", placeId);
             NSMutableArray *memories = [self memoriesJournal:[NSNumber numberWithLongLong:placeId]];
             for (NSUInteger i = 0; i < memories.count; i++) {
                 [self deleteMemory:[[memories objectAtIndex:i] uniqueId]];
@@ -309,7 +313,7 @@ static TripsDatabase *_database;
         const char *insert_stmt = [insertSQL UTF8String];
         sqlite3_prepare_v2(_database, insert_stmt, -1, &statement, NULL);
         if (sqlite3_step(statement) == SQLITE_DONE) {
-            NSLog(@"Memory deleted with id %lld", memoryId);
+            [TestFlight passCheckpoint:@"deleted a memory"];
         } else {
             NSLog(@"Failed to update Memory");
         }
@@ -329,6 +333,7 @@ static TripsDatabase *_database;
         sqlite3_prepare_v2(_database, insert_stmt, -1, &statement, NULL);
         if (sqlite3_step(statement) == SQLITE_DONE) {
             return sqlite3_last_insert_rowid(_database);
+            [TestFlight passCheckpoint:@"added a place to journal"];
         } else {
             NSLog(@"Failed to add Place");
             return -1;
@@ -347,7 +352,7 @@ static TripsDatabase *_database;
         const char *insert_stmt = [insertSQL UTF8String];
         sqlite3_prepare_v2(_database, insert_stmt, -1, &statement, NULL);
         if (sqlite3_step(statement) == SQLITE_DONE) {
-            //NSLog(@"Place updated");
+            [TestFlight passCheckpoint:@"updated a place"];
         } else {
             NSLog(@"Failed to update place");
         }
@@ -405,6 +410,7 @@ static TripsDatabase *_database;
         sqlite3_prepare_v2(_database, insert_stmt, -1, &statement, NULL);
         if (sqlite3_step(statement) == SQLITE_DONE) {
             return sqlite3_last_insert_rowid(_database);
+            [TestFlight passCheckpoint:@"added a memory to journal"];
         } else {
             NSLog(@"Failed to add Memory");
             return -1;
@@ -423,7 +429,7 @@ static TripsDatabase *_database;
         const char *insert_stmt = [insertSQL UTF8String];
         sqlite3_prepare_v2(_database, insert_stmt, -1, &statement, NULL);
         if (sqlite3_step(statement) == SQLITE_DONE) {
-            //NSLog(@"Memory updated");
+            [TestFlight passCheckpoint:@"updated a memory"];
         } else {
             NSLog(@"%s SQLITE_ERROR '%s' (%1d)", __FUNCTION__, sqlite3_errmsg(_database), sqlite3_errcode(_database));
             NSLog(@"Failed to update Memory");

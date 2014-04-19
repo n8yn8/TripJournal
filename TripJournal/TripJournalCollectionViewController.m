@@ -10,6 +10,8 @@
 #import "TripCollectionViewController.h"
 #import "Trip.h"
 #import "TripsDatabase.h"
+#import <AssetsLibrary/AssetsLibrary.h>
+#import "TestFlight.h"
 
 @interface TripJournalCollectionViewController ()
 @property (strong, nonatomic) NSDateFormatter *format;
@@ -103,9 +105,22 @@ NSIndexPath *deletePath;
     
     Trip *info = [_tripsJournal objectAtIndex:indexPath.item];
     if (![info.photo isEqualToString:@""] /*|| ![info.photo isEqualToString:@"(null)"]*/) {
-        NSData *imageData = [[NSFileManager defaultManager] contentsAtPath:info.photo];
-        UIImage *myImage = [[UIImage alloc] initWithData:imageData];
-        menuPhotoView.image = myImage;
+        
+        ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *myasset)
+        {
+            [menuPhotoView setImage:[UIImage imageWithCGImage:[myasset thumbnail]]];
+        };
+        
+        ALAssetsLibraryAccessFailureBlock failureblock  = ^(NSError *myerror)
+        {
+            NSLog(@"can't get image");
+            
+        };
+        
+        ALAssetsLibrary* assetslibrary = [[ALAssetsLibrary alloc] init];
+        [assetslibrary assetForURL:[NSURL URLWithString:info.photo]
+                       resultBlock:resultblock
+                      failureBlock:failureblock];
     }
     tripName.text = info.name;
     tripDesc.text = info.description;

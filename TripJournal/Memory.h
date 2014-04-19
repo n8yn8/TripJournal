@@ -15,7 +15,6 @@
     NSString *_name;
     NSString *_description;
     NSString *_photo;
-    NSURL *_photoURL;
     NSDate *_date;
     CLLocationCoordinate2D _latlng;
 }
@@ -25,7 +24,6 @@
 @property (copy, nonatomic) NSString *name;
 @property (copy, nonatomic) NSString *description;
 @property (copy, nonatomic) NSString *photo;
-@property (copy, nonatomic) NSURL *photoURL;
 @property (copy, nonatomic) NSDate *date;
 @property CLLocationCoordinate2D latlng;
 

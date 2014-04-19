@@ -7,12 +7,13 @@
 //
 
 #import "TripJournalAppDelegate.h"
+#import "TestFlight.h"
 
 @implementation TripJournalAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+    [TestFlight takeOff:@"a63e9204-3765-4c21-9797-b9a3b5e92ffd"];
     return YES;
 }
 							

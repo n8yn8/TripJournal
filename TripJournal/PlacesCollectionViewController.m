@@ -8,6 +8,7 @@
 
 #import "PlacesCollectionViewController.h"
 #import "TripsDatabase.h"
+#import <AssetsLibrary/AssetsLibrary.h>
 
 @interface PlacesCollectionViewController ()
 
@@ -103,9 +104,27 @@ NSIndexPath *deletePath;
     //assign the image
     Memory *memory = [_memoriesJournal objectAtIndex:indexPath.item];
     if (!([memory.photo isEqualToString:@""])) {
+        
+        ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *myasset)
+        {
+            [menuPhotoView setImage:[UIImage imageWithCGImage:[myasset thumbnail]]];
+        };
+        
+        ALAssetsLibraryAccessFailureBlock failureblock  = ^(NSError *myerror)
+        {
+            NSLog(@"can't get image");
+            
+        };
+        
+        ALAssetsLibrary* assetslibrary = [[ALAssetsLibrary alloc] init];
+        [assetslibrary assetForURL:[NSURL URLWithString:memory.photo]
+                       resultBlock:resultblock
+                      failureBlock:failureblock];
+        /*
         NSData *imageData = [[NSFileManager defaultManager] contentsAtPath:memory.photo];
         UIImage *myImage = [[UIImage alloc] initWithData:imageData];
         menuPhotoView.image = myImage;
+         */
     }
     memoryName.text = memory.name;
     memoryDesc.text = memory.description;
@@ -142,11 +161,6 @@ NSIndexPath *deletePath;
         _headerView.name.text = _selectedPlace.name;
         _memoryAdd.enabled = _headerView.name.hasText;
         _headerView.description.text = _selectedPlace.description;
-        /*
-        NSData *imageData = [[NSFileManager defaultManager] contentsAtPath:_placeCoverImage];
-        UIImage *myImage = [[UIImage alloc] initWithData:imageData];
-        _headerView.placeCoverImageView.image = myImage;
-         */
         
         reusableview = _headerView;
     }

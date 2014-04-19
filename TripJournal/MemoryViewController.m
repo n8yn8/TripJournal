@@ -39,9 +39,21 @@
     [_format setDateStyle:NSDateFormatterMediumStyle];
     [_format setTimeStyle:NSDateFormatterMediumStyle];
     
-    NSData *imageData = [[NSFileManager defaultManager] contentsAtPath:self.selectedMemory.photo];
-    UIImage *myImage = [[UIImage alloc] initWithData:imageData];
-    _imageView.image = myImage;
+    ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *myasset)
+    {
+        [_imageView setImage:[UIImage imageWithCGImage:[myasset thumbnail]]];
+    };
+    
+    ALAssetsLibraryAccessFailureBlock failureblock  = ^(NSError *myerror)
+    {
+        NSLog(@"can't get image");
+        
+    };
+    
+    ALAssetsLibrary* assetslibrary = [[ALAssetsLibrary alloc] init];
+    [assetslibrary assetForURL:[NSURL URLWithString:_selectedMemory.photo]
+                   resultBlock:resultblock   
+                  failureBlock:failureblock];
     
     _currentImage = _selectedMemory.photo;
     [_placeCoverSwitch setOn:[_currentPlaceCover isEqualToString:_currentImage]];
@@ -172,20 +184,15 @@
     [self dismissViewControllerAnimated:YES completion:nil];
     
     if ([mediaType isEqualToString:(NSString *)kUTTypeImage]) {
-        UIImage *image = info[UIImagePickerControllerOriginalImage];
-        //_imageURL = info[UIImagePickerControllerReferenceURL];
-        _imageView.image = image;
+        //UIImage *image = info[UIImagePickerControllerOriginalImage];
+        //_imageView.image = image;
         
         void (^ALAssetsLibraryAssetForURLResultBlock)(ALAsset *) = ^(ALAsset *asset)
         {
-            
+            [_imageView setImage:[UIImage imageWithCGImage:[asset thumbnail]]];
             CLLocation *location = [asset valueForProperty:ALAssetPropertyLocation];
             if (!location) {
-                UIAlertView *noLocationAlert = [[UIAlertView alloc] initWithTitle:@"No location data."
-                                                                                message:@"Click on Set Location below to set the location of this photo."
-                                                                               delegate:nil
-                                                                      cancelButtonTitle:@"OK"
-                                                                      otherButtonTitles:nil];
+                UIAlertView *noLocationAlert = [[UIAlertView alloc] initWithTitle:@"No location data." message:@"Click on Set Location below to set the location of this photo." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
                 [noLocationAlert show];
             }
             self.coord = location.coordinate;
@@ -193,9 +200,7 @@
             NSString *retDateString = [_format stringFromDate:retDate];
             _selectedMemory.date = retDate;
             _memoryDate.text = retDateString;
-            
         };
-        
         
         NSURL *assetURL = [info objectForKey:UIImagePickerControllerReferenceURL];
         ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
@@ -204,9 +209,10 @@
                 failureBlock:^(NSError *error) {
                 }];
         
-        //_selectedMemory.photoURL = assetURL;
+        _selectedMemory.photo = [assetURL absoluteString];
         //NSLog(@"%@", [assetURL absoluteString]);
         
+        /*
          //Writes a small version of selected pic to this app's sandbox.
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
         NSString *documentsDirectory = [paths objectAtIndex:0];
@@ -225,6 +231,7 @@
                                            self,
                                            @selector(image:finishedSavingWithError:contextInfo:),
                                            nil);
+         */
         
     }
     else if ([mediaType isEqualToString:(NSString *)kUTTypeMovie])
