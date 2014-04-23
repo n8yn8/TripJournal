@@ -191,4 +191,9 @@ NSIndexPath *deletePath;
     }
 }
 
+- (IBAction)unwindToHome:(UIStoryboardSegue *)unwindSegue {
+    self.tripsJournal = [TripsDatabase database].tripsJournal;
+    [self.collectionView reloadData];
+}
+
 @end

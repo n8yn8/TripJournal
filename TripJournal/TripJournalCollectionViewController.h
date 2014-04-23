@@ -21,5 +21,6 @@
 @property NSInteger chosenIndex;
 
 - (IBAction)unwindToJournal:(UIStoryboardSegue *)unwindSegue;
+- (IBAction)unwindToHome:(UIStoryboardSegue *)unwindSegue;
 
 @end

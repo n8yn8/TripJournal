@@ -159,7 +159,7 @@ NSIndexPath *deletePath;
         }
         _headerView.date.text = placeDates;
         _headerView.name.text = _selectedPlace.name;
-        _memoryAdd.enabled = _headerView.name.hasText;
+        //_memoryAdd.enabled = _headerView.name.hasText;
         _headerView.description.text = _selectedPlace.description;
         
         reusableview = _headerView;
@@ -177,7 +177,7 @@ NSIndexPath *deletePath;
 - (BOOL) textFieldShouldReturn:(UITextField *)textField {
     if ([textField isEqual:_headerView.name]) {
         [_headerView.description becomeFirstResponder];
-        _memoryAdd.enabled = _headerView.name.hasText;
+        //_memoryAdd.enabled = _headerView.name.hasText;
     }
     if ([textField isEqual:_headerView.description]) {
         [_headerView.description resignFirstResponder];
