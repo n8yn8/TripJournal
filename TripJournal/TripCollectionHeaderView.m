@@ -50,19 +50,6 @@
     }
     [super touchesBegan:touches withEvent:event];
 }
-/*
-- (BOOL) textFieldShouldReturn:(UITextField *)textField {
-    if ([textField isEqual:_name]) {
-        [_description becomeFirstResponder];
-        if (_name.hasText) {
-            //enable AddPlace
-        }
-    }
-    if ([textField isEqual:_description]) {
-        [_description resignFirstResponder];
-    }
-    return YES;
-}*/
 
 /*
 // Only override drawRect: if you perform custom drawing.

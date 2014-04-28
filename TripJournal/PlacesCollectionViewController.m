@@ -159,7 +159,13 @@ NSIndexPath *deletePath;
         }
         _headerView.date.text = placeDates;
         _headerView.name.text = _selectedPlace.name;
-        //_memoryAdd.enabled = _headerView.name.hasText;
+        if (!_headerView.name.hasText) {
+            _memoryAdd.enabled = NO;
+            _headBack.title = @"Cancel";
+        } else {
+            _headBack.title = @"Save";
+            _memoryAdd.enabled = YES;
+        }
         _headerView.description.text = _selectedPlace.description;
         
         reusableview = _headerView;
@@ -177,7 +183,6 @@ NSIndexPath *deletePath;
 - (BOOL) textFieldShouldReturn:(UITextField *)textField {
     if ([textField isEqual:_headerView.name]) {
         [_headerView.description becomeFirstResponder];
-        //_memoryAdd.enabled = _headerView.name.hasText;
     }
     if ([textField isEqual:_headerView.description]) {
         [_headerView.description resignFirstResponder];
@@ -284,6 +289,18 @@ NSIndexPath *deletePath;
         [self.memoriesJournal replaceObjectAtIndex:_chosenIndex withObject:item];
         [self.collectionView reloadData];
     }
+}
+
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    NSUInteger length = _headerView.name.text.length - range.length + string.length;
+    if (length > 0) {
+        _memoryAdd.enabled = YES;
+        _headBack.title = @"Save";
+    } else {
+        _memoryAdd.enabled = NO;
+        _headBack.title = @"Cancel";
+    }
+    return YES;
 }
 
 @end

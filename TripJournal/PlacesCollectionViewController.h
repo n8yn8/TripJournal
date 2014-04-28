@@ -27,6 +27,7 @@
 @property CLLocationCoordinate2D placeCoord;
 @property CLLocationCoordinate2D tripCoord;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *memoryAdd;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *headBack;
 @property (nonatomic, strong) PlacesCollectionHeaderView *headerView;
 @property NSInteger chosenIndex;
 - (IBAction)unwindToPlace:(UIStoryboardSegue *)unwindSegue;

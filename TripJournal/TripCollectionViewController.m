@@ -86,6 +86,7 @@ NSIndexPath *deletePath;
     }
 }
 
+#pragma mark - UICollectionViewDelegate
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
     //same as before….count the array
     return [_placesJournal count];
@@ -152,11 +153,17 @@ NSIndexPath *deletePath;
                 [tripDates appendString:thisEndDate];
             }
         }
-        //NSString *tripDates = [[NSString alloc]initWithFormat:@"%@ - %@", [_format stringFromDate:_selectedTrip.startDate], [_format stringFromDate:_selectedTrip.endDate]];
         _headerView.date.text = tripDates;
         _headerView.name.text = _selectedTrip.name;
-        //_placeAdd.enabled = _headerView.name.hasText;
         _headerView.description.text = _selectedTrip.description;
+        
+        if (!_headerView.name.hasText) {
+            _placeAdd.enabled = NO;
+            _headBack.title = @"Cancel";
+        } else {
+            _headBack.title = @"Save";
+            _placeAdd.enabled = YES;
+        }
         
         _headerView.TripMapView.showsUserLocation = YES;
         NSMutableArray *annotations = [[TripsDatabase database] placesAnnotations: [NSNumber numberWithLongLong:_selectedTrip.uniqueId]];
@@ -174,21 +181,7 @@ NSIndexPath *deletePath;
     return reusableview;
 }
 
-- (void)textFieldDidBeginEditing:(UITextField *)textField {
-    //_placeAdd.enabled = _headerView.name.hasText;
-}
-
-- (BOOL) textFieldShouldReturn:(UITextField *)textField {
-    if ([textField isEqual:_headerView.name]) {
-        [_headerView.description becomeFirstResponder];
-        //_placeAdd.enabled = _headerView.name.hasText;
-    }
-    if ([textField isEqual:_headerView.description]) {
-        [_headerView.description resignFirstResponder];
-    }
-    return YES;
-}
-
+#pragma mark - Navigation Control
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     
     //Prepare to save current state of current trip.
@@ -279,6 +272,7 @@ NSIndexPath *deletePath;
     
 }
 
+#pragma mark - Touch Control
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     
     UITouch *touch = [[event allTouches] anyObject];
@@ -288,6 +282,28 @@ NSIndexPath *deletePath;
         [_headerView.description resignFirstResponder];
     }
     [super touchesBegan:touches withEvent:event];
+}
+
+- (BOOL) textFieldShouldReturn:(UITextField *)textField {
+    if ([textField isEqual:_headerView.name]) {
+        [_headerView.description becomeFirstResponder];
+    }
+    if ([textField isEqual:_headerView.description]) {
+        [_headerView.description resignFirstResponder];
+    }
+    return YES;
+}
+
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    NSUInteger length = _headerView.name.text.length - range.length + string.length;
+    if (length > 0) {
+        _placeAdd.enabled = YES;
+        _headBack.title = @"Save";
+    } else {
+        _placeAdd.enabled = NO;
+        _headBack.title = @"Cancel";
+    }
+    return YES;
 }
 
 @end

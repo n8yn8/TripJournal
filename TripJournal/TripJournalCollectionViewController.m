@@ -180,6 +180,7 @@ NSIndexPath *deletePath;
 
 - (IBAction)unwindToJournal:(UIStoryboardSegue *)unwindSegue
 {
+    
     TripCollectionViewController *source = [unwindSegue sourceViewController];
     Trip *item = source.selectedTrip;
     if (source.newTrip || (source.editedTrip && (_chosenIndex == _tripsJournal.count))) {
@@ -194,6 +195,10 @@ NSIndexPath *deletePath;
 - (IBAction)unwindToHome:(UIStoryboardSegue *)unwindSegue {
     self.tripsJournal = [TripsDatabase database].tripsJournal;
     [self.collectionView reloadData];
+}
+
+- (IBAction)cancel:(UIStoryboardSegue *)unwindSegue {
+    
 }
 
 @end

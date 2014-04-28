@@ -41,7 +41,7 @@
     
     ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *myasset)
     {
-        [_imageView setImage:[UIImage imageWithCGImage:[myasset thumbnail]]];
+        [_imageView setImage:[UIImage imageWithCGImage:[myasset aspectRatioThumbnail]]];
     };
     
     ALAssetsLibraryAccessFailureBlock failureblock  = ^(NSError *myerror)
@@ -60,6 +60,9 @@
     [_tripCoverSwitch setOn:[_currentTripCover isEqualToString:_currentImage]];
     _coord = _selectedMemory.latlng;
     _memoryName.text = _selectedMemory.name;
+    if (!_selectedMemory.name) {
+        _headBack.title = @"Cancel";
+    }
     _memoryDescription.text = _selectedMemory.description;
     _memoryDate.text = [_format stringFromDate:_selectedMemory.date];
 }
@@ -156,6 +159,16 @@
     return YES;
 }
 
+-(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    NSUInteger length = _memoryName.text.length - range.length + string.length;
+    if (length > 0) {
+        _headBack.title = @"Save";
+    } else {
+        _headBack.title = @"Cancel";
+    }
+    return YES;
+}
+
 - (IBAction)useCameraRoll:(id)sender {
     if ([UIImagePickerController isSourceTypeAvailable:
          UIImagePickerControllerSourceTypeSavedPhotosAlbum])
@@ -169,6 +182,26 @@
         [self presentViewController:imagePicker animated:YES completion:nil];
         _newPic = NO;
     }
+}
+
+- (IBAction)share:(id)sender {
+    
+    NSMutableString *postText = [[NSMutableString alloc] initWithString:_memoryName.text];
+    if (_memoryDescription.hasText) {
+        [postText appendString:@" - "];
+        [postText appendString:_memoryDescription.text];
+    }
+    
+    UIImage *postImage = _imageView.image;
+    
+    NSArray *activityItems = @[postText, postImage];
+    UIActivityViewController *activityController =
+    [[UIActivityViewController alloc]
+     initWithActivityItems:activityItems
+     applicationActivities:nil];
+    
+    [self presentViewController:activityController
+                       animated:YES completion:nil];
 }
 
 - (IBAction)useCamera:(id)sender {
@@ -189,7 +222,7 @@
         
         void (^ALAssetsLibraryAssetForURLResultBlock)(ALAsset *) = ^(ALAsset *asset)
         {
-            [_imageView setImage:[UIImage imageWithCGImage:[asset thumbnail]]];
+            [_imageView setImage:[UIImage imageWithCGImage:[asset aspectRatioThumbnail]]];
             CLLocation *location = [asset valueForProperty:ALAssetPropertyLocation];
             if (!location) {
                 UIAlertView *noLocationAlert = [[UIAlertView alloc] initWithTitle:@"No location data." message:@"Click on Set Location below to set the location of this photo." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];

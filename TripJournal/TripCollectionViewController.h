@@ -26,5 +26,6 @@
 @property CLLocationCoordinate2D tripCoord;
 @property NSInteger chosenIndex;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *placeAdd;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *headBack;
 - (IBAction)unwindToTrip:(UIStoryboardSegue *)unwindSegue;
 @end

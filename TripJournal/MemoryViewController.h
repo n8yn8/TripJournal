@@ -16,6 +16,8 @@
 @property (nonatomic, assign, getter=isEdited) BOOL editedMemory;
 @property (nonatomic, assign, getter=isNewTrip) BOOL newMemory;
 - (IBAction)useCameraRoll:(id)sender;
+- (IBAction)share:(id)sender;
+@property (strong, nonatomic) IBOutlet UIBarButtonItem *headBack;
 @property (strong, nonatomic) Memory *selectedMemory;
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
 @property (strong, nonatomic) IBOutlet UITextField *memoryName;
