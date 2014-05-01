@@ -42,6 +42,7 @@
     ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *myasset)
     {
         [_imageView setImage:[UIImage imageWithCGImage:[myasset aspectRatioThumbnail]]];
+        [_imageView setContentMode:UIViewContentModeScaleAspectFit];
     };
     
     ALAssetsLibraryAccessFailureBlock failureblock  = ^(NSError *myerror)
@@ -223,6 +224,7 @@
         void (^ALAssetsLibraryAssetForURLResultBlock)(ALAsset *) = ^(ALAsset *asset)
         {
             [_imageView setImage:[UIImage imageWithCGImage:[asset aspectRatioThumbnail]]];
+            [_imageView setContentMode:UIViewContentModeScaleAspectFit];
             CLLocation *location = [asset valueForProperty:ALAssetPropertyLocation];
             if (!location) {
                 UIAlertView *noLocationAlert = [[UIAlertView alloc] initWithTitle:@"No location data." message:@"Click on Set Location below to set the location of this photo." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];

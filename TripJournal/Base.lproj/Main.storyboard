@@ -103,7 +103,7 @@
                     <navigationItem key="navigationItem" title="Trip Journal" id="Z0I-yD-sBm">
                         <barButtonItem key="leftBarButtonItem" title="Quick+" id="rg7-qp-yYV">
                             <connections>
-                                <segue destination="fik-qj-eBP" kind="modal" identifier="QuickAdd" id="k4P-um-vBv"/>
+                                <action selector="quickAdd:" destination="F7x-uk-ItR" id="3Vw-RV-CML"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="+Trip" id="4Jo-AH-wqc">
@@ -130,7 +130,7 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Tee-04-vHo">
-                                <rect key="frame" x="20" y="250" width="280" height="30"/>
+                                <rect key="frame" x="20" y="224" width="280" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="next"/>
@@ -139,7 +139,7 @@
                                 </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Description" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="W3d-en-NZg">
-                                <rect key="frame" x="20" y="288" width="280" height="30"/>
+                                <rect key="frame" x="20" y="262" width="280" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done"/>
@@ -148,28 +148,11 @@
                                 </connections>
                             </textField>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="TripJournal-placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="sad-wg-X1A">
-                                <rect key="frame" x="0.0" y="64" width="150" height="150"/>
+                                <rect key="frame" x="85" y="66" width="150" height="150"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tse-8H-ger">
-                                <rect key="frame" x="188" y="93" width="90" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Photo Roll">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="useCameraRoll:" destination="ldH-G9-JkS" eventType="touchUpInside" id="EzS-1q-UOy"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Feature coming soon" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="150" translatesAutoresizingMaskIntoConstraints="NO" id="34j-xQ-xHK">
-                                <rect key="frame" x="0.0" y="93" width="150" height="115"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TDD-Fs-AwV">
-                                <rect key="frame" x="20" y="350" width="57" height="30"/>
+                                <rect key="frame" x="20" y="300" width="57" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Set Trip">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -179,7 +162,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bjg-o4-rDL">
-                                <rect key="frame" x="213" y="350" width="71" height="30"/>
+                                <rect key="frame" x="213" y="300" width="71" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Set Place">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -188,52 +171,75 @@
                                     <segue destination="fdX-hA-ndT" kind="modal" identifier="Place" id="hc7-4X-3FJ"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cJQ-xT-q8u">
-                                <rect key="frame" x="20" y="388" width="130" height="21"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Select a trip" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cJQ-xT-q8u">
+                                <rect key="frame" x="20" y="338" width="130" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Def-fE-E2E">
-                                <rect key="frame" x="20" y="417" width="130" height="21"/>
+                                <rect key="frame" x="20" y="357" width="130" height="13"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TGk-zH-vvd">
-                                <rect key="frame" x="165" y="388" width="119" height="21"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Select a Place" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TGk-zH-vvd">
+                                <rect key="frame" x="165" y="338" width="119" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jeo-h6-9kO">
-                                <rect key="frame" x="165" y="417" width="119" height="21"/>
+                                <rect key="frame" x="165" y="357" width="119" height="13"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y5M-XZ-LzL">
+                                <rect key="frame" x="20" y="414" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Save">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="saveMemory:" destination="ldH-G9-JkS" eventType="touchUpInside" id="3NI-lT-BPw"/>
+                                    <segue destination="He7-EN-IaK" kind="unwind" unwindAction="unwindToHome:" id="rIF-gQ-Kaa"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mOa-TK-xd0">
+                                <rect key="frame" x="225" y="414" width="59" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Cancel">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="cancel:" destination="ldH-G9-JkS" eventType="touchUpInside" id="b2a-j2-DLZ"/>
+                                    <segue destination="He7-EN-IaK" kind="unwind" unwindAction="cancel:" id="Mb2-Jd-AoQ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.87058823529999996" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="a8D-Wb-Bnv">
                         <barButtonItem key="leftBarButtonItem" enabled="NO" title="Save" id="ouJ-eh-RRw">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
-                                <action selector="saveMemory:" destination="ldH-G9-JkS" id="zg9-C4-rwV"/>
                                 <segue destination="He7-EN-IaK" kind="unwind" unwindAction="cancel:" id="S6h-qJ-rzf"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Cancel" id="9EZ-hE-D9w">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
-                                <segue destination="He7-EN-IaK" kind="unwind" unwindAction="cancel:" id="POh-Ns-Av7"/>
+                                <segue destination="He7-EN-IaK" kind="unwind" unwindAction="cancel:" id="XgR-G6-PDx"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="description" destination="W3d-en-NZg" id="YuH-j1-XSZ"/>
-                        <outlet property="headBack" destination="ouJ-eh-RRw" id="Vmd-Ox-f8F"/>
+                        <outlet property="headBack" destination="y5M-XZ-LzL" id="cfh-IT-Qym"/>
                         <outlet property="imageView" destination="sad-wg-X1A" id="29B-ZP-zLG"/>
                         <outlet property="name" destination="Tee-04-vHo" id="bgI-UO-bfg"/>
                         <outlet property="placeDescription" destination="jeo-h6-9kO" id="nhn-iK-UzY"/>
@@ -246,7 +252,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RhG-5P-4Kh" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="He7-EN-IaK" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-785" y="-1039"/>
+            <point key="canvasLocation" x="-259" y="-1039"/>
         </scene>
         <!--Quick Place Table View Controller-->
         <scene sceneID="jHh-xN-RmI">
@@ -298,7 +304,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7kN-A4-WuR" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="DO5-js-bEu" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="276" y="-1398"/>
+            <point key="canvasLocation" x="802" y="-1398"/>
         </scene>
         <!--Quick Trip Table View Controller-->
         <scene sceneID="Bsk-kg-yEk">
@@ -350,7 +356,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H31-6I-NLD" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Dxc-p1-qa3" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="276" y="-712"/>
+            <point key="canvasLocation" x="802" y="-712"/>
         </scene>
         <!--Trip Collection View Controller - Trip-->
         <scene sceneID="ipR-dI-eXY">
@@ -645,13 +651,13 @@
                                 <rect key="frame" x="0.0" y="524" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
-                                    <barButtonItem title="Photo Roll" id="Wnc-Zf-4RX">
+                                    <barButtonItem systemItem="camera" id="Wnc-Zf-4RX">
                                         <connections>
                                             <action selector="useCameraRoll:" destination="5Fm-HM-DlW" id="zfB-1n-0xe"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="LAZ-sp-9Cr"/>
-                                    <barButtonItem title="Share" id="Z6I-4T-wdm">
+                                    <barButtonItem systemItem="action" id="Z6I-4T-wdm">
                                         <connections>
                                             <action selector="share:" destination="5Fm-HM-DlW" id="kUu-ZY-rCh"/>
                                         </connections>
@@ -700,7 +706,7 @@
                                 </connections>
                             </textField>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CtJ-Na-bvl">
-                                <rect key="frame" x="75" y="64" width="170" height="170"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="170"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="170" id="NsE-tH-3hQ"/>
@@ -727,14 +733,10 @@
                                 <color key="textColor" red="0.51457002740000002" green="0.83573791060000002" blue="0.42697878649999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="71C-Sw-5XF">
-                                <rect key="frame" x="0.0" y="64" width="320" height="170"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" red="0.89411764709999997" green="0.94117647059999998" blue="0.86274509799999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="CtJ-Na-bvl" secondAttribute="trailing" constant="75" id="2bR-cW-nNA"/>
+                            <constraint firstAttribute="trailing" secondItem="CtJ-Na-bvl" secondAttribute="trailing" id="2bR-cW-nNA"/>
                             <constraint firstItem="yXU-7y-2cm" firstAttribute="top" secondItem="CtJ-Na-bvl" secondAttribute="bottom" constant="8" id="8tX-IU-r1Y"/>
                             <constraint firstItem="bXe-Ar-UYv" firstAttribute="top" secondItem="l5d-He-uZm" secondAttribute="bottom" id="AP7-ao-WjT"/>
                             <constraint firstAttribute="trailing" secondItem="l5d-He-uZm" secondAttribute="trailing" id="Cej-7i-2oR"/>
@@ -744,7 +746,7 @@
                             <constraint firstItem="l5d-He-uZm" firstAttribute="top" secondItem="2gU-yB-Xv4" secondAttribute="bottom" constant="10" id="JRl-hx-6V9"/>
                             <constraint firstItem="CtJ-Na-bvl" firstAttribute="top" secondItem="JsK-ge-tcK" secondAttribute="bottom" id="NIC-CT-QBF"/>
                             <constraint firstItem="2gU-yB-Xv4" firstAttribute="top" secondItem="I9L-BC-2GS" secondAttribute="bottom" constant="8" id="SB8-XC-caS"/>
-                            <constraint firstItem="CtJ-Na-bvl" firstAttribute="leading" secondItem="B0M-T9-lzf" secondAttribute="leading" constant="75" id="SFH-Rd-7Kn"/>
+                            <constraint firstItem="CtJ-Na-bvl" firstAttribute="leading" secondItem="B0M-T9-lzf" secondAttribute="leading" id="SFH-Rd-7Kn"/>
                             <constraint firstItem="lOk-l4-yK6" firstAttribute="top" secondItem="crd-SP-zer" secondAttribute="bottom" constant="18" id="XVc-SH-wpY"/>
                             <constraint firstItem="2gU-yB-Xv4" firstAttribute="leading" secondItem="B0M-T9-lzf" secondAttribute="leading" constant="20" id="ZVP-JV-ZC1"/>
                             <constraint firstItem="yXU-7y-2cm" firstAttribute="leading" secondItem="B0M-T9-lzf" secondAttribute="leading" constant="20" id="aIG-50-xXi"/>
@@ -856,7 +858,7 @@
                     <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="31c-rk-P2K">
                         <rect key="frame" x="0.0" y="524" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="tintColor" red="0.56862745100000001" green="0.87058823529999996" blue="0.48627450979999998" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </toolbar>
                     <connections>
                         <segue destination="F7x-uk-ItR" kind="relationship" relationship="rootViewController" id="Ov5-fb-t3q"/>
@@ -951,7 +953,15 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Dd6-oQ-tsG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-250" y="-712"/>
+            <point key="canvasLocation" x="276" y="-712"/>
+        </scene>
+        <!--Page View Controller-->
+        <scene sceneID="jDB-qK-S9j">
+            <objects>
+                <pageViewController storyboardIdentifier="PageViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="Wlk-YI-UDr" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="enu-sx-mCX" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-785" y="-1849"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="LGv-7O-UtQ">
@@ -969,31 +979,27 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="U5R-4b-7O5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-250" y="-1398"/>
+            <point key="canvasLocation" x="276" y="-1398"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="c6I-mc-HDr">
+        <scene sceneID="afN-pO-oBk">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="fik-qj-eBP" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="PageContentViewController" automaticallyAdjustsScrollViewInsets="NO" id="6wH-09-26x" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="hfs-w9-FoJ">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="5Uh-Ps-qHN">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.81960784310000001" green="0.54117647059999996" blue="0.3294117647" alpha="1" colorSpace="calibratedRGB"/>
-                        <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="barTintColor" red="0.81960784310000001" green="0.54117647059999996" blue="0.3294117647" alpha="1" colorSpace="calibratedRGB"/>
-                        <textAttributes key="titleTextAttributes">
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </textAttributes>
+                        <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="ldH-G9-JkS" kind="relationship" relationship="rootViewController" id="Ezr-Mo-8ao"/>
+                        <segue destination="ldH-G9-JkS" kind="relationship" relationship="rootViewController" id="HVX-qc-BKe"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="BDx-sZ-rzc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hTw-Cl-J9V" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1313" y="-1039"/>
+            <point key="canvasLocation" x="-785" y="-1039"/>
         </scene>
     </scenes>
     <resources>

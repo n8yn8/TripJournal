@@ -13,7 +13,7 @@
 #import "TripsDatabase.h"
 
 @interface QuickAddViewController ()
-@property (strong, nonatomic) NSDateFormatter *format;
+
 @end
 
 @implementation QuickAddViewController
@@ -37,6 +37,26 @@
     [_format setTimeStyle:NSDateFormatterMediumStyle];
     
     self.selectedMemory = [[Memory alloc] init];
+    
+    void (^ALAssetsLibraryAssetForURLResultBlock)(ALAsset *) = ^(ALAsset *asset)
+    {
+        [_imageView setImage:[UIImage imageWithCGImage:[asset aspectRatioThumbnail]]];
+        [_imageView setContentMode:UIViewContentModeScaleAspectFit];
+        
+        CLLocation *location = [asset valueForProperty:ALAssetPropertyLocation];
+        NSDate *retDate = [asset valueForProperty:ALAssetPropertyDate];
+        
+        _selectedMemory.latlng = location.coordinate;
+        _selectedMemory.date = retDate;
+    };
+    
+    ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+    [library assetForURL:_imageUrl
+             resultBlock:ALAssetsLibraryAssetForURLResultBlock
+            failureBlock:^(NSError *error) {
+            }];
+    _selectedMemory.photo = [_imageUrl absoluteString];
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -56,10 +76,7 @@
         QuickPlaceTableViewController *dvc = [[navigationController viewControllers] objectAtIndex:0];
         dvc.tripId = [NSNumber numberWithLongLong:_selectedTrip.uniqueId];
     } else if (sender == _headBack) {
-        self.selectedMemory.placeId = [NSNumber numberWithLongLong:_selectedPlace.uniqueId];
-        self.selectedMemory.name = _name.text;
-        self.selectedMemory.description = _description.text;
-        [[TripsDatabase database] addMemoryToJournal:self.selectedMemory];
+        
     }
 }
 
@@ -81,80 +98,6 @@
     if (_name.hasText) {
         _headBack.enabled = YES;
     }
-}
-
-- (IBAction)useCameraRoll:(id)sender {
-    if ([UIImagePickerController isSourceTypeAvailable:
-         UIImagePickerControllerSourceTypeSavedPhotosAlbum])
-    {
-        UIImagePickerController *imagePicker =
-        [[UIImagePickerController alloc] init];
-        imagePicker.delegate = self;
-        imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-        imagePicker.mediaTypes = @[(NSString *) kUTTypeImage];
-        imagePicker.allowsEditing = NO;
-        [self presentViewController:imagePicker animated:YES completion:nil];
-    }
-}
-
-#pragma mark -
-#pragma mark UIImagePickerControllerDelegate
-
--(void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary *)info
-{
-    NSString *mediaType = info[UIImagePickerControllerMediaType];
-    
-    [self dismissViewControllerAnimated:YES completion:nil];
-    
-    if ([mediaType isEqualToString:(NSString *)kUTTypeImage]) {
-        
-        void (^ALAssetsLibraryAssetForURLResultBlock)(ALAsset *) = ^(ALAsset *asset)
-        {
-            [_imageView setImage:[UIImage imageWithCGImage:[asset aspectRatioThumbnail]]];
-            CLLocation *location = [asset valueForProperty:ALAssetPropertyLocation];
-            if (!location) {
-                UIAlertView *noLocationAlert = [[UIAlertView alloc] initWithTitle:@"No location data." message:@"Click on Set Location below to set the location of this photo." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-                [noLocationAlert show];
-            }
-            _selectedMemory.latlng = location.coordinate;
-            NSDate *retDate = [asset valueForProperty:ALAssetPropertyDate];
-            //NSString *retDateString = [_format stringFromDate:retDate];
-            _selectedMemory.date = retDate;
-            //_memoryDate.text = retDateString;
-        };
-        
-        NSURL *assetURL = [info objectForKey:UIImagePickerControllerReferenceURL];
-        ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
-        [library assetForURL:assetURL
-                 resultBlock:ALAssetsLibraryAssetForURLResultBlock
-                failureBlock:^(NSError *error) {
-                }];
-        
-        _selectedMemory.photo = [assetURL absoluteString];
-        
-    }
-    else if ([mediaType isEqualToString:(NSString *)kUTTypeMovie])
-    {
-        // Code here to support video if enabled
-    }
-}
-
--(void)image:(UIImage *)image finishedSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
-{
-    if (error) {
-        UIAlertView *alert = [[UIAlertView alloc]
-                              initWithTitle: @"Save failed"
-                              message: @"Failed to save image"
-                              delegate: nil
-                              cancelButtonTitle:@"OK"
-                              otherButtonTitles:nil];
-        [alert show];
-    }
-}
-
--(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
-{
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -190,4 +133,17 @@
     return YES;
 }
 
+
+- (IBAction)saveMemory:(id)sender {
+    self.selectedMemory.placeId = [NSNumber numberWithLongLong:_selectedPlace.uniqueId];
+    self.selectedMemory.name = _name.text;
+    self.selectedMemory.description = _description.text;
+    [[TripsDatabase database] addMemoryToJournal:self.selectedMemory];
+}
+
+- (IBAction)cancel:(id)sender {
+    [self willMoveToParentViewController:nil];
+    [self.view removeFromSuperview];
+    [self removeFromParentViewController];
+}
 @end

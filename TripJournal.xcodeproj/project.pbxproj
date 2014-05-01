@@ -47,7 +47,6 @@
 		439EC68B18B53F8900BC6EBA /* PlacesCollectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 439EC68A18B53F8900BC6EBA /* PlacesCollectionHeaderView.m */; };
 		439EC68E18B541FF00BC6EBA /* Memory.m in Sources */ = {isa = PBXBuildFile; fileRef = 439EC68D18B541FF00BC6EBA /* Memory.m */; };
 		439EC69118B582E300BC6EBA /* MemoryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 439EC69018B582E300BC6EBA /* MemoryViewController.m */; };
-		439EC69318B5D6A700BC6EBA /* Journal.plist in Resources */ = {isa = PBXBuildFile; fileRef = 439EC69218B5D6A700BC6EBA /* Journal.plist */; };
 		43A0A223190243C80005CEB9 /* libTestFlight.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 43A0A222190243C80005CEB9 /* libTestFlight.a */; };
 		43A0A225190243F20005CEB9 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 43A0A224190243F20005CEB9 /* libz.dylib */; };
 		43A413231902E1B900858100 /* QuickPlaceTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A413221902E1B900858100 /* QuickPlaceTableViewController.m */; };
@@ -131,7 +130,6 @@
 		439EC68D18B541FF00BC6EBA /* Memory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Memory.m; sourceTree = "<group>"; };
 		439EC68F18B582E300BC6EBA /* MemoryViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemoryViewController.h; sourceTree = "<group>"; };
 		439EC69018B582E300BC6EBA /* MemoryViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemoryViewController.m; sourceTree = "<group>"; };
-		439EC69218B5D6A700BC6EBA /* Journal.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Journal.plist; sourceTree = "<group>"; };
 		43A0A21F190243820005CEB9 /* TestFlight.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestFlight.h; sourceTree = "<group>"; };
 		43A0A220190243820005CEB9 /* TestFlight+AsyncLogging.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+AsyncLogging.h"; sourceTree = "<group>"; };
 		43A0A221190243820005CEB9 /* TestFlight+ManualSessions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TestFlight+ManualSessions.h"; sourceTree = "<group>"; };
@@ -302,7 +300,6 @@
 				439EC68718B4B36500BC6EBA /* Place.m */,
 				439EC68C18B541FF00BC6EBA /* Memory.h */,
 				439EC68D18B541FF00BC6EBA /* Memory.m */,
-				439EC69218B5D6A700BC6EBA /* Journal.plist */,
 				43A9965D18C3BFEA0083F327 /* TripsDatabase.h */,
 				43A9965E18C3BFEA0083F327 /* TripsDatabase.m */,
 			);
@@ -420,7 +417,6 @@
 				4370B8001898D38F00907C5D /* InfoPlist.strings in Resources */,
 				4358535E19083C7000C1A3A9 /* ELCAssetPicker.xib in Resources */,
 				4358535F19083C7000C1A3A9 /* ELCAssetTablePicker.xib in Resources */,
-				439EC69318B5D6A700BC6EBA /* Journal.plist in Resources */,
 				4370B8091898D38F00907C5D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

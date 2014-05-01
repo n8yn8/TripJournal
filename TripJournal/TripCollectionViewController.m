@@ -109,6 +109,7 @@ NSIndexPath *deletePath;
         ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *myasset)
         {
             [menuPhotoView setImage:[UIImage imageWithCGImage:[myasset thumbnail]]];
+            [menuPhotoView setContentMode:UIViewContentModeScaleAspectFit];
         };
         
         ALAssetsLibraryAccessFailureBlock failureblock  = ^(NSError *myerror)
