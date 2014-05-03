@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <MobileCoreServices/MobileCoreServices.h>
-
+#import "TripJournalCollectionViewController.h"
 #import "Trip.h"
 #import "Place.h"
 #import "Memory.h"

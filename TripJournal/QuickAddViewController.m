@@ -142,6 +142,7 @@
 }
 
 - (IBAction)cancel:(id)sender {
+    
     [self willMoveToParentViewController:nil];
     [self.view removeFromSuperview];
     [self removeFromParentViewController];

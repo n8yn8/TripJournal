@@ -59,13 +59,18 @@
     _currentImage = _selectedMemory.photo;
     [_placeCoverSwitch setOn:[_currentPlaceCover isEqualToString:_currentImage]];
     [_tripCoverSwitch setOn:[_currentTripCover isEqualToString:_currentImage]];
+    if ([_selectedMemory.photo isEqualToString:@""]) {
+        _memoryDate.text = @"Choose a photo for this memory.";
+    } else {
+        _memoryDate.text = [_format stringFromDate:_selectedMemory.date];
+    }
     _coord = _selectedMemory.latlng;
     _memoryName.text = _selectedMemory.name;
     if (!_selectedMemory.name) {
         _headBack.title = @"Cancel";
     }
     _memoryDescription.text = _selectedMemory.description;
-    _memoryDate.text = [_format stringFromDate:_selectedMemory.date];
+    
 }
 
 - (void)didReceiveMemoryWarning
