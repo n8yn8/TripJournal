@@ -12,5 +12,6 @@
 @interface QuickTripTableViewController : UITableViewController
 
 @property (nonatomic, strong) Trip *selectedTrip;
+- (IBAction)newTrip:(id)sender;
 
 @end

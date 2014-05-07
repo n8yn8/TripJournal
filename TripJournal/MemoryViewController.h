@@ -21,7 +21,7 @@
 @property (strong, nonatomic) Memory *selectedMemory;
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
 @property (strong, nonatomic) IBOutlet UITextField *memoryName;
-@property (strong, nonatomic) IBOutlet UITextView *memoryDescription;
+@property (strong, nonatomic) IBOutlet UITextField *memoryDescription;
 @property (strong, nonatomic) IBOutlet UILabel *memoryDate;
 @property (strong, nonatomic) IBOutlet UISwitch *placeCoverSwitch;
 @property (strong, nonatomic) IBOutlet UISwitch *tripCoverSwitch;

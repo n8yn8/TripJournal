@@ -124,4 +124,7 @@ NSMutableArray *tripsJournal;
 }
 */
 
+- (IBAction)newTrip:(id)sender {
+    
+}
 @end

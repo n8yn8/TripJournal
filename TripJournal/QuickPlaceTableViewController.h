@@ -13,5 +13,6 @@
 
 @property (nonatomic, strong) NSNumber *tripId;
 @property (nonatomic, strong) Place *selectedPlace;
+- (IBAction)newPlace:(id)sender;
 
 @end

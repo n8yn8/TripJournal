@@ -128,4 +128,6 @@ NSMutableArray *placesJournal;
 }
 */
 
+- (IBAction)newPlace:(id)sender {
+}
 @end
