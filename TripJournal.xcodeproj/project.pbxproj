@@ -55,6 +55,7 @@
 		43A9965C18C3B56E0083F327 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 43A9965B18C3B56E0083F327 /* libsqlite3.dylib */; };
 		43A9965F18C3BFEA0083F327 /* TripsDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A9965E18C3BFEA0083F327 /* TripsDatabase.m */; };
 		43B2F017190C715100A874F3 /* QuickAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B2F016190C715100A874F3 /* QuickAddViewController.m */; };
+		43DF7353191A033700FF7403 /* FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43DF7352191A033700FF7403 /* FeedbackViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -146,6 +147,8 @@
 		43A9965E18C3BFEA0083F327 /* TripsDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TripsDatabase.m; sourceTree = "<group>"; };
 		43B2F015190C715100A874F3 /* QuickAddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuickAddViewController.h; sourceTree = "<group>"; };
 		43B2F016190C715100A874F3 /* QuickAddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuickAddViewController.m; sourceTree = "<group>"; };
+		43DF7351191A033700FF7403 /* FeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackViewController.h; sourceTree = "<group>"; };
+		43DF7352191A033700FF7403 /* FeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -276,6 +279,8 @@
 				43A413251902E1CC00858100 /* QuickTripTableViewController.m */,
 				43B2F015190C715100A874F3 /* QuickAddViewController.h */,
 				43B2F016190C715100A874F3 /* QuickAddViewController.m */,
+				43DF7351191A033700FF7403 /* FeedbackViewController.h */,
+				43DF7352191A033700FF7403 /* FeedbackViewController.m */,
 			);
 			path = TripJournal;
 			sourceTree = "<group>";
@@ -463,6 +468,7 @@
 				439EC68518B4906E00BC6EBA /* Trip.m in Sources */,
 				439EC68B18B53F8900BC6EBA /* PlacesCollectionHeaderView.m in Sources */,
 				4318AD6918D50D0500D513A5 /* SetLocationViewController.m in Sources */,
+				43DF7353191A033700FF7403 /* FeedbackViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

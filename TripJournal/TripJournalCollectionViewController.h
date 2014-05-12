@@ -20,6 +20,7 @@
 @property NSMutableArray *journalEntries;
 @property NSInteger chosenIndex;
 
+
 - (IBAction)unwindToJournal:(UIStoryboardSegue *)unwindSegue;
 - (IBAction)unwindToHome:(UIStoryboardSegue *)unwindSegue;
 

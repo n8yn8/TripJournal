@@ -157,7 +157,7 @@ NSIndexPath *deletePath;
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     
-    if (![segue.identifier isEqualToString:@"QuickAdd"]) {
+    if (![segue.identifier isEqualToString:@"QuickAdd"] && ![segue.identifier isEqualToString:@"feedback"]) {
         
         //Get destination view controller
         UINavigationController *navigationController = segue.destinationViewController;
