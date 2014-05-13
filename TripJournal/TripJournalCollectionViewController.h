@@ -13,11 +13,11 @@
 #import "ELCImagePickerController.h"
 #import <sqlite3.h>
 
-@interface TripJournalCollectionViewController : UICollectionViewController <UIPageViewControllerDataSource, ELCImagePickerControllerDelegate, UINavigationControllerDelegate> {
+@interface TripJournalCollectionViewController : UICollectionViewController <ELCImagePickerControllerDelegate, UINavigationControllerDelegate> {
     NSMutableArray *_tripsJournal;
 }
 
-@property (strong, nonatomic) UIPageViewController *pageViewController;
+
 @property (nonatomic, retain) NSMutableArray *tripsJournal;
 @property NSMutableArray *journalEntries;
 @property NSInteger chosenIndex;

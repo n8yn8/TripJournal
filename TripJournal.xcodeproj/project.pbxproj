@@ -54,6 +54,7 @@
 		43A9965C18C3B56E0083F327 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 43A9965B18C3B56E0083F327 /* libsqlite3.dylib */; };
 		43A9965F18C3BFEA0083F327 /* TripsDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A9965E18C3BFEA0083F327 /* TripsDatabase.m */; };
 		43B2F017190C715100A874F3 /* QuickAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B2F016190C715100A874F3 /* QuickAddViewController.m */; };
+		43C952AD1921EF1D002B3CB6 /* PageCoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C952AC1921EF1D002B3CB6 /* PageCoverViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -144,6 +145,8 @@
 		43A9965E18C3BFEA0083F327 /* TripsDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TripsDatabase.m; sourceTree = "<group>"; };
 		43B2F015190C715100A874F3 /* QuickAddViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuickAddViewController.h; sourceTree = "<group>"; };
 		43B2F016190C715100A874F3 /* QuickAddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuickAddViewController.m; sourceTree = "<group>"; };
+		43C952AB1921EF1D002B3CB6 /* PageCoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageCoverViewController.h; sourceTree = "<group>"; };
+		43C952AC1921EF1D002B3CB6 /* PageCoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PageCoverViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -274,6 +277,8 @@
 				43A413251902E1CC00858100 /* QuickTripTableViewController.m */,
 				43B2F015190C715100A874F3 /* QuickAddViewController.h */,
 				43B2F016190C715100A874F3 /* QuickAddViewController.m */,
+				43C952AB1921EF1D002B3CB6 /* PageCoverViewController.h */,
+				43C952AC1921EF1D002B3CB6 /* PageCoverViewController.m */,
 			);
 			path = TripJournal;
 			sourceTree = "<group>";
@@ -443,6 +448,7 @@
 				433E4EB018AB5540003FC9AA /* TripCollectionHeaderView.m in Sources */,
 				439EC68E18B541FF00BC6EBA /* Memory.m in Sources */,
 				433E4EB318AB5D0C003FC9AA /* JournalCollectionHeaderView.m in Sources */,
+				43C952AD1921EF1D002B3CB6 /* PageCoverViewController.m in Sources */,
 				439EC68818B4B36500BC6EBA /* Place.m in Sources */,
 				43A9965F18C3BFEA0083F327 /* TripsDatabase.m in Sources */,
 				433E4E9118AB1D5C003FC9AA /* TripJournalCollectionViewController.m in Sources */,

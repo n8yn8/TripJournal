@@ -112,6 +112,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <segue destination="6wH-09-26x" kind="modal" identifier="AddPhotos" id="Gsd-Yw-l71"/>
+                    </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ftS-yy-wko" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -120,7 +123,7 @@
         <!--Quick Add View Controller-->
         <scene sceneID="3WI-q0-45L">
             <objects>
-                <viewController id="ldH-G9-JkS" customClass="QuickAddViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PageContentViewController" id="ldH-G9-JkS" customClass="QuickAddViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="W5f-qu-phw"/>
                         <viewControllerLayoutGuide type="bottom" id="HnF-B4-ZnT"/>
@@ -152,7 +155,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TDD-Fs-AwV">
-                                <rect key="frame" x="20" y="300" width="57" height="30"/>
+                                <rect key="frame" x="213" y="66" width="57" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Set Trip">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -162,7 +165,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bjg-o4-rDL">
-                                <rect key="frame" x="213" y="300" width="71" height="30"/>
+                                <rect key="frame" x="213" y="104" width="71" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Set Place">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -172,54 +175,43 @@
                                 </connections>
                             </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Select a trip" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cJQ-xT-q8u">
-                                <rect key="frame" x="20" y="338" width="130" height="21"/>
+                                <rect key="frame" x="20" y="338" width="280" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Def-fE-E2E">
-                                <rect key="frame" x="20" y="357" width="130" height="13"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Def-fE-E2E">
+                                <rect key="frame" x="20" y="367" width="280" height="13"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Select a Place" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TGk-zH-vvd">
-                                <rect key="frame" x="165" y="338" width="119" height="21"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Select a Place" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TGk-zH-vvd">
+                                <rect key="frame" x="20" y="395" width="280" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jeo-h6-9kO">
-                                <rect key="frame" x="165" y="357" width="119" height="13"/>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jeo-h6-9kO">
+                                <rect key="frame" x="20" y="424" width="280" height="13"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y5M-XZ-LzL">
-                                <rect key="frame" x="20" y="414" width="46" height="30"/>
+                                <rect key="frame" x="158" y="166" width="142" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Save">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
                                     <action selector="saveMemory:" destination="ldH-G9-JkS" eventType="touchUpInside" id="3NI-lT-BPw"/>
-                                    <segue destination="He7-EN-IaK" kind="unwind" unwindAction="unwindToHome:" id="rIF-gQ-Kaa"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mOa-TK-xd0">
-                                <rect key="frame" x="225" y="414" width="59" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Cancel">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="cancel:" destination="ldH-G9-JkS" eventType="touchUpInside" id="b2a-j2-DLZ"/>
-                                    <segue destination="He7-EN-IaK" kind="unwind" unwindAction="cancel:" id="Mb2-Jd-AoQ"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="0.87058823529999996" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="a8D-Wb-Bnv">
@@ -239,11 +231,11 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="description" destination="W3d-en-NZg" id="YuH-j1-XSZ"/>
-                        <outlet property="headBack" destination="y5M-XZ-LzL" id="cfh-IT-Qym"/>
                         <outlet property="imageView" destination="sad-wg-X1A" id="29B-ZP-zLG"/>
                         <outlet property="name" destination="Tee-04-vHo" id="bgI-UO-bfg"/>
                         <outlet property="placeDescription" destination="jeo-h6-9kO" id="nhn-iK-UzY"/>
                         <outlet property="placeName" destination="TGk-zH-vvd" id="D8j-Vj-MSG"/>
+                        <outlet property="saveButton" destination="y5M-XZ-LzL" id="Hyg-yu-ywc"/>
                         <outlet property="setPlace" destination="bjg-o4-rDL" id="4EI-Am-G2c"/>
                         <outlet property="tripDescription" destination="Def-fE-E2E" id="ofU-DY-7TU"/>
                         <outlet property="tripName" destination="cJQ-xT-q8u" id="ZyJ-FO-Hzi"/>
@@ -299,11 +291,6 @@
                                 <segue destination="DO5-js-bEu" kind="unwind" unwindAction="unwindFromPlaceToQuick:" id="wo2-SJ-u6m"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="New Place" id="Rtf-PS-lst">
-                            <connections>
-                                <action selector="newPlace:" destination="YJF-kS-x7u" id="rsc-0V-bwd"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7kN-A4-WuR" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -354,11 +341,6 @@
                         <barButtonItem key="leftBarButtonItem" systemItem="done" id="FKB-cP-XWu">
                             <connections>
                                 <segue destination="Dxc-p1-qa3" kind="unwind" unwindAction="unwindFromTripToQuick:" id="sXk-Kx-SEY"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="New Trip" id="38Q-aq-lRt">
-                            <connections>
-                                <action selector="newTrip:" destination="KHl-Zj-4fE" id="AKh-Cq-8f5"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -813,7 +795,7 @@
                             <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vVj-uV-m3E">
                                 <rect key="frame" x="0.0" y="64" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <color key="barTintColor" red="0.89411764709999997" green="0.94117647059999998" blue="0.86274509799999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="barTintColor" red="1" green="0.87058823529999996" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <outlet property="delegate" destination="cMo-AF-jOz" id="odo-Wk-w3k"/>
@@ -826,9 +808,10 @@
                                     <outlet property="delegate" destination="cMo-AF-jOz" id="325-st-tww"/>
                                 </connections>
                             </mapView>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cce-22-beD">
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cce-22-beD">
                                 <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="barTintColor" red="0.81960784310000001" green="0.54117647059999996" blue="0.3294117647" alpha="1" colorSpace="calibratedRGB"/>
                                 <items>
                                     <navigationItem title="Title" id="Jht-ai-v2p">
                                         <barButtonItem key="leftBarButtonItem" systemItem="save" id="yRy-5x-065">
@@ -840,7 +823,7 @@
                                 </items>
                             </navigationBar>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="0.87058823529999996" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.81960784310000001" green="0.54117647059999996" blue="0.3294117647" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="reO-J2-zZL"/>
@@ -862,7 +845,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="barTintColor" red="0.47843137250000001" green="0.25098039220000001" blue="0.1333333333" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.81960784310000001" green="0.54117647059999996" blue="0.3294117647" alpha="1" colorSpace="calibratedRGB"/>
                         <textAttributes key="titleTextAttributes">
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </textAttributes>
@@ -976,7 +959,33 @@
                 <pageViewController storyboardIdentifier="PageViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="Wlk-YI-UDr" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="enu-sx-mCX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2385" y="-1063"/>
+            <point key="canvasLocation" x="-1859" y="-1063"/>
+        </scene>
+        <!--Page Cover View Controller-->
+        <scene sceneID="rDg-Jb-duU">
+            <objects>
+                <viewController id="8RA-DF-Htd" customClass="PageCoverViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="uYW-XJ-Q4n"/>
+                        <viewControllerLayoutGuide type="bottom" id="XXI-EF-CPQ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ko2-gg-HwA">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="syN-Nx-oZG">
+                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="iPb-Ls-nUf">
+                            <connections>
+                                <segue destination="7Ii-oz-trQ" kind="unwind" unwindAction="unwindToHome:" id="ddG-zn-PBk"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zRU-Jt-oCL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="7Ii-oz-trQ" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="-1470" y="-1993"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="LGv-7O-UtQ">
@@ -999,22 +1008,23 @@
         <!--Navigation Controller-->
         <scene sceneID="afN-pO-oBk">
             <objects>
-                <navigationController storyboardIdentifier="PageContentViewController" automaticallyAdjustsScrollViewInsets="NO" id="6wH-09-26x" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="6wH-09-26x" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="5Uh-Ps-qHN">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" red="0.81960784310000001" green="0.54117647059999996" blue="0.3294117647" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="barTintColor" red="0.81960784310000001" green="0.54117647059999996" blue="0.3294117647" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="ldH-G9-JkS" kind="relationship" relationship="rootViewController" id="HVX-qc-BKe"/>
+                        <segue destination="8RA-DF-Htd" kind="relationship" relationship="rootViewController" id="LEY-L5-mFk"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hTw-Cl-J9V" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1859" y="-1063"/>
+            <point key="canvasLocation" x="-1972" y="-1993"/>
         </scene>
     </scenes>
     <resources>

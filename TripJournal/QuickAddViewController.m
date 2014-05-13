@@ -30,7 +30,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     
     _format = [[NSDateFormatter alloc] init];
     [_format setDateStyle:NSDateFormatterMediumStyle];
@@ -75,8 +74,6 @@
         UINavigationController *navigationController = segue.destinationViewController;
         QuickPlaceTableViewController *dvc = [[navigationController viewControllers] objectAtIndex:0];
         dvc.tripId = [NSNumber numberWithLongLong:_selectedTrip.uniqueId];
-    } else if (sender == _headBack) {
-        
     }
 }
 
@@ -96,7 +93,7 @@
     _placeName.text = self.selectedPlace.name;
     _placeDescription.text = self.selectedPlace.description;
     if (_name.hasText) {
-        _headBack.enabled = YES;
+        _saveButton.enabled = YES;
     }
 }
 
@@ -126,25 +123,20 @@
     //NSLog(@"length = %lu, name = %lu, range = %lu, string = %lu", length, (unsigned long)_name.text.length, (unsigned long)range.length, (unsigned long)string.length);
     //NSLog(@"length = %lu, name = %@, range = %lu, string = %@", (unsigned long)length, _name.text, (unsigned long)range.length, string);
     if (length > 0 && _selectedPlace) {
-        _headBack.enabled = YES;
+        _saveButton.enabled = YES;
     } else {
-        _headBack.enabled = NO;
+        _saveButton.enabled = NO;
     }
     return YES;
 }
-
 
 - (IBAction)saveMemory:(id)sender {
     self.selectedMemory.placeId = [NSNumber numberWithLongLong:_selectedPlace.uniqueId];
     self.selectedMemory.name = _name.text;
     self.selectedMemory.description = _description.text;
     [[TripsDatabase database] addMemoryToJournal:self.selectedMemory];
+    [_saveButton setTitle:@"Memory Saved" forState:UIControlStateDisabled];
+    _saveButton.enabled = NO;
 }
 
-- (IBAction)cancel:(id)sender {
-    
-    [self willMoveToParentViewController:nil];
-    [self.view removeFromSuperview];
-    [self removeFromParentViewController];
-}
 @end

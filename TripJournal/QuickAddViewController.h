@@ -36,8 +36,7 @@
 
 - (IBAction)unwindFromTripToQuick:(UIStoryboardSegue *)unwindSegue;
 - (IBAction)unwindFromPlaceToQuick:(UIStoryboardSegue *)unwindSegue;
-@property (strong, nonatomic) IBOutlet UIButton *headBack;
+@property (strong, nonatomic) IBOutlet UIButton *saveButton;
 - (IBAction)saveMemory:(id)sender;
-- (IBAction)cancel:(id)sender;
 
 @end
