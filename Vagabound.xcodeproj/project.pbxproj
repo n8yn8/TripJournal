@@ -103,21 +103,21 @@
 		4358535619083C7000C1A3A9 /* Overlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Overlay.png; sourceTree = "<group>"; };
 		4358535719083C7000C1A3A9 /* Overlay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Overlay@2x.png"; sourceTree = "<group>"; };
 		4358536219083D6900C1A3A9 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
-		4370B7F21898D38F00907C5D /* TripJournal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TripJournal.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4370B7F21898D38F00907C5D /* Vagabound.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vagabound.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4370B7F51898D38F00907C5D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4370B7F71898D38F00907C5D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		4370B7F91898D38F00907C5D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		4370B7FD1898D38F00907C5D /* TripJournal-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TripJournal-Info.plist"; sourceTree = "<group>"; };
+		4370B7FD1898D38F00907C5D /* Vagabound-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Vagabound-Info.plist"; sourceTree = "<group>"; };
 		4370B7FF1898D38F00907C5D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4370B8011898D38F00907C5D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		4370B8031898D38F00907C5D /* TripJournal-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TripJournal-Prefix.pch"; sourceTree = "<group>"; };
+		4370B8031898D38F00907C5D /* Vagabound-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Vagabound-Prefix.pch"; sourceTree = "<group>"; };
 		4370B8041898D38F00907C5D /* TripJournalAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TripJournalAppDelegate.h; sourceTree = "<group>"; };
 		4370B8051898D38F00907C5D /* TripJournalAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TripJournalAppDelegate.m; sourceTree = "<group>"; };
 		4370B8081898D38F00907C5D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4370B80D1898D38F00907C5D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		4370B8131898D38F00907C5D /* TripJournalTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TripJournalTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4370B8131898D38F00907C5D /* VagaboundTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = VagaboundTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4370B8141898D38F00907C5D /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		4370B81C1898D38F00907C5D /* TripJournalTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "TripJournalTests-Info.plist"; sourceTree = "<group>"; };
+		4370B81C1898D38F00907C5D /* VagaboundTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "VagaboundTests-Info.plist"; sourceTree = "<group>"; };
 		4370B81E1898D38F00907C5D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4370B8201898D38F00907C5D /* TripJournalTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TripJournalTests.m; sourceTree = "<group>"; };
 		4376228D18C5597A002FD0D7 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
@@ -226,8 +226,8 @@
 		4370B7F31898D38F00907C5D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4370B7F21898D38F00907C5D /* TripJournal.app */,
-				4370B8131898D38F00907C5D /* TripJournalTests.xctest */,
+				4370B7F21898D38F00907C5D /* Vagabound.app */,
+				4370B8131898D38F00907C5D /* VagaboundTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -293,10 +293,10 @@
 				433E4EAF18AB5540003FC9AA /* TripCollectionHeaderView.m */,
 				439EC68918B53F8900BC6EBA /* PlacesCollectionHeaderView.h */,
 				439EC68A18B53F8900BC6EBA /* PlacesCollectionHeaderView.m */,
-				4370B7FD1898D38F00907C5D /* TripJournal-Info.plist */,
+				4370B7FD1898D38F00907C5D /* Vagabound-Info.plist */,
 				4370B7FE1898D38F00907C5D /* InfoPlist.strings */,
 				4370B8011898D38F00907C5D /* main.m */,
-				4370B8031898D38F00907C5D /* TripJournal-Prefix.pch */,
+				4370B8031898D38F00907C5D /* Vagabound-Prefix.pch */,
 				433E4EB418AB5E97003FC9AA /* MyAnnotation.h */,
 				433E4EB518AB5E97003FC9AA /* MyAnnotation.m */,
 				439EC68318B4906E00BC6EBA /* Trip.h */,
@@ -323,7 +323,7 @@
 		4370B81B1898D38F00907C5D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				4370B81C1898D38F00907C5D /* TripJournalTests-Info.plist */,
+				4370B81C1898D38F00907C5D /* VagaboundTests-Info.plist */,
 				4370B81D1898D38F00907C5D /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
@@ -332,9 +332,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		4370B7F11898D38F00907C5D /* TripJournal */ = {
+		4370B7F11898D38F00907C5D /* Vagabound */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4370B8241898D38F00907C5D /* Build configuration list for PBXNativeTarget "TripJournal" */;
+			buildConfigurationList = 4370B8241898D38F00907C5D /* Build configuration list for PBXNativeTarget "Vagabound" */;
 			buildPhases = (
 				4370B7EE1898D38F00907C5D /* Sources */,
 				4370B7EF1898D38F00907C5D /* Frameworks */,
@@ -344,14 +344,14 @@
 			);
 			dependencies = (
 			);
-			name = TripJournal;
+			name = Vagabound;
 			productName = TripJournal;
-			productReference = 4370B7F21898D38F00907C5D /* TripJournal.app */;
+			productReference = 4370B7F21898D38F00907C5D /* Vagabound.app */;
 			productType = "com.apple.product-type.application";
 		};
-		4370B8121898D38F00907C5D /* TripJournalTests */ = {
+		4370B8121898D38F00907C5D /* VagaboundTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4370B8271898D38F00907C5D /* Build configuration list for PBXNativeTarget "TripJournalTests" */;
+			buildConfigurationList = 4370B8271898D38F00907C5D /* Build configuration list for PBXNativeTarget "VagaboundTests" */;
 			buildPhases = (
 				4370B80F1898D38F00907C5D /* Sources */,
 				4370B8101898D38F00907C5D /* Frameworks */,
@@ -362,9 +362,9 @@
 			dependencies = (
 				4370B8191898D38F00907C5D /* PBXTargetDependency */,
 			);
-			name = TripJournalTests;
+			name = VagaboundTests;
 			productName = TripJournalTests;
-			productReference = 4370B8131898D38F00907C5D /* TripJournalTests.xctest */;
+			productReference = 4370B8131898D38F00907C5D /* VagaboundTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -390,7 +390,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 4370B7ED1898D38F00907C5D /* Build configuration list for PBXProject "TripJournal" */;
+			buildConfigurationList = 4370B7ED1898D38F00907C5D /* Build configuration list for PBXProject "Vagabound" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -403,8 +403,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4370B7F11898D38F00907C5D /* TripJournal */,
-				4370B8121898D38F00907C5D /* TripJournalTests */,
+				4370B7F11898D38F00907C5D /* Vagabound */,
+				4370B8121898D38F00907C5D /* VagaboundTests */,
 			);
 		};
 /* End PBXProject section */
@@ -481,7 +481,7 @@
 /* Begin PBXTargetDependency section */
 		4370B8191898D38F00907C5D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 4370B7F11898D38F00907C5D /* TripJournal */;
+			target = 4370B7F11898D38F00907C5D /* Vagabound */;
 			targetProxy = 4370B8181898D38F00907C5D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -591,14 +591,14 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "TripJournal/TripJournal-Prefix.pch";
-				INFOPLIST_FILE = "TripJournal/TripJournal-Info.plist";
+				GCC_PREFIX_HEADER = "TripJournal/Vagabound-Prefix.pch";
+				INFOPLIST_FILE = "TripJournal/Vagabound-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/TripJournal",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Vagabound;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -610,14 +610,14 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "TripJournal/TripJournal-Prefix.pch";
-				INFOPLIST_FILE = "TripJournal/TripJournal-Info.plist";
+				GCC_PREFIX_HEADER = "TripJournal/Vagabound-Prefix.pch";
+				INFOPLIST_FILE = "TripJournal/Vagabound-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/TripJournal",
 				);
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Vagabound;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -637,8 +637,8 @@
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				INFOPLIST_FILE = "TripJournalTests/TripJournalTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "TripJournalTests/VagaboundTests-Info.plist";
+				PRODUCT_NAME = VagaboundTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -655,8 +655,8 @@
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TripJournal/TripJournal-Prefix.pch";
-				INFOPLIST_FILE = "TripJournalTests/TripJournalTests-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_FILE = "TripJournalTests/VagaboundTests-Info.plist";
+				PRODUCT_NAME = VagaboundTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
 			};
@@ -665,7 +665,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4370B7ED1898D38F00907C5D /* Build configuration list for PBXProject "TripJournal" */ = {
+		4370B7ED1898D38F00907C5D /* Build configuration list for PBXProject "Vagabound" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4370B8221898D38F00907C5D /* Debug */,
@@ -674,7 +674,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4370B8241898D38F00907C5D /* Build configuration list for PBXNativeTarget "TripJournal" */ = {
+		4370B8241898D38F00907C5D /* Build configuration list for PBXNativeTarget "Vagabound" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4370B8251898D38F00907C5D /* Debug */,
@@ -683,7 +683,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4370B8271898D38F00907C5D /* Build configuration list for PBXNativeTarget "TripJournalTests" */ = {
+		4370B8271898D38F00907C5D /* Build configuration list for PBXNativeTarget "VagaboundTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4370B8281898D38F00907C5D /* Debug */,
