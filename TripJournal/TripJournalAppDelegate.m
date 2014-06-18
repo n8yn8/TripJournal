@@ -13,7 +13,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [TestFlight takeOff:@"710fe487-f21e-4aba-8e00-6ebf2cc40628"];
+    [TestFlight takeOff:@"5d93fe7c-881d-4bdb-96d2-7e491cece813"];
     
     UIPageControl *pageControl = [UIPageControl appearance];
     pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
