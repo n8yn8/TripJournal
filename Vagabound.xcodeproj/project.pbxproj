@@ -17,6 +17,7 @@
 		433E4EB618AB5E97003FC9AA /* MyAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 433E4EB518AB5E97003FC9AA /* MyAnnotation.m */; };
 		433E4EB818AB5ECC003FC9AA /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 433E4EB718AB5ECC003FC9AA /* MapKit.framework */; };
 		433E4EBA18AB5ED4003FC9AA /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 433E4EB918AB5ED4003FC9AA /* CoreLocation.framework */; };
+		434DBFE11958C2AC001DCF00 /* FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 434DBFE01958C2AC001DCF00 /* FeedbackViewController.m */; };
 		4358535819083C7000C1A3A9 /* ELCAlbumPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4358534719083C7000C1A3A9 /* ELCAlbumPickerController.m */; };
 		4358535919083C7000C1A3A9 /* ELCAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = 4358534919083C7000C1A3A9 /* ELCAsset.m */; };
 		4358535A19083C7000C1A3A9 /* ELCAssetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4358534B19083C7000C1A3A9 /* ELCAssetCell.m */; };
@@ -85,6 +86,8 @@
 		433E4EB518AB5E97003FC9AA /* MyAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAnnotation.m; sourceTree = "<group>"; };
 		433E4EB718AB5ECC003FC9AA /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		433E4EB918AB5ED4003FC9AA /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		434DBFDF1958C2AC001DCF00 /* FeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackViewController.h; sourceTree = "<group>"; };
+		434DBFE01958C2AC001DCF00 /* FeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackViewController.m; sourceTree = "<group>"; };
 		4358534619083C7000C1A3A9 /* ELCAlbumPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAlbumPickerController.h; sourceTree = "<group>"; };
 		4358534719083C7000C1A3A9 /* ELCAlbumPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCAlbumPickerController.m; sourceTree = "<group>"; };
 		4358534819083C7000C1A3A9 /* ELCAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAsset.h; sourceTree = "<group>"; };
@@ -279,6 +282,8 @@
 				43B2F016190C715100A874F3 /* QuickAddViewController.m */,
 				43C952AB1921EF1D002B3CB6 /* PageCoverViewController.h */,
 				43C952AC1921EF1D002B3CB6 /* PageCoverViewController.m */,
+				434DBFDF1958C2AC001DCF00 /* FeedbackViewController.h */,
+				434DBFE01958C2AC001DCF00 /* FeedbackViewController.m */,
 			);
 			path = TripJournal;
 			sourceTree = "<group>";
@@ -463,6 +468,7 @@
 				433E4EAA18AB2668003FC9AA /* TripCollectionViewController.m in Sources */,
 				4358535819083C7000C1A3A9 /* ELCAlbumPickerController.m in Sources */,
 				439EC68518B4906E00BC6EBA /* Trip.m in Sources */,
+				434DBFE11958C2AC001DCF00 /* FeedbackViewController.m in Sources */,
 				439EC68B18B53F8900BC6EBA /* PlacesCollectionHeaderView.m in Sources */,
 				4318AD6918D50D0500D513A5 /* SetLocationViewController.m in Sources */,
 			);

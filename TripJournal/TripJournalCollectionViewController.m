@@ -36,6 +36,7 @@ NSIndexPath *deletePath;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    NSLog(@"viewDidLoad");
     
     self.tripsJournal = [TripsDatabase database].tripsJournal;
     
@@ -160,7 +161,7 @@ NSIndexPath *deletePath;
 
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     
-    if (![segue.identifier isEqualToString:@"QuickAdd"]) {
+    if (![segue.identifier isEqualToString:@"QuickAdd"] && ![segue.identifier isEqualToString:@"feedback"]) {
         if ([segue.identifier isEqualToString:@"AddPhotos"]) {
             UINavigationController *navigationController = segue.destinationViewController;
             PageCoverViewController *dvc = [[navigationController viewControllers] objectAtIndex:0];
