@@ -235,16 +235,6 @@
                                     <segue destination="ozf-d2-Xok" kind="modal" identifier="Trip" id="VB3-PV-WdF"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bjg-o4-rDL">
-                                <rect key="frame" x="213" y="104" width="71" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Set Place">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <segue destination="fdX-hA-ndT" kind="modal" identifier="Place" id="hc7-4X-3FJ"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Select a trip" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cJQ-xT-q8u">
                                 <rect key="frame" x="20" y="338" width="280" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -307,7 +297,6 @@
                         <outlet property="placeDescription" destination="jeo-h6-9kO" id="nhn-iK-UzY"/>
                         <outlet property="placeName" destination="TGk-zH-vvd" id="D8j-Vj-MSG"/>
                         <outlet property="saveButton" destination="y5M-XZ-LzL" id="Hyg-yu-ywc"/>
-                        <outlet property="setPlace" destination="bjg-o4-rDL" id="4EI-Am-G2c"/>
                         <outlet property="tripDescription" destination="Def-fE-E2E" id="ofU-DY-7TU"/>
                         <outlet property="tripName" destination="cJQ-xT-q8u" id="ZyJ-FO-Hzi"/>
                     </connections>
@@ -349,6 +338,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="DO5-js-bEu" kind="unwind" unwindAction="unwindFromPlaceToQuick:" id="WUE-ry-bvA"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -367,7 +359,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7kN-A4-WuR" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="DO5-js-bEu" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-324" y="-1481"/>
+            <point key="canvasLocation" x="726" y="-1063"/>
         </scene>
         <!--Quick Trip Table View Controller-->
         <scene sceneID="Bsk-kg-yEk">
@@ -378,11 +370,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell tag="502" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TripCell" textLabel="sCd-31-DQx" detailTextLabel="6H2-Gt-gtU" style="IBUITableViewCellStyleSubtitle" id="Agu-J1-cJn">
+                            <tableViewCell tag="502" contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="TripCell" textLabel="sCd-31-DQx" detailTextLabel="6H2-Gt-gtU" style="IBUITableViewCellStyleSubtitle" id="Agu-J1-cJn">
                                 <rect key="frame" x="0.0" y="86" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Agu-J1-cJn" id="vmT-cg-KZk">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sCd-31-DQx">
@@ -401,6 +393,9 @@
                                         </label>
                                     </subviews>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <segue destination="fdX-hA-ndT" kind="modal" id="t8r-fH-t5i"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -409,7 +404,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="nz4-Bn-b0w">
-                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="FKB-cP-XWu">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="FKB-cP-XWu">
                             <connections>
                                 <segue destination="Dxc-p1-qa3" kind="unwind" unwindAction="unwindFromTripToQuick:" id="sXk-Kx-SEY"/>
                             </connections>
@@ -419,7 +414,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H31-6I-NLD" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="Dxc-p1-qa3" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-324" y="-704"/>
+            <point key="canvasLocation" x="-272" y="-1063"/>
         </scene>
         <!--Trip Collection View Controller - Trip-->
         <scene sceneID="ipR-dI-eXY">
@@ -843,6 +838,7 @@
                         <outlet property="memoryName" destination="yXU-7y-2cm" id="MpV-jb-cdh"/>
                         <outlet property="placeCoverSwitch" destination="I9L-BC-2GS" id="75Q-8s-UqY"/>
                         <outlet property="saveMemory" destination="Fml-zk-RkU" id="Eon-W9-Cxf"/>
+                        <outlet property="shareButton" destination="Z6I-4T-wdm" id="irg-OF-uBY"/>
                         <outlet property="tripCoverSwitch" destination="2gU-yB-Xv4" id="Ylt-B0-GBN"/>
                     </connections>
                 </viewController>
@@ -1009,6 +1005,7 @@
         <!--Navigation Controller-->
         <scene sceneID="2nS-RD-vkx">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Dd6-oQ-tsG" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ozf-d2-Xok" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="qKO-Un-7Tr">
@@ -1020,9 +1017,8 @@
                         <segue destination="KHl-Zj-4fE" kind="relationship" relationship="rootViewController" id="OOd-ma-tlJ"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Dd6-oQ-tsG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-785" y="-704"/>
+            <point key="canvasLocation" x="-761" y="-1063"/>
         </scene>
         <!--Page View Controller-->
         <scene sceneID="jDB-qK-S9j">
@@ -1061,6 +1057,7 @@
         <!--Navigation Controller-->
         <scene sceneID="LGv-7O-UtQ">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="U5R-4b-7O5" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="fdX-hA-ndT" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="pK4-SC-kTR">
@@ -1072,9 +1069,8 @@
                         <segue destination="YJF-kS-x7u" kind="relationship" relationship="rootViewController" id="eY9-lu-Jpw"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="U5R-4b-7O5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-785" y="-1481"/>
+            <point key="canvasLocation" x="215" y="-1063"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="afN-pO-oBk">

@@ -9,6 +9,7 @@
 #import "PlacesCollectionViewController.h"
 #import "TripsDatabase.h"
 #import <AssetsLibrary/AssetsLibrary.h>
+#import "TestFlight.h"
 
 @interface PlacesCollectionViewController ()
 
@@ -34,6 +35,8 @@ NSIndexPath *deletePath;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    [TestFlight passCheckpoint:@"Place View"];
     
     self.memoriesJournal = [[TripsDatabase database] memoriesJournal:[NSNumber numberWithLongLong:_selectedPlace.uniqueId]];
     _chosenIndex = -1;

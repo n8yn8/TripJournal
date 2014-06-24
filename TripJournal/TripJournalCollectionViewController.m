@@ -35,6 +35,7 @@ NSIndexPath *deletePath;
 
 - (void)viewDidLoad
 {
+    [TestFlight passCheckpoint:@"Journal View"];
     [super viewDidLoad];
     NSLog(@"viewDidLoad");
     
@@ -201,11 +202,12 @@ NSIndexPath *deletePath;
 #pragma mark -
 #pragma mark ELCImagePickerControllerDelegate
 - (void)elcImagePickerController:(ELCImagePickerController *)picker didFinishPickingMediaWithInfo:(NSArray *)info {
-    
+    [TestFlight passCheckpoint:@"selected photos with ELCImagePicker"];
     [self dismissViewControllerAnimated:YES completion:^{[self processElcData:info];}];
 }
 
 - (void)elcImagePickerControllerDidCancel:(ELCImagePickerController *)picker {
+    [TestFlight passCheckpoint:@"cancelled ELCImagePicker"];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -222,7 +224,7 @@ NSIndexPath *deletePath;
 
 - (IBAction)unwindToJournal:(UIStoryboardSegue *)unwindSegue
 {
-    
+    [TestFlight passCheckpoint:@"unwindToJournal UnwindSegue"];
     TripCollectionViewController *source = [unwindSegue sourceViewController];
     Trip *item = source.selectedTrip;
     if (source.newTrip || (source.editedTrip && (_chosenIndex == _tripsJournal.count))) {
@@ -235,11 +237,13 @@ NSIndexPath *deletePath;
 }
 
 - (IBAction)unwindToHome:(UIStoryboardSegue *)unwindSegue {
+    [TestFlight passCheckpoint:@"Home UnwindSegue"];
     self.tripsJournal = [TripsDatabase database].tripsJournal;
     [self.collectionView reloadData];
 }
 
 - (IBAction)cancel:(UIStoryboardSegue *)unwindSegue {
+    [TestFlight passCheckpoint:@"Cancel"];
     //Do nothing.
 }
 

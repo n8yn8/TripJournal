@@ -8,6 +8,7 @@
 
 #import "QuickPlaceTableViewController.h"
 #import "TripsDatabase.h"
+#import "TestFlight.h"
 
 @interface QuickPlaceTableViewController ()
 
@@ -28,9 +29,11 @@ NSMutableArray *placesJournal;
 
 - (void)viewDidLoad
 {
+    [TestFlight passCheckpoint:@"QuickAdd Place"];
     [super viewDidLoad];
     
-    placesJournal = [[TripsDatabase database] placesJournal: _tripId];
+    placesJournal = [[TripsDatabase database] placesJournal: [NSNumber numberWithLongLong:_selectedTrip.uniqueId]];
+    NSLog(@"QuickPlace tripId = %lld", _selectedTrip.uniqueId);
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -73,11 +76,6 @@ NSMutableArray *placesJournal;
 
 #pragma mark - Table view delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    _selectedPlace = [placesJournal objectAtIndex:indexPath.row];
-}
-
 
 /*
 // Override to support conditional editing of the table view.
@@ -117,16 +115,18 @@ NSMutableArray *placesJournal;
 }
 */
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+    NSIndexPath *selectedIndexPath = [self.tableView indexPathForSelectedRow];
+    _selectedPlace = [placesJournal objectAtIndex:selectedIndexPath.row];
+    NSLog(@"Selected Trip name = %@", _selectedPlace.name );
+    NSLog(@"prepareForSegue tripId = %lld", _selectedPlace.uniqueId);
 }
-*/
+
 
 - (IBAction)newPlace:(id)sender {
 }

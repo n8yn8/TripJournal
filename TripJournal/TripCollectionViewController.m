@@ -9,6 +9,7 @@
 #import "TripCollectionViewController.h"
 #import "TripsDatabase.h"
 #import <AssetsLibrary/AssetsLibrary.h>
+#import "TestFlight.h"
 
 @interface TripCollectionViewController ()
 
@@ -41,6 +42,8 @@ NSIndexPath *deletePath;
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    [TestFlight passCheckpoint:@"Trip View"];
     
     self.placesJournal = [[TripsDatabase database] placesJournal: [NSNumber numberWithLongLong:_selectedTrip.uniqueId]];
     

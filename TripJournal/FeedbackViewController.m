@@ -28,6 +28,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [TestFlight passCheckpoint:@"Feedback View"];
     NSLog(@"viewDidLoad FeedbackViewController");
     // Do any additional setup after loading the view.
 }
@@ -50,7 +51,9 @@
  */
 
 - (IBAction)sendFeedback:(id)sender {
-    [self send];
+    [TestFlight submitFeedback:_feedback.text];
+    _feedback.text = @"";
+    _result.text = @"Feedback sent!";
 }
 
 - (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
@@ -66,12 +69,6 @@
 {
     [textField resignFirstResponder];
     return YES;
-}
-
-- (void)send {
-    [TestFlight submitFeedback:_feedback.text];
-    _feedback.text = @"";
-    _result.text = @"Feedback sent!";
 }
 
 @end

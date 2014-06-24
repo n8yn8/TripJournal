@@ -11,6 +11,7 @@
 #import "QuickPlaceTableViewController.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "TripsDatabase.h"
+#import "TestFlight.h"
 
 @interface QuickAddViewController ()
 
@@ -30,6 +31,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [TestFlight passCheckpoint:@"QuickAdd View"];
     
     _format = [[NSDateFormatter alloc] init];
     [_format setDateStyle:NSDateFormatterMediumStyle];
@@ -70,25 +72,28 @@
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([segue.identifier isEqualToString:@"Place"]) {
-        UINavigationController *navigationController = segue.destinationViewController;
-        QuickPlaceTableViewController *dvc = [[navigationController viewControllers] objectAtIndex:0];
-        dvc.tripId = [NSNumber numberWithLongLong:_selectedTrip.uniqueId];
-    }
+    
 }
 
 - (IBAction)unwindFromTripToQuick:(UIStoryboardSegue *)unwindSegue {
-    QuickTripTableViewController *source = [unwindSegue sourceViewController];
+    /*QuickTripTableViewController *source = [unwindSegue sourceViewController];
     self.selectedTrip = source.selectedTrip;
     _tripName.text = self.selectedTrip.name;
     _tripDescription.text = self.selectedTrip.description;
     if (self.selectedTrip) {
         _setPlace.enabled = YES;
-    }
+    }*/
 }
 
 - (IBAction)unwindFromPlaceToQuick:(UIStoryboardSegue *)unwindSegue {
+    
+    
     QuickPlaceTableViewController *source = [unwindSegue sourceViewController];
+    
+    self.selectedTrip = source.selectedTrip;
+    _tripName.text = self.selectedTrip.name;
+    _tripDescription.text = self.selectedTrip.description;
+    
     self.selectedPlace = source.selectedPlace;
     _placeName.text = self.selectedPlace.name;
     _placeDescription.text = self.selectedPlace.description;

@@ -29,7 +29,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *tripName;
 @property (strong, nonatomic) IBOutlet UILabel *tripDescription;
 
-@property (strong, nonatomic) IBOutlet UIButton *setPlace;
 @property (nonatomic, strong) Place *selectedPlace;
 @property (strong, nonatomic) IBOutlet UILabel *placeName;
 @property (strong, nonatomic) IBOutlet UILabel *placeDescription;

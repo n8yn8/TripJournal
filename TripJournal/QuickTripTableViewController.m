@@ -9,6 +9,8 @@
 #import "QuickTripTableViewController.h"
 #import "TripsDatabase.h"
 #import "Trip.h"
+#import "QuickPlaceTableViewController.h"
+#import "TestFlight.h"
 
 @interface QuickTripTableViewController ()
 
@@ -30,6 +32,7 @@ NSMutableArray *tripsJournal;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    [TestFlight passCheckpoint:@"QuickAdd Trip"];
     
     tripsJournal = [TripsDatabase database].tripsJournal;
     
@@ -74,7 +77,7 @@ NSMutableArray *tripsJournal;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    _selectedTrip = [tripsJournal objectAtIndex:indexPath.row];
+    
 }
 
 /*
@@ -115,14 +118,21 @@ NSMutableArray *tripsJournal;
 }
 */
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    NSIndexPath *selectedIndexPath = [self.tableView indexPathForSelectedRow];
+    _selectedTrip = [tripsJournal objectAtIndex:selectedIndexPath.row];
+    NSLog(@"Selected Trip name = %@", _selectedTrip.name );
+    NSLog(@"prepareForSegue tripId = %lld", _selectedTrip.uniqueId);
+    UINavigationController *navigationController = segue.destinationViewController;
+    QuickPlaceTableViewController *dvc = [[navigationController viewControllers] objectAtIndex:0];
+    dvc.selectedTrip = _selectedTrip;
 }
-*/
+
 
 - (IBAction)newTrip:(id)sender {
     
