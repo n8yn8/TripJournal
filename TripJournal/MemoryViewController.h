@@ -14,9 +14,11 @@
 
 @property BOOL newPic;
 @property (nonatomic, assign, getter=isEdited) BOOL editedMemory;
+
 @property (nonatomic, assign, getter=isNewTrip) BOOL newMemory;
 - (IBAction)useCameraRoll:(id)sender;
 - (IBAction)share:(id)sender;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *shareButton;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *headBack;
 @property (strong, nonatomic) Memory *selectedMemory;
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;

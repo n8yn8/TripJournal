@@ -10,6 +10,7 @@
 #import "TripsDatabase.h"
 #import "SetLocationViewController.h"
 #import <AssetsLibrary/AssetsLibrary.h>
+#import "TestFlight.h"
 
 @interface MemoryViewController ()
 
@@ -42,6 +43,8 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
     
+    [TestFlight passCheckpoint:@"Memory View"];
+    
     _format = [[NSDateFormatter alloc] init];
     [_format setDateStyle:NSDateFormatterMediumStyle];
     [_format setTimeStyle:NSDateFormatterMediumStyle];
@@ -68,6 +71,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     [_tripCoverSwitch setOn:[_currentTripCover isEqualToString:_currentImage]];
     if ([_selectedMemory.photo isEqualToString:@""]) {
         _memoryDate.text = @"Choose a photo for this memory.";
+        _shareButton.enabled = false;
     } else {
         _memoryDate.text = [_format stringFromDate:_selectedMemory.date];
     }
@@ -320,6 +324,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
                 }];
         
         _selectedMemory.photo = [assetURL absoluteString];
+        _shareButton.enabled = true;
         //NSLog(@"%@", [assetURL absoluteString]);
         
         /*
