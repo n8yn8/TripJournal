@@ -75,14 +75,8 @@
     
 }
 
-- (IBAction)unwindFromTripToQuick:(UIStoryboardSegue *)unwindSegue {
-    /*QuickTripTableViewController *source = [unwindSegue sourceViewController];
-    self.selectedTrip = source.selectedTrip;
-    _tripName.text = self.selectedTrip.name;
-    _tripDescription.text = self.selectedTrip.description;
-    if (self.selectedTrip) {
-        _setPlace.enabled = YES;
-    }*/
+- (IBAction)cancelSelectionUnwind:(UIStoryboardSegue *)unwindSegue {
+    
 }
 
 - (IBAction)unwindFromPlaceToQuick:(UIStoryboardSegue *)unwindSegue {

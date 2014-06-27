@@ -33,7 +33,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *placeName;
 @property (strong, nonatomic) IBOutlet UILabel *placeDescription;
 
-- (IBAction)unwindFromTripToQuick:(UIStoryboardSegue *)unwindSegue;
 - (IBAction)unwindFromPlaceToQuick:(UIStoryboardSegue *)unwindSegue;
 @property (strong, nonatomic) IBOutlet UIButton *saveButton;
 - (IBAction)saveMemory:(id)sender;

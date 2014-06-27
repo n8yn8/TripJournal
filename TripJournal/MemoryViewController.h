@@ -8,15 +8,16 @@
 
 #import <UIKit/UIKit.h>
 #import <MobileCoreServices/MobileCoreServices.h>
+#import <CoreLocation/CoreLocation.h>
 #import "Memory.h"
 
-@interface MemoryViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface MemoryViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate, CLLocationManagerDelegate>
 
 @property BOOL newPic;
 @property (nonatomic, assign, getter=isEdited) BOOL editedMemory;
 
+- (IBAction)showActionSheet:(id)sender;
 @property (nonatomic, assign, getter=isNewTrip) BOOL newMemory;
-- (IBAction)useCameraRoll:(id)sender;
 - (IBAction)share:(id)sender;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *shareButton;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *headBack;

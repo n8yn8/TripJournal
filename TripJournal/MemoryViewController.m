@@ -22,6 +22,9 @@
 
 @implementation MemoryViewController
 
+CLLocationManager *locationManager;
+CLLocation *currentLocation;
+
 CGFloat animatedDistance;
 static const CGFloat KEYBOARD_ANIMATION_DURATION = 0.3;
 static const CGFloat MINIMUM_SCROLL_FRACTION = 0.2;
@@ -63,7 +66,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     
     ALAssetsLibrary* assetslibrary = [[ALAssetsLibrary alloc] init];
     [assetslibrary assetForURL:[NSURL URLWithString:_selectedMemory.photo]
-                   resultBlock:resultblock   
+                   resultBlock:resultblock
                   failureBlock:failureblock];
     
     _currentImage = _selectedMemory.photo;
@@ -249,18 +252,45 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     [UIView commitAnimations];
 }
 
-- (IBAction)useCameraRoll:(id)sender {
-    if ([UIImagePickerController isSourceTypeAvailable:
-         UIImagePickerControllerSourceTypeSavedPhotosAlbum])
-    {
-        UIImagePickerController *imagePicker =
-        [[UIImagePickerController alloc] init];
-        imagePicker.delegate = self;
-        imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
-        imagePicker.mediaTypes = @[(NSString *) kUTTypeImage];
-        imagePicker.allowsEditing = NO;
-        [self presentViewController:imagePicker animated:YES completion:nil];
-        _newPic = NO;
+- (IBAction)showActionSheet:(id)sender {
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Use Camera", @"Use Photo Roll", nil];
+    
+    [actionSheet showInView:self.view];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1) {
+        if ([UIImagePickerController isSourceTypeAvailable:
+             UIImagePickerControllerSourceTypeSavedPhotosAlbum])
+        {
+            UIImagePickerController *imagePicker =
+            [[UIImagePickerController alloc] init];
+            imagePicker.delegate = self;
+            imagePicker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+            imagePicker.mediaTypes = @[(NSString *) kUTTypeImage];
+            imagePicker.allowsEditing = NO;
+            [self presentViewController:imagePicker animated:YES completion:nil];
+            _newPic = NO;
+        }
+    } else if (buttonIndex == 0) {
+        if ([UIImagePickerController isSourceTypeAvailable:
+             UIImagePickerControllerSourceTypeCamera])
+        {
+            locationManager = [[CLLocationManager alloc] init];
+            locationManager.delegate = self;
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+            [locationManager startUpdatingLocation];
+            
+            UIImagePickerController *imagePicker = [[UIImagePickerController alloc] init];
+            imagePicker.delegate = self;
+            imagePicker.sourceType =
+            UIImagePickerControllerSourceTypeCamera;
+            imagePicker.mediaTypes = @[(NSString *) kUTTypeImage];
+            imagePicker.allowsEditing = NO;
+            [self presentViewController:imagePicker animated:YES completion:nil];
+            _newPic = YES;
+        }
     }
 }
 
@@ -284,9 +314,6 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
                        animated:YES completion:nil];
 }
 
-- (IBAction)useCamera:(id)sender {
-}
-
 #pragma mark -
 #pragma mark UIImagePickerControllerDelegate
 
@@ -297,56 +324,62 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     [self dismissViewControllerAnimated:YES completion:nil];
     
     if ([mediaType isEqualToString:(NSString *)kUTTypeImage]) {
-        //UIImage *image = info[UIImagePickerControllerOriginalImage];
-        //_imageView.image = image;
         
-        void (^ALAssetsLibraryAssetForURLResultBlock)(ALAsset *) = ^(ALAsset *asset)
-        {
-            [_imageView setImage:[UIImage imageWithCGImage:[asset aspectRatioThumbnail]]];
-            [_imageView setContentMode:UIViewContentModeScaleAspectFit];
-            CLLocation *location = [asset valueForProperty:ALAssetPropertyLocation];
-            if (!location) {
-                UIAlertView *noLocationAlert = [[UIAlertView alloc] initWithTitle:@"No location data." message:@"Click on Set Location below to set the location of this photo." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-                [noLocationAlert show];
-            }
-            self.coord = location.coordinate;
-            NSDate *retDate = [asset valueForProperty:ALAssetPropertyDate];
+        if (_newPic) {
+            _coord = (currentLocation.coordinate);
+            NSDate *retDate = [NSDate date];
             NSString *retDateString = [_format stringFromDate:retDate];
             _selectedMemory.date = retDate;
             _memoryDate.text = retDateString;
-        };
-        
-        NSURL *assetURL = [info objectForKey:UIImagePickerControllerReferenceURL];
-        ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
-        [library assetForURL:assetURL
-                 resultBlock:ALAssetsLibraryAssetForURLResultBlock
-                failureBlock:^(NSError *error) {
-                }];
-        
-        _selectedMemory.photo = [assetURL absoluteString];
-        _shareButton.enabled = true;
-        //NSLog(@"%@", [assetURL absoluteString]);
-        
-        /*
-         //Writes a small version of selected pic to this app's sandbox.
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        NSString *documentsDirectory = [paths objectAtIndex:0];
-        NSString *appendPic = [NSString stringWithFormat:@"%@.png", [NSDate date]];
-        NSData *data = UIImagePNGRepresentation(image);
-        NSString *tmpPathToFile = [[NSString alloc] initWithString:[NSString stringWithFormat:@"%@/%@",documentsDirectory,appendPic]];
-        self.selectedMemory.photo = tmpPathToFile;
-        if([data writeToFile:tmpPathToFile atomically:YES]){
-            //NSLog(@"Success");
+            
+            
+            UIImage *image = info[UIImagePickerControllerOriginalImage];
+            _imageView.image = image;
+            CGImageRef imageRef = image.CGImage;
+            
+            ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+            [library writeImageToSavedPhotosAlbum:imageRef metadata:[info objectForKey:UIImagePickerControllerMediaMetadata] completionBlock:^(NSURL *assetURL,NSError *error){
+                if(error == nil)
+                {
+                    [self setRetreivedMemory:assetURL];
+                    UIAlertView *alertView=[[UIAlertView alloc] initWithTitle:nil message:@"Save success!" delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+                    [alertView show];
+                }
+                else
+                {
+                    UIAlertView *alertView=[[UIAlertView alloc] initWithTitle:nil message:@"Save failure!" delegate:nil cancelButtonTitle:@"Okay" otherButtonTitles:nil];
+                    NSLog(@"writeImage error: %@", error);
+                    [alertView show];
+                }
+            }];
+            
+        } else {
+            
+            void (^ALAssetsLibraryAssetForURLResultBlock)(ALAsset *) = ^(ALAsset *asset)
+            {
+                [_imageView setImage:[UIImage imageWithCGImage:[asset aspectRatioThumbnail]]];
+                [_imageView setContentMode:UIViewContentModeScaleAspectFit];
+                CLLocation *location = [asset valueForProperty:ALAssetPropertyLocation];
+                if (!location) {
+                    UIAlertView *noLocationAlert = [[UIAlertView alloc] initWithTitle:@"No location data." message:@"Click on Set Location below to set the location of this photo." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+                    [noLocationAlert show];
+                }
+                self.coord = location.coordinate;
+                NSDate *retDate = [asset valueForProperty:ALAssetPropertyDate];
+                NSString *retDateString = [_format stringFromDate:retDate];
+                _selectedMemory.date = retDate;
+                _memoryDate.text = retDateString;
+            };
+            
+            NSURL *assetURL = [info objectForKey:UIImagePickerControllerReferenceURL];
+            ALAssetsLibrary *library = [[ALAssetsLibrary alloc] init];
+            [library assetForURL:assetURL
+                     resultBlock:ALAssetsLibraryAssetForURLResultBlock
+                    failureBlock:^(NSError *error) {
+                    }];
+            [self setRetreivedMemory:assetURL];
+            
         }
-        else{
-            NSLog(@"Failed to write file");
-        }
-        if (_newPic)
-            UIImageWriteToSavedPhotosAlbum(image,
-                                           self,
-                                           @selector(image:finishedSavingWithError:contextInfo:),
-                                           nil);
-         */
         
     }
     else if ([mediaType isEqualToString:(NSString *)kUTTypeMovie])
@@ -355,22 +388,33 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     }
 }
 
--(void)image:(UIImage *)image finishedSavingWithError:(NSError *)error contextInfo:(void *)contextInfo
-{
-    if (error) {
-        UIAlertView *alert = [[UIAlertView alloc]
-                              initWithTitle: @"Save failed"
-                              message: @"Failed to save image"
-                              delegate: nil
-                              cancelButtonTitle:@"OK"
-                              otherButtonTitles:nil];
-        [alert show];
-    }
+-(void)setRetreivedMemory:(NSURL *)assetURL {
+    _selectedMemory.photo = [assetURL absoluteString];
+    _shareButton.enabled = true;
 }
 
 -(void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+#pragma mark - CLLocationManagerDelegate
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    NSLog(@"didFailWithError: %@", error);
+    UIAlertView *errorAlert = [[UIAlertView alloc]
+                               initWithTitle:@"Error" message:@"Failed to Get Your Location" delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [errorAlert show];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
+{
+    NSLog(@"didUpdateToLocation: %@", newLocation);
+    currentLocation = newLocation;
+    
+    [locationManager stopUpdatingLocation];
+}
+
 
 @end

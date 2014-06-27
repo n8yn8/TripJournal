@@ -349,9 +349,9 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="5Sg-kp-phC">
-                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="Jtd-vi-5fQ">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="373-Zs-8BB">
                             <connections>
-                                <segue destination="DO5-js-bEu" kind="unwind" unwindAction="unwindFromPlaceToQuick:" id="wo2-SJ-u6m"/>
+                                <segue destination="DO5-js-bEu" kind="unwind" unwindAction="backToTrip:" id="OD4-EQ-qew"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -361,7 +361,7 @@
             </objects>
             <point key="canvasLocation" x="726" y="-1063"/>
         </scene>
-        <!--Quick Trip Table View Controller-->
+        <!--Quick Trip Table View Controller - Select Trip-->
         <scene sceneID="Bsk-kg-yEk">
             <objects>
                 <tableViewController id="KHl-Zj-4fE" customClass="QuickTripTableViewController" sceneMemberID="viewController">
@@ -394,7 +394,7 @@
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
-                                    <segue destination="fdX-hA-ndT" kind="modal" id="t8r-fH-t5i"/>
+                                    <segue destination="fdX-hA-ndT" kind="modal" identifier="tripSelected" id="t8r-fH-t5i"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -403,10 +403,10 @@
                             <outlet property="delegate" destination="KHl-Zj-4fE" id="7B4-an-JEd"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="nz4-Bn-b0w">
+                    <navigationItem key="navigationItem" title="Select Trip" id="nz4-Bn-b0w">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="FKB-cP-XWu">
                             <connections>
-                                <segue destination="Dxc-p1-qa3" kind="unwind" unwindAction="unwindFromTripToQuick:" id="sXk-Kx-SEY"/>
+                                <segue destination="Dxc-p1-qa3" kind="unwind" unwindAction="cancelSelectionUnwind:" id="mtj-NQ-WOc"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -711,7 +711,7 @@
                                 <items>
                                     <barButtonItem systemItem="camera" id="Wnc-Zf-4RX">
                                         <connections>
-                                            <action selector="useCameraRoll:" destination="5Fm-HM-DlW" id="zfB-1n-0xe"/>
+                                            <action selector="showActionSheet:" destination="5Fm-HM-DlW" id="CHv-oy-8rO"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="LAZ-sp-9Cr"/>
@@ -727,7 +727,7 @@
                                         </connections>
                                     </barButtonItem>
                                 </items>
-                                <color key="tintColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="barTintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </toolbar>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2gU-yB-Xv4">
                                 <rect key="frame" x="20" y="483" width="51" height="31"/>

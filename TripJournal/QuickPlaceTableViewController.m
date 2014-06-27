@@ -31,6 +31,7 @@ NSMutableArray *placesJournal;
 {
     [TestFlight passCheckpoint:@"QuickAdd Place"];
     [super viewDidLoad];
+    self.navigationItem.title = _selectedTrip.name;
     
     placesJournal = [[TripsDatabase database] placesJournal: [NSNumber numberWithLongLong:_selectedTrip.uniqueId]];
     NSLog(@"QuickPlace tripId = %lld", _selectedTrip.uniqueId);

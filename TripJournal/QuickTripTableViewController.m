@@ -124,13 +124,18 @@ NSMutableArray *tripsJournal;
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    NSIndexPath *selectedIndexPath = [self.tableView indexPathForSelectedRow];
-    _selectedTrip = [tripsJournal objectAtIndex:selectedIndexPath.row];
-    NSLog(@"Selected Trip name = %@", _selectedTrip.name );
-    NSLog(@"prepareForSegue tripId = %lld", _selectedTrip.uniqueId);
-    UINavigationController *navigationController = segue.destinationViewController;
-    QuickPlaceTableViewController *dvc = [[navigationController viewControllers] objectAtIndex:0];
-    dvc.selectedTrip = _selectedTrip;
+    if ([segue.identifier isEqualToString:@"tripSelected"]){
+        NSIndexPath *selectedIndexPath = [self.tableView indexPathForSelectedRow];
+        _selectedTrip = [tripsJournal objectAtIndex:selectedIndexPath.row];
+        NSLog(@"Selected Trip name = %@", _selectedTrip.name );
+        NSLog(@"prepareForSegue tripId = %lld", _selectedTrip.uniqueId);
+        UINavigationController *navigationController = segue.destinationViewController;
+        QuickPlaceTableViewController *dvc = [[navigationController viewControllers] objectAtIndex:0];
+        dvc.selectedTrip = _selectedTrip;
+    }
+}
+
+- (IBAction)backToTrip:(UIStoryboardSegue *)unwindSegue {
 }
 
 
