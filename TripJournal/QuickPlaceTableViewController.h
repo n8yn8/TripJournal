@@ -14,6 +14,6 @@
 
 @property (nonatomic, strong) Trip *selectedTrip;
 @property (nonatomic, strong) Place *selectedPlace;
-- (IBAction)newPlace:(id)sender;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *backButton;
 
 @end

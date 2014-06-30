@@ -18,6 +18,8 @@
 		433E4EB818AB5ECC003FC9AA /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 433E4EB718AB5ECC003FC9AA /* MapKit.framework */; };
 		433E4EBA18AB5ED4003FC9AA /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 433E4EB918AB5ED4003FC9AA /* CoreLocation.framework */; };
 		434DBFE11958C2AC001DCF00 /* FeedbackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 434DBFE01958C2AC001DCF00 /* FeedbackViewController.m */; };
+		434DBFE4195E4117001DCF00 /* NewTripViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 434DBFE3195E4117001DCF00 /* NewTripViewController.m */; };
+		434DBFE7195E412F001DCF00 /* NewPlaceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 434DBFE6195E412F001DCF00 /* NewPlaceViewController.m */; };
 		4358535819083C7000C1A3A9 /* ELCAlbumPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4358534719083C7000C1A3A9 /* ELCAlbumPickerController.m */; };
 		4358535919083C7000C1A3A9 /* ELCAsset.m in Sources */ = {isa = PBXBuildFile; fileRef = 4358534919083C7000C1A3A9 /* ELCAsset.m */; };
 		4358535A19083C7000C1A3A9 /* ELCAssetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 4358534B19083C7000C1A3A9 /* ELCAssetCell.m */; };
@@ -88,6 +90,10 @@
 		433E4EB918AB5ED4003FC9AA /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		434DBFDF1958C2AC001DCF00 /* FeedbackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeedbackViewController.h; sourceTree = "<group>"; };
 		434DBFE01958C2AC001DCF00 /* FeedbackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeedbackViewController.m; sourceTree = "<group>"; };
+		434DBFE2195E4117001DCF00 /* NewTripViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewTripViewController.h; sourceTree = "<group>"; };
+		434DBFE3195E4117001DCF00 /* NewTripViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewTripViewController.m; sourceTree = "<group>"; };
+		434DBFE5195E412F001DCF00 /* NewPlaceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewPlaceViewController.h; sourceTree = "<group>"; };
+		434DBFE6195E412F001DCF00 /* NewPlaceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewPlaceViewController.m; sourceTree = "<group>"; };
 		4358534619083C7000C1A3A9 /* ELCAlbumPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAlbumPickerController.h; sourceTree = "<group>"; };
 		4358534719083C7000C1A3A9 /* ELCAlbumPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELCAlbumPickerController.m; sourceTree = "<group>"; };
 		4358534819083C7000C1A3A9 /* ELCAsset.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELCAsset.h; sourceTree = "<group>"; };
@@ -284,6 +290,10 @@
 				43C952AC1921EF1D002B3CB6 /* PageCoverViewController.m */,
 				434DBFDF1958C2AC001DCF00 /* FeedbackViewController.h */,
 				434DBFE01958C2AC001DCF00 /* FeedbackViewController.m */,
+				434DBFE2195E4117001DCF00 /* NewTripViewController.h */,
+				434DBFE3195E4117001DCF00 /* NewTripViewController.m */,
+				434DBFE5195E412F001DCF00 /* NewPlaceViewController.h */,
+				434DBFE6195E412F001DCF00 /* NewPlaceViewController.m */,
 			);
 			path = TripJournal;
 			sourceTree = "<group>";
@@ -456,6 +466,7 @@
 				43C952AD1921EF1D002B3CB6 /* PageCoverViewController.m in Sources */,
 				439EC68818B4B36500BC6EBA /* Place.m in Sources */,
 				43A9965F18C3BFEA0083F327 /* TripsDatabase.m in Sources */,
+				434DBFE4195E4117001DCF00 /* NewTripViewController.m in Sources */,
 				433E4E9118AB1D5C003FC9AA /* TripJournalCollectionViewController.m in Sources */,
 				4358535B19083C7000C1A3A9 /* ELCAssetTablePicker.m in Sources */,
 				43A413231902E1B900858100 /* QuickPlaceTableViewController.m in Sources */,
@@ -469,6 +480,7 @@
 				4358535819083C7000C1A3A9 /* ELCAlbumPickerController.m in Sources */,
 				439EC68518B4906E00BC6EBA /* Trip.m in Sources */,
 				434DBFE11958C2AC001DCF00 /* FeedbackViewController.m in Sources */,
+				434DBFE7195E412F001DCF00 /* NewPlaceViewController.m in Sources */,
 				439EC68B18B53F8900BC6EBA /* PlacesCollectionHeaderView.m in Sources */,
 				4318AD6918D50D0500D513A5 /* SetLocationViewController.m in Sources */,
 			);

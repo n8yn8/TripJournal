@@ -11,6 +11,7 @@
 #import "Trip.h"
 #import "QuickPlaceTableViewController.h"
 #import "TestFlight.h"
+#import "NewTripViewController.h"
 
 @interface QuickTripTableViewController ()
 
@@ -132,14 +133,22 @@ NSMutableArray *tripsJournal;
         UINavigationController *navigationController = segue.destinationViewController;
         QuickPlaceTableViewController *dvc = [[navigationController viewControllers] objectAtIndex:0];
         dvc.selectedTrip = _selectedTrip;
+    } else if ([segue.identifier isEqualToString:@"newTrip"]){
+        Trip *newTrip = [[Trip alloc] init];
+        UINavigationController *navigationController = segue.destinationViewController;
+        NewTripViewController *dvc = [[navigationController viewControllers] objectAtIndex:0];
+        dvc.trip = newTrip;
     }
 }
 
 - (IBAction)backToTrip:(UIStoryboardSegue *)unwindSegue {
 }
 
-
-- (IBAction)newTrip:(id)sender {
-    
+- (IBAction)newTripMade:(UIStoryboardSegue *)unwindSegue {
+    NewTripViewController *source = [unwindSegue sourceViewController];
+    if (source.isTripSaved) {
+        [tripsJournal addObject:source.trip];
+        [self.tableView reloadData];
+    }
 }
 @end
