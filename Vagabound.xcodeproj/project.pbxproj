@@ -54,6 +54,7 @@
 		43A0A225190243F20005CEB9 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 43A0A224190243F20005CEB9 /* libz.dylib */; };
 		43A413231902E1B900858100 /* QuickPlaceTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A413221902E1B900858100 /* QuickPlaceTableViewController.m */; };
 		43A413261902E1CC00858100 /* QuickTripTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A413251902E1CC00858100 /* QuickTripTableViewController.m */; };
+		43A52D211969B279000385F7 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43A52D201969B279000385F7 /* MessageUI.framework */; };
 		43A9965C18C3B56E0083F327 /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 43A9965B18C3B56E0083F327 /* libsqlite3.dylib */; };
 		43A9965F18C3BFEA0083F327 /* TripsDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A9965E18C3BFEA0083F327 /* TripsDatabase.m */; };
 		43B2F017190C715100A874F3 /* QuickAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B2F016190C715100A874F3 /* QuickAddViewController.m */; };
@@ -149,6 +150,7 @@
 		43A413221902E1B900858100 /* QuickPlaceTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuickPlaceTableViewController.m; sourceTree = "<group>"; };
 		43A413241902E1CC00858100 /* QuickTripTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuickTripTableViewController.h; sourceTree = "<group>"; };
 		43A413251902E1CC00858100 /* QuickTripTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuickTripTableViewController.m; sourceTree = "<group>"; };
+		43A52D201969B279000385F7 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		43A9965B18C3B56E0083F327 /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
 		43A9965D18C3BFEA0083F327 /* TripsDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TripsDatabase.h; sourceTree = "<group>"; };
 		43A9965E18C3BFEA0083F327 /* TripsDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TripsDatabase.m; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43A52D211969B279000385F7 /* MessageUI.framework in Frameworks */,
 				43A0A225190243F20005CEB9 /* libz.dylib in Frameworks */,
 				43A0A223190243C80005CEB9 /* libTestFlight.a in Frameworks */,
 				4326AA3218CA998E008ED1E2 /* AssetsLibrary.framework in Frameworks */,
@@ -244,6 +247,7 @@
 		4370B7F41898D38F00907C5D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				43A52D201969B279000385F7 /* MessageUI.framework */,
 				43A0A224190243F20005CEB9 /* libz.dylib */,
 				4326AA3118CA998E008ED1E2 /* AssetsLibrary.framework */,
 				4376228D18C5597A002FD0D7 /* MobileCoreServices.framework */,

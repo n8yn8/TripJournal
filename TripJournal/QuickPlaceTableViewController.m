@@ -140,7 +140,7 @@ NSMutableArray *placesJournal;
     }
 }
 
-- (IBAction)newTripMade:(UIStoryboardSegue *)unwindSegue {
+- (IBAction)newPlaceMade:(UIStoryboardSegue *)unwindSegue {
     NewPlaceViewController *source = [unwindSegue sourceViewController];
     if (source.isPlaceSaved) {
         [placesJournal addObject:source.place];

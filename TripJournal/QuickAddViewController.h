@@ -27,11 +27,11 @@
 
 @property (nonatomic, strong) Trip *selectedTrip;
 @property (strong, nonatomic) IBOutlet UILabel *tripName;
-@property (strong, nonatomic) IBOutlet UILabel *tripDescription;
+
 
 @property (nonatomic, strong) Place *selectedPlace;
 @property (strong, nonatomic) IBOutlet UILabel *placeName;
-@property (strong, nonatomic) IBOutlet UILabel *placeDescription;
+
 
 - (IBAction)unwindFromPlaceToQuick:(UIStoryboardSegue *)unwindSegue;
 @property (strong, nonatomic) IBOutlet UIButton *saveButton;

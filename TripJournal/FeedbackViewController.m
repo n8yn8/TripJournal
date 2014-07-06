@@ -51,24 +51,36 @@
  */
 
 - (IBAction)sendFeedback:(id)sender {
-    [TestFlight submitFeedback:_feedback.text];
-    _feedback.text = @"";
-    _result.text = @"Feedback sent!";
+    NSLog(@"sendFeedback");
+    MFMailComposeViewController* controller = [[MFMailComposeViewController alloc] init];
+    controller.mailComposeDelegate = self;
+    [controller setSubject:@"Vagabound"];
+    [controller setToRecipients:@[@"natecondell@gmail.com"]];
+    [self presentViewController:controller animated:YES completion:NULL];
 }
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-    
-    UITouch *touch = [[event allTouches] anyObject];
-    if ([_feedback isFirstResponder] && [touch view] != _feedback) {
-        [_feedback resignFirstResponder];
-    }
-    [super touchesBegan:touches withEvent:event];
-}
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
+- (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
 {
-    [textField resignFirstResponder];
-    return YES;
+    switch (result)
+    {
+        case MFMailComposeResultCancelled:
+            NSLog(@"Mail cancelled");
+            break;
+        case MFMailComposeResultSaved:
+            NSLog(@"Mail saved");
+            break;
+        case MFMailComposeResultSent:
+            NSLog(@"Mail sent");
+            break;
+        case MFMailComposeResultFailed:
+            NSLog(@"Mail sent failure: %@", [error localizedDescription]);
+            break;
+        default:
+            break;
+    }
+    
+    // Close the Mail Interface
+    [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
 @end

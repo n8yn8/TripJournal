@@ -7,10 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MessageUI/MessageUI.h>
 
-@interface FeedbackViewController : UIViewController
+@interface FeedbackViewController : UIViewController <MFMailComposeViewControllerDelegate>
 - (IBAction)sendFeedback:(id)sender;
-@property (strong, nonatomic) IBOutlet UITextView *feedback;
-@property (strong, nonatomic) IBOutlet UILabel *result;
-
 @end
