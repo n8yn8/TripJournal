@@ -8,6 +8,20 @@
 
 #import "TripJournalAppDelegate.h"
 #import "TestFlight.h"
+#import "GAI.h"
+#import "GAIDictionaryBuilder.h"
+
+/** Google Analytics configuration constants **/
+static NSString *const kGaPropertyId = @"UA-51347872-1"; // Placeholder property ID.
+static NSString *const kTrackingPreferenceKey = @"allowTracking";
+static BOOL const kGaDryRun = NO;
+static int const kGaDispatchPeriod = 30;
+
+@interface TripJournalAppDelegate ()
+
+- (void)initializeGoogleAnalytics;
+
+@end
 
 @implementation TripJournalAppDelegate
 
@@ -15,12 +29,25 @@
 {
     [TestFlight takeOff:@"5d93fe7c-881d-4bdb-96d2-7e491cece813"];
     
+    [self initializeGoogleAnalytics];
+    
     UIPageControl *pageControl = [UIPageControl appearance];
     pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
     pageControl.currentPageIndicatorTintColor = [UIColor blackColor];
     //pageControl.backgroundColor = [UIColor whiteColor];
     
     return YES;
+}
+
+- (void)initializeGoogleAnalytics {
+    
+    [[GAI sharedInstance] setDispatchInterval:kGaDispatchPeriod];
+    [[GAI sharedInstance] setDryRun:kGaDryRun];
+    self.tracker = [[GAI sharedInstance] trackerWithTrackingId:kGaPropertyId];
+    // Optional: automatically send uncaught exceptions to Google Analytics.
+    [GAI sharedInstance].trackUncaughtExceptions = YES;
+    // Optional: set Logger to VERBOSE for debug information.
+    [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelVerbose];
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -43,6 +70,9 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    
+    [GAI sharedInstance].optOut =
+    ![[NSUserDefaults standardUserDefaults] boolForKey:kTrackingPreferenceKey];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

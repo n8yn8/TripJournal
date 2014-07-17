@@ -11,5 +11,6 @@
 @interface TripJournalAppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+@property (strong, nonatomic) id<GAITracker> tracker;
 
 @end

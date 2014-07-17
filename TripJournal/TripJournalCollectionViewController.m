@@ -13,6 +13,10 @@
 #import "TripsDatabase.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "TestFlight.h"
+#import "GAI.h"
+#import "GAIFields.h"
+#import "GAITracker.h"
+#import "GAIDictionaryBuilder.h"
 #import "PageCoverViewController.h"
 
 @interface TripJournalCollectionViewController ()
@@ -38,6 +42,13 @@ NSIndexPath *deletePath;
     [TestFlight passCheckpoint:@"Journal View"];
     [super viewDidLoad];
     NSLog(@"viewDidLoad");
+    
+    // This screen name value will remain set on the tracker and sent with
+    // hits until it is set to a new value or to nil.
+    [[GAI sharedInstance].defaultTracker set:kGAIScreenName value:@"Home Screen"];
+    // Send the screen view.
+    [[GAI sharedInstance].defaultTracker
+     send:[[GAIDictionaryBuilder createAppView] build]];
     
     self.tripsJournal = [TripsDatabase database].tripsJournal;
     

@@ -31,6 +31,10 @@
 		4358536019083C7000C1A3A9 /* Overlay.png in Resources */ = {isa = PBXBuildFile; fileRef = 4358535619083C7000C1A3A9 /* Overlay.png */; };
 		4358536119083C7000C1A3A9 /* Overlay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4358535719083C7000C1A3A9 /* Overlay@2x.png */; };
 		4358536319083D6900C1A3A9 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 4358536219083D6900C1A3A9 /* README.md */; };
+		436E8BB31978694D00B2F923 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 436E8BB21978694D00B2F923 /* libGoogleAnalyticsServices.a */; };
+		436E8BB51978699E00B2F923 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 436E8BB41978699E00B2F923 /* AdSupport.framework */; };
+		436E8BB7197869A900B2F923 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 436E8BB6197869A900B2F923 /* CoreData.framework */; };
+		436E8BB9197869B400B2F923 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 436E8BB8197869B400B2F923 /* SystemConfiguration.framework */; };
 		4370B7F61898D38F00907C5D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4370B7F51898D38F00907C5D /* Foundation.framework */; };
 		4370B7F81898D38F00907C5D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4370B7F71898D38F00907C5D /* CoreGraphics.framework */; };
 		4370B7FA1898D38F00907C5D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4370B7F91898D38F00907C5D /* UIKit.framework */; };
@@ -113,6 +117,16 @@
 		4358535619083C7000C1A3A9 /* Overlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Overlay.png; sourceTree = "<group>"; };
 		4358535719083C7000C1A3A9 /* Overlay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Overlay@2x.png"; sourceTree = "<group>"; };
 		4358536219083D6900C1A3A9 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
+		436E8BAC1978693500B2F923 /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAI.h; path = ../../Development/GoogleAnalyticsServicesiOS_3.08/GoogleAnalytics/Library/GAI.h; sourceTree = "<group>"; };
+		436E8BAD1978693500B2F923 /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAIDictionaryBuilder.h; path = ../../Development/GoogleAnalyticsServicesiOS_3.08/GoogleAnalytics/Library/GAIDictionaryBuilder.h; sourceTree = "<group>"; };
+		436E8BAE1978693500B2F923 /* GAIFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAIFields.h; path = ../../Development/GoogleAnalyticsServicesiOS_3.08/GoogleAnalytics/Library/GAIFields.h; sourceTree = "<group>"; };
+		436E8BAF1978693500B2F923 /* GAILogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAILogger.h; path = ../../Development/GoogleAnalyticsServicesiOS_3.08/GoogleAnalytics/Library/GAILogger.h; sourceTree = "<group>"; };
+		436E8BB01978693500B2F923 /* GAITrackedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAITrackedViewController.h; path = ../../Development/GoogleAnalyticsServicesiOS_3.08/GoogleAnalytics/Library/GAITrackedViewController.h; sourceTree = "<group>"; };
+		436E8BB11978693500B2F923 /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAITracker.h; path = ../../Development/GoogleAnalyticsServicesiOS_3.08/GoogleAnalytics/Library/GAITracker.h; sourceTree = "<group>"; };
+		436E8BB21978694D00B2F923 /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGoogleAnalyticsServices.a; path = ../../Development/GoogleAnalyticsServicesiOS_3.08/libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
+		436E8BB41978699E00B2F923 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
+		436E8BB6197869A900B2F923 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		436E8BB8197869B400B2F923 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		4370B7F21898D38F00907C5D /* Vagabound.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vagabound.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4370B7F51898D38F00907C5D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		4370B7F71898D38F00907C5D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -165,6 +179,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				436E8BB9197869B400B2F923 /* SystemConfiguration.framework in Frameworks */,
+				436E8BB7197869A900B2F923 /* CoreData.framework in Frameworks */,
+				436E8BB51978699E00B2F923 /* AdSupport.framework in Frameworks */,
 				43A52D211969B279000385F7 /* MessageUI.framework in Frameworks */,
 				43A0A225190243F20005CEB9 /* libz.dylib in Frameworks */,
 				43A0A223190243C80005CEB9 /* libTestFlight.a in Frameworks */,
@@ -176,6 +193,7 @@
 				4370B7F81898D38F00907C5D /* CoreGraphics.framework in Frameworks */,
 				4370B7FA1898D38F00907C5D /* UIKit.framework in Frameworks */,
 				4370B7F61898D38F00907C5D /* Foundation.framework in Frameworks */,
+				436E8BB31978694D00B2F923 /* libGoogleAnalyticsServices.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -225,6 +243,20 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		436E8BAB197868F700B2F923 /* Google Analytics */ = {
+			isa = PBXGroup;
+			children = (
+				436E8BB21978694D00B2F923 /* libGoogleAnalyticsServices.a */,
+				436E8BAC1978693500B2F923 /* GAI.h */,
+				436E8BAD1978693500B2F923 /* GAIDictionaryBuilder.h */,
+				436E8BAE1978693500B2F923 /* GAIFields.h */,
+				436E8BAF1978693500B2F923 /* GAILogger.h */,
+				436E8BB01978693500B2F923 /* GAITrackedViewController.h */,
+				436E8BB11978693500B2F923 /* GAITracker.h */,
+			);
+			name = "Google Analytics";
+			sourceTree = "<group>";
+		};
 		4370B7E91898D38F00907C5D = {
 			isa = PBXGroup;
 			children = (
@@ -247,6 +279,9 @@
 		4370B7F41898D38F00907C5D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				436E8BB8197869B400B2F923 /* SystemConfiguration.framework */,
+				436E8BB6197869A900B2F923 /* CoreData.framework */,
+				436E8BB41978699E00B2F923 /* AdSupport.framework */,
 				43A52D201969B279000385F7 /* MessageUI.framework */,
 				43A0A224190243F20005CEB9 /* libz.dylib */,
 				4326AA3118CA998E008ED1E2 /* AssetsLibrary.framework */,
@@ -305,6 +340,7 @@
 		4370B7FC1898D38F00907C5D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				436E8BAB197868F700B2F923 /* Google Analytics */,
 				4358534519083C7000C1A3A9 /* ELCImagePicker */,
 				433E4EB118AB5D0C003FC9AA /* JournalCollectionHeaderView.h */,
 				433E4EB218AB5D0C003FC9AA /* JournalCollectionHeaderView.m */,
@@ -619,6 +655,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/TripJournal",
+					/Users/Nate/Documents/Development/GoogleAnalyticsServicesiOS_3.08,
 				);
 				PRODUCT_NAME = Vagabound;
 				PROVISIONING_PROFILE = "9A45E465-0041-47C0-A43E-17DB014E606F";
@@ -639,6 +676,7 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/TripJournal",
+					/Users/Nate/Documents/Development/GoogleAnalyticsServicesiOS_3.08,
 				);
 				PRODUCT_NAME = Vagabound;
 				PROVISIONING_PROFILE = "9A45E465-0041-47C0-A43E-17DB014E606F";
