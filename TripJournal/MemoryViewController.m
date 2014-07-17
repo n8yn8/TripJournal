@@ -10,7 +10,6 @@
 #import "TripsDatabase.h"
 #import "SetLocationViewController.h"
 #import <AssetsLibrary/AssetsLibrary.h>
-#import "TestFlight.h"
 
 @interface MemoryViewController ()
 
@@ -45,8 +44,6 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
-    
-    [TestFlight passCheckpoint:@"Memory View"];
     
     _format = [[NSDateFormatter alloc] init];
     [_format setDateStyle:NSDateFormatterMediumStyle];

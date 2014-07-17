@@ -11,7 +11,6 @@
 #import "QuickPlaceTableViewController.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "TripsDatabase.h"
-#import "TestFlight.h"
 
 @interface QuickAddViewController ()
 
@@ -38,7 +37,6 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [TestFlight passCheckpoint:@"QuickAdd View"];
     
     _format = [[NSDateFormatter alloc] init];
     [_format setDateStyle:NSDateFormatterMediumStyle];

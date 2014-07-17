@@ -7,7 +7,6 @@
 //
 
 #import "FeedbackViewController.h"
-#import "TestFlight.h"
 
 @interface FeedbackViewController ()
 
@@ -28,7 +27,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [TestFlight passCheckpoint:@"Feedback View"];
     NSLog(@"viewDidLoad FeedbackViewController");
     // Do any additional setup after loading the view.
 }

@@ -7,7 +7,6 @@
 //
 
 #import "TripJournalAppDelegate.h"
-#import "TestFlight.h"
 #import "GAI.h"
 #import "GAIDictionaryBuilder.h"
 
@@ -27,8 +26,6 @@ static int const kGaDispatchPeriod = 30;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [TestFlight takeOff:@"5d93fe7c-881d-4bdb-96d2-7e491cece813"];
-    
     [self initializeGoogleAnalytics];
     
     UIPageControl *pageControl = [UIPageControl appearance];

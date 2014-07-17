@@ -8,7 +8,6 @@
 
 #import "SetLocationViewController.h"
 #import "MemoryViewController.h"
-#import "TestFlight.h"
 
 static NSString *kCellIdentifier = @"cellIdentifier";
 
@@ -31,8 +30,6 @@ static NSString *kCellIdentifier = @"cellIdentifier";
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    [TestFlight passCheckpoint:@"Setting a location"];
     
     _map.showsUserLocation = YES;
     //if (_latlng.latitude != 0 && _latlng.longitude != 0) {
@@ -65,7 +62,6 @@ static NSString *kCellIdentifier = @"cellIdentifier";
 
 - (void)startSearch:(NSString *)searchString
 {
-    [TestFlight passCheckpoint:@"started a search"];
     // Create and initialize a search request object.
     MKLocalSearchRequest *request = [[MKLocalSearchRequest alloc] init];
     request.naturalLanguageQuery = searchString;
@@ -155,8 +151,6 @@ static NSString *kCellIdentifier = @"cellIdentifier";
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
 {
     _latlng = view.annotation.coordinate;
-    [TestFlight passCheckpoint:@"AnnotationView CalloutAccessoryControlTapped"];
-    
     //[self dismissViewControllerAnimated:YES completion:nil];
     
 }

@@ -8,7 +8,6 @@
 
 #import "QuickPlaceTableViewController.h"
 #import "TripsDatabase.h"
-#import "TestFlight.h"
 #import "NewPlaceViewController.h"
 
 @interface QuickPlaceTableViewController ()
@@ -30,7 +29,6 @@ NSMutableArray *placesJournal;
 
 - (void)viewDidLoad
 {
-    [TestFlight passCheckpoint:@"QuickAdd Place"];
     [super viewDidLoad];
     self.navigationItem.title = _selectedTrip.name;
     

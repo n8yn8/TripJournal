@@ -10,7 +10,6 @@
 #import "TripsDatabase.h"
 #import "Trip.h"
 #import "QuickPlaceTableViewController.h"
-#import "TestFlight.h"
 #import "NewTripViewController.h"
 
 @interface QuickTripTableViewController ()
@@ -33,7 +32,6 @@ NSMutableArray *tripsJournal;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [TestFlight passCheckpoint:@"QuickAdd Trip"];
     
     tripsJournal = [TripsDatabase database].tripsJournal;
     
