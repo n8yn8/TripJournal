@@ -7,6 +7,10 @@
 //
 
 #import "FeedbackViewController.h"
+#import "GAI.h"
+#import "GAIFields.h"
+#import "GAITracker.h"
+#import "GAIDictionaryBuilder.h"
 
 @interface FeedbackViewController ()
 
@@ -29,6 +33,17 @@
     [super viewDidLoad];
     NSLog(@"viewDidLoad FeedbackViewController");
     // Do any additional setup after loading the view.
+    
+    // This screen name value will remain set on the tracker and sent with
+    // hits until it is set to a new value or to nil.
+    [[GAI sharedInstance].defaultTracker set:kGAIScreenName value:@"Feedback"];
+    // Send the screen view.
+    [[GAI sharedInstance].defaultTracker
+     send:[[GAIDictionaryBuilder createScreenView] build]];
+    /*
+    [_allowAnalytics setOn:[[NSUserDefaults standardUserDefaults] boolForKey:@"allowTracking"]];
+    NSLog(@"allowTracking read as %hhd", [[NSUserDefaults standardUserDefaults] boolForKey:@"allowTracking"]);
+     */
 }
 
 - (void)didReceiveMemoryWarning
@@ -43,10 +58,10 @@
  // In a storyboard-based application, you will often want to do a little preparation before navigation
  - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
  {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
+     
  }
  */
+
 
 - (IBAction)sendFeedback:(id)sender {
     NSLog(@"sendFeedback");
@@ -81,4 +96,9 @@
     [self dismissViewControllerAnimated:YES completion:NULL];
 }
 
+/*- (IBAction)toggleAllowAnalytics:(id)sender {
+    NSLog(@"toggleAllowAnalytics");
+    [[NSUserDefaults standardUserDefaults] setBool:_allowAnalytics.isOn forKey:@"allowTracking"];
+    NSLog(@"allowTracking saved as %hhd", [[NSUserDefaults standardUserDefaults] boolForKey:@"allowTracking"]);
+}*/
 @end

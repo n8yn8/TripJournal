@@ -46,7 +46,7 @@ NSIndexPath *deletePath;
     [[GAI sharedInstance].defaultTracker set:kGAIScreenName value:@"Home Screen"];
     // Send the screen view.
     [[GAI sharedInstance].defaultTracker
-     send:[[GAIDictionaryBuilder createAppView] build]];
+     send:[[GAIDictionaryBuilder createScreenView] build]];
     
     self.tripsJournal = [TripsDatabase database].tripsJournal;
     

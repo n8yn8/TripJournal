@@ -12,9 +12,8 @@
 
 /** Google Analytics configuration constants **/
 static NSString *const kGaPropertyId = @"UA-51347872-1"; // Placeholder property ID.
-static NSString *const kTrackingPreferenceKey = @"allowTracking";
 static BOOL const kGaDryRun = NO;
-static int const kGaDispatchPeriod = 30;
+static int const kGaDispatchPeriod = 20;
 
 @interface TripJournalAppDelegate ()
 
@@ -68,8 +67,8 @@ static int const kGaDispatchPeriod = 30;
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     
-    [GAI sharedInstance].optOut =
-    ![[NSUserDefaults standardUserDefaults] boolForKey:kTrackingPreferenceKey];
+    //[GAI sharedInstance].optOut = ![[NSUserDefaults standardUserDefaults] boolForKey:@"allowTracking"];
+    
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

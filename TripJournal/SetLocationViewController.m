@@ -8,6 +8,10 @@
 
 #import "SetLocationViewController.h"
 #import "MemoryViewController.h"
+#import "GAI.h"
+#import "GAIFields.h"
+#import "GAITracker.h"
+#import "GAIDictionaryBuilder.h"
 
 static NSString *kCellIdentifier = @"cellIdentifier";
 
@@ -30,6 +34,13 @@ static NSString *kCellIdentifier = @"cellIdentifier";
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    // This screen name value will remain set on the tracker and sent with
+    // hits until it is set to a new value or to nil.
+    [[GAI sharedInstance].defaultTracker set:kGAIScreenName value:@"SetLocationView"];
+    // Send the screen view.
+    [[GAI sharedInstance].defaultTracker
+     send:[[GAIDictionaryBuilder createScreenView] build]];
     
     _map.showsUserLocation = YES;
     //if (_latlng.latitude != 0 && _latlng.longitude != 0) {

@@ -9,6 +9,10 @@
 #import "TripCollectionViewController.h"
 #import "TripsDatabase.h"
 #import <AssetsLibrary/AssetsLibrary.h>
+#import "GAI.h"
+#import "GAIFields.h"
+#import "GAITracker.h"
+#import "GAIDictionaryBuilder.h"
 
 @interface TripCollectionViewController ()
 
@@ -41,6 +45,13 @@ NSIndexPath *deletePath;
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    // This screen name value will remain set on the tracker and sent with
+    // hits until it is set to a new value or to nil.
+    [[GAI sharedInstance].defaultTracker set:kGAIScreenName value:@"TripCollectionView"];
+    // Send the screen view.
+    [[GAI sharedInstance].defaultTracker
+     send:[[GAIDictionaryBuilder createScreenView] build]];
     
     self.placesJournal = [[TripsDatabase database] placesJournal: [NSNumber numberWithLongLong:_selectedTrip.uniqueId]];
     

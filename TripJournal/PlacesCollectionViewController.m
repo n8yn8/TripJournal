@@ -9,6 +9,10 @@
 #import "PlacesCollectionViewController.h"
 #import "TripsDatabase.h"
 #import <AssetsLibrary/AssetsLibrary.h>
+#import "GAI.h"
+#import "GAIFields.h"
+#import "GAITracker.h"
+#import "GAIDictionaryBuilder.h"
 
 @interface PlacesCollectionViewController ()
 
@@ -34,6 +38,13 @@ NSIndexPath *deletePath;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    // This screen name value will remain set on the tracker and sent with
+    // hits until it is set to a new value or to nil.
+    [[GAI sharedInstance].defaultTracker set:kGAIScreenName value:@"PlacesCollectionView"];
+    // Send the screen view.
+    [[GAI sharedInstance].defaultTracker
+     send:[[GAIDictionaryBuilder createScreenView] build]];
     
     self.memoriesJournal = [[TripsDatabase database] memoriesJournal:[NSNumber numberWithLongLong:_selectedPlace.uniqueId]];
     _chosenIndex = -1;
