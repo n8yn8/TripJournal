@@ -658,7 +658,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Nathan Condell (Z3X6HD4H5L)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Nathan Condell (752656QTHP)";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TripJournal/Vagabound-Prefix.pch";
 				INFOPLIST_FILE = "TripJournal/Vagabound-Info.plist";

@@ -11,4 +11,6 @@
 
 @interface FeedbackViewController : UIViewController <MFMailComposeViewControllerDelegate>
 - (IBAction)sendFeedback:(id)sender;
+- (IBAction)rateReview:(id)sender;
+- (IBAction)facebook:(id)sender;
 @end

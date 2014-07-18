@@ -72,6 +72,21 @@
     [self presentViewController:controller animated:YES completion:NULL];
 }
 
+- (IBAction)rateReview:(id)sender {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=882999042"]];
+}
+
+- (IBAction)facebook:(id)sender {
+    NSURL *url = [NSURL URLWithString:@"fb://profile/671060982942066"];
+    [[UIApplication sharedApplication] openURL:url];
+    if ([[UIApplication sharedApplication] canOpenURL:url]){
+        [[UIApplication sharedApplication] openURL:url];
+    }
+    else {
+        //Open the url as usual
+    }
+}
+
 - (void) mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
 {
     switch (result)
