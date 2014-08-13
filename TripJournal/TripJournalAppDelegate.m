@@ -11,8 +11,8 @@
 #import "GAIDictionaryBuilder.h"
 
 /** Google Analytics configuration constants **/
-static NSString *const kGaPropertyId = @"UA-51347872-1"; // Placeholder property ID.
-static BOOL const kGaDryRun = NO;
+static NSString *const kGaPropertyId = @"UA-51347872-1";
+static BOOL const kGaDryRun = YES;
 static int const kGaDispatchPeriod = 20;
 
 @interface TripJournalAppDelegate ()

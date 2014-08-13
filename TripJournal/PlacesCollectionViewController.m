@@ -266,11 +266,15 @@ NSIndexPath *deletePath;
             NSIndexPath *index = [indexPaths objectAtIndex:0];
             _chosenIndex = index.item;
             dvc.selectedMemory = [_memoriesJournal objectAtIndex: _chosenIndex];
+            dvc.selectedPlace = self.selectedPlace;
+            dvc.selectedTrip = self.selectedTrip;
             dvc.currentPlaceCover = self.placeCoverImage;
             dvc.currentTripCover = self.tripCoverImage;
         } else if ([segue.identifier isEqualToString:@"NewMemory"]) {
             dvc.selectedMemory = [[Memory alloc] init];
             dvc.selectedMemory.placeId = [NSNumber numberWithLongLong:self.selectedPlace.uniqueId];
+            dvc.selectedPlace = self.selectedPlace;
+            dvc.selectedTrip = self.selectedTrip;
             dvc.currentPlaceCover = self.placeCoverImage;
             dvc.currentTripCover = self.tripCoverImage;
         }

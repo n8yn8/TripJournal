@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4308B7B81993E0AE00534F2D /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4308B7B71993E0AE00534F2D /* libGoogleAnalyticsServices.a */; };
 		4318AD6918D50D0500D513A5 /* SetLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4318AD6818D50D0500D513A5 /* SetLocationViewController.m */; };
 		4326AA3218CA998E008ED1E2 /* AssetsLibrary.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4326AA3118CA998E008ED1E2 /* AssetsLibrary.framework */; };
 		433E4E9118AB1D5C003FC9AA /* TripJournalCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 433E4E9018AB1D5C003FC9AA /* TripJournalCollectionViewController.m */; };
@@ -31,7 +32,6 @@
 		4358536019083C7000C1A3A9 /* Overlay.png in Resources */ = {isa = PBXBuildFile; fileRef = 4358535619083C7000C1A3A9 /* Overlay.png */; };
 		4358536119083C7000C1A3A9 /* Overlay@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4358535719083C7000C1A3A9 /* Overlay@2x.png */; };
 		4358536319083D6900C1A3A9 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 4358536219083D6900C1A3A9 /* README.md */; };
-		436E8BB31978694D00B2F923 /* libGoogleAnalyticsServices.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 436E8BB21978694D00B2F923 /* libGoogleAnalyticsServices.a */; };
 		436E8BB51978699E00B2F923 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 436E8BB41978699E00B2F923 /* AdSupport.framework */; };
 		436E8BB7197869A900B2F923 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 436E8BB6197869A900B2F923 /* CoreData.framework */; };
 		436E8BB9197869B400B2F923 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 436E8BB8197869B400B2F923 /* SystemConfiguration.framework */; };
@@ -62,6 +62,7 @@
 		43A9965F18C3BFEA0083F327 /* TripsDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 43A9965E18C3BFEA0083F327 /* TripsDatabase.m */; };
 		43B2F017190C715100A874F3 /* QuickAddViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43B2F016190C715100A874F3 /* QuickAddViewController.m */; };
 		43C952AD1921EF1D002B3CB6 /* PageCoverViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 43C952AC1921EF1D002B3CB6 /* PageCoverViewController.m */; };
+		43F5F47C197E15C6001467F2 /* Main-iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 43F5F47B197E15C6001467F2 /* Main-iPad.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4308B7AD1993E09700534F2D /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
+		4308B7AE1993E09700534F2D /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIDictionaryBuilder.h; sourceTree = "<group>"; };
+		4308B7AF1993E09700534F2D /* GAIEcommerceFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceFields.h; sourceTree = "<group>"; };
+		4308B7B01993E09700534F2D /* GAIEcommerceProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceProduct.h; sourceTree = "<group>"; };
+		4308B7B11993E09700534F2D /* GAIEcommerceProductAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceProductAction.h; sourceTree = "<group>"; };
+		4308B7B21993E09700534F2D /* GAIEcommercePromotion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIEcommercePromotion.h; sourceTree = "<group>"; };
+		4308B7B31993E09700534F2D /* GAIFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAIFields.h; sourceTree = "<group>"; };
+		4308B7B41993E09700534F2D /* GAILogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAILogger.h; sourceTree = "<group>"; };
+		4308B7B51993E09700534F2D /* GAITrackedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITrackedViewController.h; sourceTree = "<group>"; };
+		4308B7B61993E09700534F2D /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
+		4308B7B71993E0AE00534F2D /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
 		4318AD6718D50D0500D513A5 /* SetLocationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SetLocationViewController.h; sourceTree = "<group>"; };
 		4318AD6818D50D0500D513A5 /* SetLocationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = SetLocationViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		4326AA3118CA998E008ED1E2 /* AssetsLibrary.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AssetsLibrary.framework; path = System/Library/Frameworks/AssetsLibrary.framework; sourceTree = SDKROOT; };
@@ -116,13 +128,6 @@
 		4358535619083C7000C1A3A9 /* Overlay.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Overlay.png; sourceTree = "<group>"; };
 		4358535719083C7000C1A3A9 /* Overlay@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Overlay@2x.png"; sourceTree = "<group>"; };
 		4358536219083D6900C1A3A9 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = "<group>"; };
-		436E8BAC1978693500B2F923 /* GAI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAI.h; path = ../../Development/GoogleAnalyticsServicesiOS_3.08/GoogleAnalytics/Library/GAI.h; sourceTree = "<group>"; };
-		436E8BAD1978693500B2F923 /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAIDictionaryBuilder.h; path = ../../Development/GoogleAnalyticsServicesiOS_3.08/GoogleAnalytics/Library/GAIDictionaryBuilder.h; sourceTree = "<group>"; };
-		436E8BAE1978693500B2F923 /* GAIFields.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAIFields.h; path = ../../Development/GoogleAnalyticsServicesiOS_3.08/GoogleAnalytics/Library/GAIFields.h; sourceTree = "<group>"; };
-		436E8BAF1978693500B2F923 /* GAILogger.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAILogger.h; path = ../../Development/GoogleAnalyticsServicesiOS_3.08/GoogleAnalytics/Library/GAILogger.h; sourceTree = "<group>"; };
-		436E8BB01978693500B2F923 /* GAITrackedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAITrackedViewController.h; path = ../../Development/GoogleAnalyticsServicesiOS_3.08/GoogleAnalytics/Library/GAITrackedViewController.h; sourceTree = "<group>"; };
-		436E8BB11978693500B2F923 /* GAITracker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GAITracker.h; path = ../../Development/GoogleAnalyticsServicesiOS_3.08/GoogleAnalytics/Library/GAITracker.h; sourceTree = "<group>"; };
-		436E8BB21978694D00B2F923 /* libGoogleAnalyticsServices.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libGoogleAnalyticsServices.a; path = ../../Development/GoogleAnalyticsServicesiOS_3.08/libGoogleAnalyticsServices.a; sourceTree = "<group>"; };
 		436E8BB41978699E00B2F923 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		436E8BB6197869A900B2F923 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		436E8BB8197869B400B2F923 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
@@ -167,6 +172,7 @@
 		43B2F016190C715100A874F3 /* QuickAddViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = QuickAddViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		43C952AB1921EF1D002B3CB6 /* PageCoverViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PageCoverViewController.h; sourceTree = "<group>"; };
 		43C952AC1921EF1D002B3CB6 /* PageCoverViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = PageCoverViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		43F5F47B197E15C6001467F2 /* Main-iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Main-iPad.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +183,7 @@
 				436E8BB9197869B400B2F923 /* SystemConfiguration.framework in Frameworks */,
 				436E8BB7197869A900B2F923 /* CoreData.framework in Frameworks */,
 				436E8BB51978699E00B2F923 /* AdSupport.framework in Frameworks */,
+				4308B7B81993E0AE00534F2D /* libGoogleAnalyticsServices.a in Frameworks */,
 				43A52D211969B279000385F7 /* MessageUI.framework in Frameworks */,
 				43A0A225190243F20005CEB9 /* libz.dylib in Frameworks */,
 				4326AA3218CA998E008ED1E2 /* AssetsLibrary.framework in Frameworks */,
@@ -187,7 +194,6 @@
 				4370B7F81898D38F00907C5D /* CoreGraphics.framework in Frameworks */,
 				4370B7FA1898D38F00907C5D /* UIKit.framework in Frameworks */,
 				4370B7F61898D38F00907C5D /* Foundation.framework in Frameworks */,
-				436E8BB31978694D00B2F923 /* libGoogleAnalyticsServices.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,6 +210,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4308B7AC1993E09700534F2D /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				4308B7B71993E0AE00534F2D /* libGoogleAnalyticsServices.a */,
+				4308B7AD1993E09700534F2D /* GAI.h */,
+				4308B7AE1993E09700534F2D /* GAIDictionaryBuilder.h */,
+				4308B7AF1993E09700534F2D /* GAIEcommerceFields.h */,
+				4308B7B01993E09700534F2D /* GAIEcommerceProduct.h */,
+				4308B7B11993E09700534F2D /* GAIEcommerceProductAction.h */,
+				4308B7B21993E09700534F2D /* GAIEcommercePromotion.h */,
+				4308B7B31993E09700534F2D /* GAIFields.h */,
+				4308B7B41993E09700534F2D /* GAILogger.h */,
+				4308B7B51993E09700534F2D /* GAITrackedViewController.h */,
+				4308B7B61993E09700534F2D /* GAITracker.h */,
+			);
+			path = Library;
+			sourceTree = "<group>";
+		};
 		4358534519083C7000C1A3A9 /* ELCImagePicker */ = {
 			isa = PBXGroup;
 			children = (
@@ -237,23 +261,10 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		436E8BAB197868F700B2F923 /* Google Analytics */ = {
-			isa = PBXGroup;
-			children = (
-				436E8BB21978694D00B2F923 /* libGoogleAnalyticsServices.a */,
-				436E8BAC1978693500B2F923 /* GAI.h */,
-				436E8BAD1978693500B2F923 /* GAIDictionaryBuilder.h */,
-				436E8BAE1978693500B2F923 /* GAIFields.h */,
-				436E8BAF1978693500B2F923 /* GAILogger.h */,
-				436E8BB01978693500B2F923 /* GAITrackedViewController.h */,
-				436E8BB11978693500B2F923 /* GAITracker.h */,
-			);
-			name = "Google Analytics";
-			sourceTree = "<group>";
-		};
 		4370B7E91898D38F00907C5D = {
 			isa = PBXGroup;
 			children = (
+				43EEA3BA1978FF5F005DD613 /* iPad */,
 				4370B7FB1898D38F00907C5D /* TripJournal */,
 				4370B81A1898D38F00907C5D /* TripJournalTests */,
 				4370B7F41898D38F00907C5D /* Frameworks */,
@@ -330,7 +341,7 @@
 		4370B7FC1898D38F00907C5D /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				436E8BAB197868F700B2F923 /* Google Analytics */,
+				4308B7AC1993E09700534F2D /* Library */,
 				4358534519083C7000C1A3A9 /* ELCImagePicker */,
 				433E4EB118AB5D0C003FC9AA /* JournalCollectionHeaderView.h */,
 				433E4EB218AB5D0C003FC9AA /* JournalCollectionHeaderView.m */,
@@ -372,6 +383,14 @@
 				4370B81D1898D38F00907C5D /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		43EEA3BA1978FF5F005DD613 /* iPad */ = {
+			isa = PBXGroup;
+			children = (
+				43F5F47B197E15C6001467F2 /* Main-iPad.storyboard */,
+			);
+			name = iPad;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -466,6 +485,7 @@
 				4370B80E1898D38F00907C5D /* Images.xcassets in Resources */,
 				4370B8001898D38F00907C5D /* InfoPlist.strings in Resources */,
 				4358535E19083C7000C1A3A9 /* ELCAssetPicker.xib in Resources */,
+				43F5F47C197E15C6001467F2 /* Main-iPad.storyboard in Resources */,
 				4358535F19083C7000C1A3A9 /* ELCAssetTablePicker.xib in Resources */,
 				4370B8091898D38F00907C5D /* Main.storyboard in Resources */,
 			);
@@ -641,14 +661,16 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TripJournal/Vagabound-Prefix.pch";
 				INFOPLIST_FILE = "TripJournal/Vagabound-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/TripJournal",
-					/Users/Nate/Documents/Development/GoogleAnalyticsServicesiOS_3.08,
+					/Users/Nate/Documents/Development/SDKs/GoogleAnalyticsServicesiOS_3.08,
+					"$(PROJECT_DIR)/TripJournal/Library",
 				);
 				PRODUCT_NAME = Vagabound;
 				PROVISIONING_PROFILE = "9A45E465-0041-47C0-A43E-17DB014E606F";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -662,14 +684,16 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TripJournal/Vagabound-Prefix.pch";
 				INFOPLIST_FILE = "TripJournal/Vagabound-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/TripJournal",
-					/Users/Nate/Documents/Development/GoogleAnalyticsServicesiOS_3.08,
+					/Users/Nate/Documents/Development/SDKs/GoogleAnalyticsServicesiOS_3.08,
+					"$(PROJECT_DIR)/TripJournal/Library",
 				);
 				PRODUCT_NAME = Vagabound;
 				PROVISIONING_PROFILE = "9A45E465-0041-47C0-A43E-17DB014E606F";
+				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;

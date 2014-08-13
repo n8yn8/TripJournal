@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import <MobileCoreServices/MobileCoreServices.h>
 #import <CoreLocation/CoreLocation.h>
+#import "Trip.h"
+#import "Place.h"
 #import "Memory.h"
 
 @interface MemoryViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIActionSheetDelegate, CLLocationManagerDelegate>
@@ -22,6 +24,8 @@
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *shareButton;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *headBack;
 @property (strong, nonatomic) Memory *selectedMemory;
+@property (nonatomic, strong) Place *selectedPlace;
+@property (nonatomic, strong) Trip *selectedTrip;
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
 @property (strong, nonatomic) IBOutlet UITextField *memoryName;
 @property (strong, nonatomic) IBOutlet UITextField *memoryDescription;

@@ -26,14 +26,17 @@
                                     <rect key="frame" x="0.0" y="0.0" width="155" height="155"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" tag="100" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="TripJournal-placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="20n-Ip-vbx">
+                                        <imageView userInteractionEnabled="NO" tag="100" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TripJournal-placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="20n-Ip-vbx">
                                             <rect key="frame" x="0.0" y="0.0" width="155" height="155"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </imageView>
-                                        <view alpha="0.59999999999999964" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tvK-cy-uHb">
+                                        <view alpha="0.59999999999999964" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tvK-cy-uHb">
                                             <rect key="frame" x="0.0" y="98" width="155" height="57"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="57" id="6jW-9m-29G"/>
+                                            </constraints>
                                         </view>
                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="101" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Trip" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1tp-Qp-GIi">
                                             <rect key="frame" x="8" y="103" width="147" height="17"/>
@@ -53,6 +56,15 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="tvK-cy-uHb" secondAttribute="trailing" id="D07-3v-nZz"/>
+                                    <constraint firstItem="20n-Ip-vbx" firstAttribute="top" secondItem="1UB-YA-ejx" secondAttribute="top" id="F8n-Uh-9t5"/>
+                                    <constraint firstItem="tvK-cy-uHb" firstAttribute="leading" secondItem="1UB-YA-ejx" secondAttribute="leading" id="G0V-Fg-CcZ"/>
+                                    <constraint firstItem="20n-Ip-vbx" firstAttribute="leading" secondItem="1UB-YA-ejx" secondAttribute="leading" id="Kex-KH-raI"/>
+                                    <constraint firstAttribute="bottom" secondItem="tvK-cy-uHb" secondAttribute="bottom" id="QUb-Si-xgS"/>
+                                    <constraint firstAttribute="trailing" secondItem="20n-Ip-vbx" secondAttribute="trailing" id="eIk-zp-NQC"/>
+                                    <constraint firstAttribute="bottom" secondItem="20n-Ip-vbx" secondAttribute="bottom" id="ml3-ho-jBH"/>
+                                </constraints>
                                 <connections>
                                     <segue destination="wrH-IR-krD" kind="modal" identifier="TripDetails" id="lGg-ed-avd"/>
                                 </connections>
@@ -419,7 +431,6 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="New Trip" id="CKT-aN-E2B">
-                        <barButtonItem key="backBarButtonItem" title="Cancel" id="6Nu-km-TkN"/>
                         <barButtonItem key="leftBarButtonItem" title="Cancel" id="Ygv-hA-4Bg">
                             <connections>
                                 <segue destination="pWV-1e-xaB" kind="unwind" unwindAction="newTripMade:" id="uhn-sV-W6i"/>
@@ -942,6 +953,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="yA3-lm-aXe"/>
                                 </constraints>
+                                <color key="textColor" red="0.69411764710000001" green="0.38823529410000002" blue="0.63921568630000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <connections>
@@ -1015,25 +1027,31 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vVj-uV-m3E">
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="vVj-uV-m3E">
                                 <rect key="frame" x="0.0" y="64" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="U9g-Kr-G5c"/>
+                                </constraints>
                                 <color key="barTintColor" red="1" green="0.87058823529999996" blue="0.78823529410000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <textInputTraits key="textInputTraits"/>
                                 <connections>
                                     <outlet property="delegate" destination="cMo-AF-jOz" id="odo-Wk-w3k"/>
                                 </connections>
                             </searchBar>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="cXL-t0-ff3">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="cXL-t0-ff3">
                                 <rect key="frame" x="0.0" y="108" width="320" height="460"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <connections>
                                     <outlet property="delegate" destination="cMo-AF-jOz" id="325-st-tww"/>
                                 </connections>
                             </mapView>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cce-22-beD">
+                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cce-22-beD">
                                 <rect key="frame" x="0.0" y="20" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="MEi-Aa-seX"/>
+                                </constraints>
                                 <color key="barTintColor" red="0.81960784310000001" green="0.54117647059999996" blue="0.3294117647" alpha="1" colorSpace="calibratedRGB"/>
                                 <items>
                                     <navigationItem title="Title" id="Jht-ai-v2p">
@@ -1048,6 +1066,20 @@
                         </subviews>
                         <color key="backgroundColor" red="0.81960784310000001" green="0.54117647059999996" blue="0.3294117647" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="cXL-t0-ff3" secondAttribute="trailing" id="0Wf-Qd-Wm1"/>
+                            <constraint firstItem="cXL-t0-ff3" firstAttribute="leading" secondItem="cRu-2v-Kvq" secondAttribute="leading" id="IFS-ey-3EL"/>
+                            <constraint firstItem="vVj-uV-m3E" firstAttribute="leading" secondItem="cRu-2v-Kvq" secondAttribute="leading" id="Q2a-bF-uuH"/>
+                            <constraint firstItem="cce-22-beD" firstAttribute="top" secondItem="XsV-QO-Dlb" secondAttribute="bottom" id="Rsw-tg-7Es"/>
+                            <constraint firstItem="NoX-sb-uJv" firstAttribute="top" secondItem="cXL-t0-ff3" secondAttribute="bottom" id="Wp2-sX-33H"/>
+                            <constraint firstAttribute="trailing" secondItem="cce-22-beD" secondAttribute="trailing" id="aDh-JS-Nlg"/>
+                            <constraint firstItem="vVj-uV-m3E" firstAttribute="top" secondItem="cce-22-beD" secondAttribute="bottom" id="eq8-YV-gnO"/>
+                            <constraint firstAttribute="trailing" secondItem="vVj-uV-m3E" secondAttribute="trailing" id="nnk-ud-fjq"/>
+                            <constraint firstItem="cXL-t0-ff3" firstAttribute="top" secondItem="vVj-uV-m3E" secondAttribute="bottom" id="sW8-bC-xYt"/>
+                            <constraint firstItem="cce-22-beD" firstAttribute="leading" secondItem="cRu-2v-Kvq" secondAttribute="leading" id="tPB-Ei-eCK"/>
+                            <constraint firstItem="vVj-uV-m3E" firstAttribute="top" secondItem="cce-22-beD" secondAttribute="bottom" id="vLT-Eu-fGf"/>
+                            <constraint firstItem="cXL-t0-ff3" firstAttribute="top" secondItem="vVj-uV-m3E" secondAttribute="bottom" id="yck-Bu-ulM"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="reO-J2-zZL"/>
                     <connections>
@@ -1182,7 +1214,7 @@
                 <pageViewController storyboardIdentifier="PageViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="Wlk-YI-UDr" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="enu-sx-mCX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1859" y="-1063"/>
+            <point key="canvasLocation" x="-2463" y="-1993"/>
         </scene>
         <!--Page Cover View Controller-->
         <scene sceneID="rDg-Jb-duU">
@@ -1298,8 +1330,8 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="es2-Fc-usD"/>
+        <segue reference="Axw-EU-7Zf"/>
         <segue reference="XD5-n4-b8o"/>
-        <segue reference="LQj-Ap-cQo"/>
-        <segue reference="h0y-Ig-dHu"/>
     </inferredMetricsTieBreakers>
 </document>

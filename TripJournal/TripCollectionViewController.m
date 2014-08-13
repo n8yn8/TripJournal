@@ -260,12 +260,14 @@ NSIndexPath *deletePath;
             NSIndexPath *index = [indexPaths objectAtIndex:0];
             _chosenIndex = index.item;
             dvc.selectedPlace = [_placesJournal objectAtIndex:_chosenIndex];
+            dvc.selectedTrip = self.selectedTrip;
             dvc.tripCoverImage = self.tripCoverImage;
             
         } else if ([segue.identifier isEqualToString:@"NewPlace"]){
             _chosenIndex = _placesJournal.count;
             dvc.selectedPlace = [[Place alloc] init];
             dvc.selectedPlace.tripId = [NSNumber numberWithLongLong:self.selectedTrip.uniqueId];
+            dvc.selectedTrip = self.selectedTrip;
             dvc.tripCoverImage = self.tripCoverImage;
         }
     }

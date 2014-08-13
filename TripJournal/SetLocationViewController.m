@@ -23,6 +23,7 @@ static NSString *kCellIdentifier = @"cellIdentifier";
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
+    NSLog(@"initWithNibName: bundle:");
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
@@ -34,6 +35,8 @@ static NSString *kCellIdentifier = @"cellIdentifier";
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    NSLog(@"SetLocationViewController viewDidLoad");
     
     // This screen name value will remain set on the tracker and sent with
     // hits until it is set to a new value or to nil.
@@ -50,6 +53,7 @@ static NSString *kCellIdentifier = @"cellIdentifier";
 
 - (void)didReceiveMemoryWarning
 {
+    NSLog(@"SetLocationViewController didReceiveMemoryWarning");
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
@@ -58,21 +62,25 @@ static NSString *kCellIdentifier = @"cellIdentifier";
 
 - (void)searchBarCancelButtonClicked:(UISearchBar *) searchBar
 {
+    NSLog(@"searchBarCancelButtonClicked");
     [searchBar resignFirstResponder];
 }
 
 - (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar
 {
+    NSLog(@"searchBarTextDidBeginEditing");
     [searchBar setShowsCancelButton:YES animated:YES];
 }
 
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar
 {
+    NSLog(@"searchBarTextDidEndEditing");
     [searchBar setShowsCancelButton:NO animated:YES];
 }
 
 - (void)startSearch:(NSString *)searchString
 {
+    NSLog(@"startSearch");
     // Create and initialize a search request object.
     MKLocalSearchRequest *request = [[MKLocalSearchRequest alloc] init];
     request.naturalLanguageQuery = searchString;
@@ -84,6 +92,7 @@ static NSString *kCellIdentifier = @"cellIdentifier";
     // Start the search and display the results as annotations on the map.
     [search startWithCompletionHandler:^(MKLocalSearchResponse *response, NSError *error)
      {
+         NSLog(@"");
          NSMutableArray *places = [NSMutableArray array];
          for (MKMapItem *item in response.mapItems) {
              [places addObject:item.placemark];
@@ -95,6 +104,7 @@ static NSString *kCellIdentifier = @"cellIdentifier";
 
 - (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar
 {
+    NSLog(@"searchBarSearchButtonClicked");
     [searchBar resignFirstResponder];
     
     // check to see if Location Services is enabled, there are two state possibilities:
@@ -133,6 +143,7 @@ static NSString *kCellIdentifier = @"cellIdentifier";
 
 - (MKAnnotationView *) mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>) annotation
 {
+    NSLog(@"mapView: viewForAnnotation:");
     if([annotation isKindOfClass:[MKUserLocation class]])
         return nil;
     static NSString *identifier = @"MyLocation";
@@ -156,11 +167,13 @@ static NSString *kCellIdentifier = @"cellIdentifier";
 }
 
 - (void)setCoordinate:(CLLocationCoordinate2D)newCoordinate {
+    NSLog(@"setCoordinate");
     _latlng = newCoordinate;
 }
 
 - (void)mapView:(MKMapView *)mapView annotationView:(MKAnnotationView *)view calloutAccessoryControlTapped:(UIControl *)control
 {
+    NSLog(@"mapView: annotationView: calloutAccessoryControlTapped:");
     _latlng = view.annotation.coordinate;
     //[self dismissViewControllerAnimated:YES completion:nil];
     
