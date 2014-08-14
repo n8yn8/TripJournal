@@ -13,7 +13,7 @@
 #import "ELCImagePickerController.h"
 #import <sqlite3.h>
 
-@interface TripJournalCollectionViewController : UICollectionViewController <ELCImagePickerControllerDelegate, UINavigationControllerDelegate> {
+@interface TripJournalCollectionViewController : UICollectionViewController <ELCImagePickerControllerDelegate, UINavigationControllerDelegate, UIAlertViewDelegate> {
     NSMutableArray *_tripsJournal;
 }
 

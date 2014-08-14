@@ -26,6 +26,7 @@
 @implementation TripJournalCollectionViewController
 
 NSIndexPath *deletePath;
+NSUserDefaults *defaults;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -40,6 +41,8 @@ NSIndexPath *deletePath;
 {
     [super viewDidLoad];
     NSLog(@"viewDidLoad");
+    
+    [self detectAppUse];
     
     // This screen name value will remain set on the tracker and sent with
     // hits until it is set to a new value or to nil.
@@ -63,6 +66,35 @@ NSIndexPath *deletePath;
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)detectAppUse
+{
+    defaults = [NSUserDefaults standardUserDefaults];
+    
+    NSInteger uses = [defaults integerForKey:@"uses"];
+    BOOL facebookVisit = [defaults boolForKey:@"facebookVisit"];
+    BOOL appStoreVisit = [defaults boolForKey:@"appStoreVisit"];
+    NSLog(@"Uses = %ld", (long)uses);
+    
+    if (uses%5 == 0 && (!facebookVisit || !appStoreVisit)) {
+        UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Review me!"
+                                                          message:@"Don't forget to leave some feedback!"
+                                                         delegate:self
+                                                cancelButtonTitle:@"Later"
+                                                otherButtonTitles:nil];
+        
+        if (!facebookVisit) {
+            [message addButtonWithTitle:@"Facebook"];
+        }
+        if (!appStoreVisit) {
+            [message addButtonWithTitle:@"App Store"];
+        }
+        [message show];
+    }
+    uses += 1;
+    [defaults setInteger:uses forKey:@"uses"];
+    [defaults synchronize];
 }
 
 -(void)handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer
@@ -90,11 +122,23 @@ NSIndexPath *deletePath;
 
 - (void)alertView:(UIAlertView *)theAlert clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if ([[theAlert buttonTitleAtIndex:buttonIndex] isEqualToString:@"OK"]) {
+    NSString *title = [theAlert buttonTitleAtIndex:buttonIndex];
+    NSLog(@"Title = %@",title);
+    if ([title isEqualToString:@"OK"]) {
         long long deleteIndex = [[self.tripsJournal objectAtIndex:deletePath.item] uniqueId];
         [self.tripsJournal removeObjectAtIndex:deletePath.item];
         [[TripsDatabase database] deleteTrip:deleteIndex];
         [self.collectionView reloadData];
+    } else if ([title isEqualToString:@"Later"]) {
+        
+    } else if ([title isEqualToString:@"Facebook"]) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"fb://profile/671060982942066"]];
+        [defaults setBool:YES forKey:@"facebookVisit"];
+        [defaults synchronize];
+    } else if ([title isEqualToString:@"App Store"]) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=882999042"]];
+        [defaults setBool:YES forKey:@"appStoreVisit"];
+        [defaults synchronize];
     }
 }
 

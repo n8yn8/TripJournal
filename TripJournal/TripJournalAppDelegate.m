@@ -12,8 +12,14 @@
 
 /** Google Analytics configuration constants **/
 static NSString *const kGaPropertyId = @"UA-51347872-1";
-static BOOL const kGaDryRun = YES;
 static int const kGaDispatchPeriod = 20;
+//Don't send Google Analytics if in Degub mode.
+#ifdef DEBUG
+    static BOOL const kGaDryRun = YES;
+#else
+    static BOOL const kGaDryRun = NO;
+#endif
+
 
 @interface TripJournalAppDelegate ()
 
@@ -36,6 +42,7 @@ static int const kGaDispatchPeriod = 20;
 }
 
 - (void)initializeGoogleAnalytics {
+    NSLog(@"initializeGoogleAnalytics");
     
     [[GAI sharedInstance] setDispatchInterval:kGaDispatchPeriod];
     [[GAI sharedInstance] setDryRun:kGaDryRun];
