@@ -155,6 +155,7 @@ static NSString *kCellIdentifier = @"cellIdentifier";
         annotationView.draggable = YES;
         annotationView.canShowCallout = YES;
         UIButton *detailButton = [UIButton buttonWithType:UIButtonTypeContactAdd];
+        detailButton.tintColor = [UIColor darkGrayColor];
         annotationView.rightCalloutAccessoryView=detailButton;
         annotationView.image = [UIImage imageNamed:@"MyPoint.png"];
         annotationView.centerOffset = CGPointMake(0, -20);
@@ -175,6 +176,7 @@ static NSString *kCellIdentifier = @"cellIdentifier";
 {
     NSLog(@"mapView: annotationView: calloutAccessoryControlTapped:");
     _latlng = view.annotation.coordinate;
+    
     //[self dismissViewControllerAnimated:YES completion:nil];
     
 }

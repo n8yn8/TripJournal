@@ -76,7 +76,6 @@ NSUserDefaults *defaults;
     BOOL facebookVisit = [defaults boolForKey:@"facebookVisit"];
     BOOL appStoreVisit = [defaults boolForKey:@"appStoreVisit"];
     NSLog(@"Uses = %ld", (long)uses);
-    uses = 0;
     
     if (uses%5 == 0 && (!facebookVisit || !appStoreVisit)) {
         UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Review me!"
