@@ -31,7 +31,10 @@ static int const kGaDispatchPeriod = 20;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [self initializeGoogleAnalytics];
+    if (!kGaDryRun) {
+        [self initializeGoogleAnalytics];
+    }
+    
     
     UIPageControl *pageControl = [UIPageControl appearance];
     pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];

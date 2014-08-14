@@ -86,7 +86,7 @@ NSIndexPath *deletePath;
         
         UIAlertView *alert = [[UIAlertView alloc]
                               initWithTitle: @"Delete"
-                              message: @"Delete the selected Place?"
+                              message: @"Delete the selected Place? Only the reference to any photos will be deleted, not your original in the Photo Roll"
                               delegate: self
                               cancelButtonTitle:@"Cancel"
                               otherButtonTitles:@"OK", nil];

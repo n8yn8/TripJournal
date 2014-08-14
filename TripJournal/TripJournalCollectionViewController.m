@@ -76,6 +76,7 @@ NSUserDefaults *defaults;
     BOOL facebookVisit = [defaults boolForKey:@"facebookVisit"];
     BOOL appStoreVisit = [defaults boolForKey:@"appStoreVisit"];
     NSLog(@"Uses = %ld", (long)uses);
+    uses = 0;
     
     if (uses%5 == 0 && (!facebookVisit || !appStoreVisit)) {
         UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Review me!"
@@ -92,6 +93,16 @@ NSUserDefaults *defaults;
         }
         [message show];
     }
+    
+    if (uses == 0) {
+        UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Welcome!"
+                                                          message:@"Start by adding a trip. Photos are referenced from their original location and are not imported. Deleting them "
+                                                         delegate:self
+                                                cancelButtonTitle:@"Thanks!"
+                                                otherButtonTitles:nil];
+        [message show];
+    }
+    
     uses += 1;
     [defaults setInteger:uses forKey:@"uses"];
     [defaults synchronize];
@@ -112,7 +123,7 @@ NSUserDefaults *defaults;
         
         UIAlertView *alert = [[UIAlertView alloc]
                               initWithTitle: @"Delete"
-                              message: @"Delete the selected Trip?"
+                              message: @"Delete the selected Trip? Only the reference to any photos will be deleted, not your original in the Photo Roll"
                               delegate: self
                               cancelButtonTitle:@"Cancel"
                               otherButtonTitles:@"OK", nil];
