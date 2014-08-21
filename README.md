@@ -5,12 +5,12 @@ Description: Travel a lot? Take lots of photos? Get them organized during or aft
 
 Features:
 * Create a trip, places on that trip and memories at each place and set the title and description of each.
-*Take a photo using the camera or select one from your Photo Roll.
-*Dates and geolocation are automatically loaded when a photo is selected or taken.
-*If the photo doesn't contain geolocation data, the location can be set.
-*Set the trip and place cover photo and geolocation on their maps by finding the memory with the desired photo and setting it as the desired cover photo.
-*Share to connected social networks.
-*Provide feedback by pressing "Talk to us!" on the home screen. Email us, connect with us on Facebook and don't forget to rate and review Vagabound!
+* Take a photo using the camera or select one from your Photo Roll.
+* Dates and geolocation are automatically loaded when a photo is selected or taken.
+* If the photo doesn't contain geolocation data, the location can be set.
+* Set the trip and place cover photo and geolocation on their maps by finding the memory with the desired photo and setting it as the desired cover photo.
+* Share to connected social networks.
+* Provide feedback by pressing "Talk to us!" on the home screen. Email us, connect with us on Facebook and don't forget to rate and review Vagabound!
 
 Tech Talk:
 Custom objects for trips, places and memories.
