@@ -23,7 +23,7 @@
 @property (nonatomic, strong) Memory *selectedMemory;
 @property (strong, nonatomic) IBOutlet UIImageView *imageView;
 @property (strong, nonatomic) IBOutlet UITextField *name;
-@property (strong, nonatomic) IBOutlet UITextField *description;
+@property (strong, nonatomic) IBOutlet UITextField *descriptionField;
 
 @property (nonatomic, strong) Trip *selectedTrip;
 @property (strong, nonatomic) IBOutlet UILabel *tripName;

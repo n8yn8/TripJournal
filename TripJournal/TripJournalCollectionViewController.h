@@ -19,7 +19,7 @@
 
 
 @property (nonatomic, retain) NSMutableArray *tripsJournal;
-@property NSMutableArray *journalEntries;
+//@property NSMutableArray *journalEntries;
 @property NSInteger chosenIndex;
 
 - (IBAction)quickAdd:(id)sender;

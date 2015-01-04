@@ -91,7 +91,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     if (!_selectedMemory.name) {
         _headBack.title = @"Cancel";
     }
-    _memoryDescription.text = _selectedMemory.description;
+    _memoryDescription.text = _selectedMemory.info;
     
 }
 
@@ -118,7 +118,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
             //There is something in the name field
             //NSLog(@"name is not blank");
             if (![self.selectedMemory.name isEqualToString: self.memoryName.text] ||
-                ![self.selectedMemory.description isEqualToString: self.memoryDescription.text] ||
+                ![self.selectedMemory.info isEqualToString: self.memoryDescription.text] ||
                 ![self.selectedMemory.photo isEqualToString:self.currentImage] ||
                 (self.selectedMemory.latlng.latitude != self.coord.latitude))
             {
@@ -130,7 +130,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
                     _newMemory = YES;
                     _editedMemory = NO;
                     self.selectedMemory.name = self.memoryName.text;
-                    self.selectedMemory.description = self.memoryDescription.text;
+                    self.selectedMemory.info = self.memoryDescription.text;
                     self.selectedMemory.latlng = self.coord;
                     self.selectedMemory.uniqueId = [[TripsDatabase database] addMemoryToJournal:self.selectedMemory];
                     //NSLog(@"New memory added to database with uniqueId = %lld", self.selectedMemory.uniqueId);
@@ -139,7 +139,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
                     _editedMemory = YES;
                     _newMemory = NO;
                     self.selectedMemory.name = self.memoryName.text;
-                    self.selectedMemory.description = self.memoryDescription.text;
+                    self.selectedMemory.info = self.memoryDescription.text;
                     self.selectedMemory.latlng = self.coord;
                     [[TripsDatabase database] updateMemory:self.selectedMemory];
                     NSLog(@"Update the old memory");

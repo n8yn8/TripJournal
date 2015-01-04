@@ -45,8 +45,8 @@
     UITouch *touch = [[event allTouches] anyObject];
     if ([_name isFirstResponder] && [touch view] != _name) {
         [_name resignFirstResponder];
-    } else if ([_description isFirstResponder] && [touch view] != _description) {
-        [_description resignFirstResponder];
+    } else if ([_descriptionField isFirstResponder] && [touch view] != _descriptionField) {
+        [_descriptionField resignFirstResponder];
     }
     [super touchesBegan:touches withEvent:event];
 }

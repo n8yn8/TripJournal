@@ -13,7 +13,7 @@
     long long _uniqueId;
     NSNumber *_placeId;
     NSString *_name;
-    NSString *_description;
+    NSString *_info;
     NSString *_photo;
     NSDate *_date;
     CLLocationCoordinate2D _latlng;
@@ -22,7 +22,7 @@
 @property (nonatomic, assign) long long uniqueId;
 @property (copy, nonatomic) NSNumber *placeId;
 @property (copy, nonatomic) NSString *name;
-@property (copy, nonatomic) NSString *description;
+@property (copy, nonatomic) NSString *info;
 @property (copy, nonatomic) NSString *photo;
 @property (copy, nonatomic) NSDate *date;
 @property CLLocationCoordinate2D latlng;

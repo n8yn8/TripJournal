@@ -115,18 +115,18 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
     UITouch *touch = [[event allTouches] anyObject];
     if ([_name isFirstResponder] && [touch view] != _name) {
         [_name resignFirstResponder];
-    } else if ([_description isFirstResponder] && [touch view] != _description) {
-        [_description resignFirstResponder];
+    } else if ([_descriptionField isFirstResponder] && [touch view] != _descriptionField) {
+        [_descriptionField resignFirstResponder];
     }
     [super touchesBegan:touches withEvent:event];
 }
 
 - (BOOL) textFieldShouldReturn:(UITextField *)textField {
     if ([textField isEqual:_name]) {
-        [_description becomeFirstResponder];
+        [_descriptionField becomeFirstResponder];
     }
-    if ([textField isEqual:_description]) {
-        [_description resignFirstResponder];
+    if ([textField isEqual:_descriptionField]) {
+        [_descriptionField resignFirstResponder];
     }
     return YES;
 }
@@ -209,7 +209,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 - (IBAction)saveMemory:(id)sender {
     self.selectedMemory.placeId = [NSNumber numberWithLongLong:_selectedPlace.uniqueId];
     self.selectedMemory.name = _name.text;
-    self.selectedMemory.description = _description.text;
+    self.selectedMemory.info = _descriptionField.text;
     [[TripsDatabase database] addMemoryToJournal:self.selectedMemory];
     [_saveButton setTitle:@"Memory Saved" forState:UIControlStateDisabled];
     _saveButton.enabled = NO;

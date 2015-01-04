@@ -139,7 +139,7 @@ NSIndexPath *deletePath;
          */
     }
     memoryName.text = memory.name;
-    memoryDesc.text = memory.description;
+    memoryDesc.text = memory.info;
     
     // Compare dates of the memories to determine start date and end date.
     if (indexPath.item == 0) {
@@ -178,7 +178,7 @@ NSIndexPath *deletePath;
             _headBack.title = @"Save";
             _memoryAdd.enabled = YES;
         }
-        _headerView.description.text = _selectedPlace.description;
+        _headerView.descriptionField.text = _selectedPlace.info;
         
         reusableview = _headerView;
     }
@@ -194,10 +194,10 @@ NSIndexPath *deletePath;
 
 - (BOOL) textFieldShouldReturn:(UITextField *)textField {
     if ([textField isEqual:_headerView.name]) {
-        [_headerView.description becomeFirstResponder];
+        [_headerView.descriptionField becomeFirstResponder];
     }
-    if ([textField isEqual:_headerView.description]) {
-        [_headerView.description resignFirstResponder];
+    if ([textField isEqual:_headerView.descriptionField]) {
+        [_headerView.descriptionField resignFirstResponder];
     }
     return YES;
 }
@@ -210,7 +210,7 @@ NSIndexPath *deletePath;
         //There is something in the name field
         //NSLog(@"name is not blank");
         if (![self.selectedPlace.name isEqualToString: self.headerView.name.text] ||
-            ![self.selectedPlace.description isEqualToString: self.headerView.description.text] ||
+            ![self.selectedPlace.info isEqualToString: self.headerView.descriptionField.text] ||
             ![self.selectedPlace.photo isEqualToString:self.placeCoverImage] ||
             !(self.selectedPlace.latlng.latitude != self.placeCoord.latitude) ||
             ![self.selectedPlace.startDate isEqualToDate:self.tempStartDate] ||
@@ -224,7 +224,7 @@ NSIndexPath *deletePath;
                 _newPlace = YES;
                 _editedPlace = NO;
                 self.selectedPlace.name = self.headerView.name.text;
-                self.selectedPlace.description = self.headerView.description.text;
+                self.selectedPlace.info = self.headerView.descriptionField.text;
                 self.selectedPlace.photo = _placeCoverImage;
                 self.selectedPlace.latlng = _placeCoord;
                 self.selectedPlace.startDate = _tempStartDate;
@@ -237,7 +237,7 @@ NSIndexPath *deletePath;
                 _editedPlace = YES;
                 _newPlace = NO;
                 self.selectedPlace.name = self.headerView.name.text;
-                self.selectedPlace.description = self.headerView.description.text;
+                self.selectedPlace.info = self.headerView.descriptionField.text;
                 self.selectedPlace.photo = _placeCoverImage;
                 self.selectedPlace.latlng = _placeCoord;
                 self.selectedPlace.startDate = _tempStartDate;

@@ -142,7 +142,7 @@ NSIndexPath *deletePath;
                       failureBlock:failureblock];
     }
     placeName.text = place.name;
-    placeDesc.text = place.description;
+    placeDesc.text = place.info;
     
     if (indexPath.item == 0) {
         _selectedTrip.startDate = place.startDate;
@@ -174,7 +174,7 @@ NSIndexPath *deletePath;
         }
         _headerView.date.text = tripDates;
         _headerView.name.text = _selectedTrip.name;
-        _headerView.description.text = _selectedTrip.description;
+        _headerView.descriptionField.text = _selectedTrip.info;
         
         if (!_headerView.name.hasText) {
             _placeAdd.enabled = NO;
@@ -209,7 +209,7 @@ NSIndexPath *deletePath;
         //There is something in the name field
         //NSLog(@"name is not blank");
         if (![self.selectedTrip.name isEqualToString: self.headerView.name.text] ||
-            ![self.selectedTrip.description isEqualToString: self.headerView.description.text] ||
+            ![self.selectedTrip.info isEqualToString: self.headerView.descriptionField.text] ||
             ![self.selectedTrip.photo isEqualToString: _tripCoverImage] ||
             !(self.selectedTrip.latlng.latitude != self.tripCoord.latitude) /*||
             ![self.selectedTrip.startDate isEqualToDate:self.tempStartDate] ||
@@ -223,7 +223,7 @@ NSIndexPath *deletePath;
                 _newTrip = YES;
                 _editedTrip = NO;
                 self.selectedTrip.name = self.headerView.name.text;
-                self.selectedTrip.description = self.headerView.description.text;
+                self.selectedTrip.info = self.headerView.descriptionField.text;
                 self.selectedTrip.photo = _tripCoverImage;
                 self.selectedTrip.latlng = _tripCoord;
                 self.selectedTrip.uniqueId = [[TripsDatabase database] addTripToJournal:self.selectedTrip];
@@ -234,7 +234,7 @@ NSIndexPath *deletePath;
                 _editedTrip = YES;
                 _newTrip = NO;
                 self.selectedTrip.name = self.headerView.name.text;
-                self.selectedTrip.description = self.headerView.description.text;
+                self.selectedTrip.info = self.headerView.descriptionField.text;
                 self.selectedTrip.photo = _tripCoverImage;
                 self.selectedTrip.latlng = _tripCoord;
                 [[TripsDatabase database] updateTrip:self.selectedTrip];
@@ -299,18 +299,18 @@ NSIndexPath *deletePath;
     UITouch *touch = [[event allTouches] anyObject];
     if ([_headerView.name isFirstResponder] && [touch view] != _headerView.name) {
         [_headerView.name resignFirstResponder];
-    } else if ([_headerView.description isFirstResponder] && [touch view] != _headerView.description) {
-        [_headerView.description resignFirstResponder];
+    } else if ([_headerView.descriptionField isFirstResponder] && [touch view] != _headerView.descriptionField) {
+        [_headerView.descriptionField resignFirstResponder];
     }
     [super touchesBegan:touches withEvent:event];
 }
 
 - (BOOL) textFieldShouldReturn:(UITextField *)textField {
     if ([textField isEqual:_headerView.name]) {
-        [_headerView.description becomeFirstResponder];
+        [_headerView.descriptionField becomeFirstResponder];
     }
-    if ([textField isEqual:_headerView.description]) {
-        [_headerView.description resignFirstResponder];
+    if ([textField isEqual:_headerView.descriptionField]) {
+        [_headerView.descriptionField resignFirstResponder];
     }
     return YES;
 }

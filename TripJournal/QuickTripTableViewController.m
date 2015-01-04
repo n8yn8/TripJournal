@@ -78,7 +78,7 @@ NSMutableArray *tripsJournal;
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TripCell" forIndexPath:indexPath];
     Trip *trip = [tripsJournal objectAtIndex:indexPath.row];
     cell.textLabel.text = trip.name;
-    cell.detailTextLabel.text = trip.description;
+    cell.detailTextLabel.text = trip.info;
     
     return cell;
 }

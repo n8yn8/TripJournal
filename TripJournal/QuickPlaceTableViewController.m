@@ -81,7 +81,7 @@ NSMutableArray *placesJournal;
     
     Place *place = [placesJournal objectAtIndex:indexPath.row];
     cell.textLabel.text = place.name;
-    cell.detailTextLabel.text = place.description;
+    cell.detailTextLabel.text = place.info;
     
     return cell;
 }

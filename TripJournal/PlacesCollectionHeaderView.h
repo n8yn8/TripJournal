@@ -11,6 +11,6 @@
 @interface PlacesCollectionHeaderView : UICollectionReusableView
 @property (strong, nonatomic) IBOutlet UILabel *date;
 @property (strong, nonatomic) IBOutlet UITextField *name;
-@property (strong, nonatomic) IBOutlet UITextField *description;
+@property (strong, nonatomic) IBOutlet UITextField *descriptionField;
 @property (strong, nonatomic) IBOutlet UIImageView *placeCoverImageView;
 @end

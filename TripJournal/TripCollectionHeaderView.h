@@ -14,6 +14,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *date;
 @property (strong, nonatomic) IBOutlet UITextField *name;
 @property (strong, nonatomic) IBOutlet MKMapView *TripMapView;
-@property (strong, nonatomic) IBOutlet UITextField *description;
+@property (strong, nonatomic) IBOutlet UITextField *descriptionField;
 
 @end

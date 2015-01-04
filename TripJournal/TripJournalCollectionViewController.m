@@ -40,7 +40,6 @@ NSUserDefaults *defaults;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    NSLog(@"viewDidLoad");
     
     [self detectAppUse];
     
@@ -75,9 +74,8 @@ NSUserDefaults *defaults;
     NSInteger uses = [defaults integerForKey:@"uses"];
     BOOL facebookVisit = [defaults boolForKey:@"facebookVisit"];
     BOOL appStoreVisit = [defaults boolForKey:@"appStoreVisit"];
-    NSLog(@"Uses = %ld", (long)uses);
     
-    if (uses%5 == 0 && (!facebookVisit || !appStoreVisit)) {
+    if ((uses%5 == 0 && uses != 0) && (!facebookVisit || !appStoreVisit)) {
         UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Review me!"
                                                           message:@"Don't forget to leave some feedback!"
                                                          delegate:self
@@ -95,7 +93,7 @@ NSUserDefaults *defaults;
     
     if (uses == 0) {
         UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Welcome!"
-                                                          message:@"Start by adding a trip. Photos are referenced from their original location and are not imported. Deleting them "
+                                                          message:@"Start by adding a trip. Photos are referenced from their original location and are not imported."
                                                          delegate:self
                                                 cancelButtonTitle:@"Thanks!"
                                                 otherButtonTitles:nil];
@@ -133,7 +131,6 @@ NSUserDefaults *defaults;
 - (void)alertView:(UIAlertView *)theAlert clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     NSString *title = [theAlert buttonTitleAtIndex:buttonIndex];
-    NSLog(@"Title = %@",title);
     if ([title isEqualToString:@"OK"]) {
         long long deleteIndex = [[self.tripsJournal objectAtIndex:deletePath.item] uniqueId];
         [self.tripsJournal removeObjectAtIndex:deletePath.item];
@@ -170,8 +167,8 @@ NSUserDefaults *defaults;
     
     //assign the image
     
-    Trip *info = [_tripsJournal objectAtIndex:indexPath.item];
-    if (![info.photo isEqualToString:@""] /*|| ![info.photo isEqualToString:@"(null)"]*/) {
+    Trip *thisTrip = [_tripsJournal objectAtIndex:indexPath.item];
+    if (![thisTrip.photo isEqualToString:@""] /*|| ![info.photo isEqualToString:@"(null)"]*/) {
         
         ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *myasset)
         {
@@ -186,12 +183,12 @@ NSUserDefaults *defaults;
         };
         
         ALAssetsLibrary* assetslibrary = [[ALAssetsLibrary alloc] init];
-        [assetslibrary assetForURL:[NSURL URLWithString:info.photo]
+        [assetslibrary assetForURL:[NSURL URLWithString:thisTrip.photo]
                        resultBlock:resultblock
                       failureBlock:failureblock];
     }
-    tripName.text = info.name;
-    tripDesc.text = info.description;
+    tripName.text = thisTrip.name;
+    tripDesc.text = thisTrip.info;
     
     return cell;
 }

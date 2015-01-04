@@ -20,7 +20,7 @@
         self.uniqueId = uniqueId;
         self.placeId = placeId;
         self.name = name;
-        self.description = description;
+        self.info = description;
         self.photo = photo;
         self.date = date;
         self.latlng = latlng;
@@ -30,7 +30,7 @@
 
 -(void) dealloc {
     self.name = nil;
-    self.description = nil;
+    self.info = nil;
     self.photo = nil;
     self.date = nil;
     //[super dealloc];

@@ -20,7 +20,7 @@
         self.uniqueId = uniqueId;
         self.tripId = tripId;
         self.name = name;
-        self.description = description;
+        self.info = description;
         self.photo = photo;
         self.startDate = startDate;
         self.endDate = endDate;
@@ -31,7 +31,7 @@
 
 -(void) dealloc {
     self.name = nil;
-    self.description = nil;
+    self.info = nil;
     self.photo = nil;
     self.startDate = nil;
     self.endDate = nil;

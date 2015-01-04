@@ -222,7 +222,7 @@ static TripsDatabase *_database;
     sqlite3_stmt    *statement;
     if (sqlite3_open(dbpath, &_database) == SQLITE_OK)
     {
-        NSString *insertSQL = [NSString stringWithFormat:@"INSERT INTO TRIPS (name, description, photo, startdate, enddate) VALUES (\"%@\", \"%@\", \"%@\", \"%@\", \"%@\")", trip.name, trip.description, trip.photo, [_format stringFromDate:trip.startDate], [_format stringFromDate:trip.endDate]];
+        NSString *insertSQL = [NSString stringWithFormat:@"INSERT INTO TRIPS (name, description, photo, startdate, enddate) VALUES (\"%@\", \"%@\", \"%@\", \"%@\", \"%@\")", trip.name, trip.info, trip.photo, [_format stringFromDate:trip.startDate], [_format stringFromDate:trip.endDate]];
         const char *insert_stmt = [insertSQL UTF8String];
         sqlite3_prepare_v2(_database, insert_stmt, -1, &statement, NULL);
         if (sqlite3_step(statement) == SQLITE_DONE) {
@@ -241,7 +241,7 @@ static TripsDatabase *_database;
     sqlite3_stmt    *statement;
     if (sqlite3_open(dbpath, &_database) == SQLITE_OK)
     {
-        NSString *insertSQL = [NSString stringWithFormat:@"UPDATE trips SET name=\'%@\', description=\'%@\', photo=\'%@\', startdate=\'%@\', enddate=\'%@\', latitude=\'%f\', longitude=\'%f\' WHERE id=%lld", trip.name, trip.description, trip.photo, [_format stringFromDate:trip.startDate], [_format stringFromDate:trip.endDate], trip.latlng.latitude, trip.latlng.longitude, trip.uniqueId];
+        NSString *insertSQL = [NSString stringWithFormat:@"UPDATE trips SET name=\'%@\', description=\'%@\', photo=\'%@\', startdate=\'%@\', enddate=\'%@\', latitude=\'%f\', longitude=\'%f\' WHERE id=%lld", trip.name, trip.info, trip.photo, [_format stringFromDate:trip.startDate], [_format stringFromDate:trip.endDate], trip.latlng.latitude, trip.latlng.longitude, trip.uniqueId];
         //NSLog(@"%@", insertSQL);
         const char *insert_stmt = [insertSQL UTF8String];
         sqlite3_prepare_v2(_database, insert_stmt, -1, &statement, NULL);
@@ -321,7 +321,7 @@ static TripsDatabase *_database;
     sqlite3_stmt    *statement;
     if (sqlite3_open(dbpath, &_database) == SQLITE_OK)
     {
-        NSString *insertSQL = [NSString stringWithFormat:@"INSERT INTO PLACES (tripid, name, description, photo, startdate, enddate, latitude, longitude) VALUES (\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%f\", \"%f\")", place.tripId, place.name, place.description, place.photo, [_format stringFromDate:place.startDate], [_format stringFromDate:place.endDate], place.latlng.latitude, place.latlng.longitude];
+        NSString *insertSQL = [NSString stringWithFormat:@"INSERT INTO PLACES (tripid, name, description, photo, startdate, enddate, latitude, longitude) VALUES (\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%f\", \"%f\")", place.tripId, place.name, place.info, place.photo, [_format stringFromDate:place.startDate], [_format stringFromDate:place.endDate], place.latlng.latitude, place.latlng.longitude];
         //NSLog(@"%@", insertSQL);
         const char *insert_stmt = [insertSQL UTF8String];
         sqlite3_prepare_v2(_database, insert_stmt, -1, &statement, NULL);
@@ -340,7 +340,7 @@ static TripsDatabase *_database;
     sqlite3_stmt    *statement;
     if (sqlite3_open(dbpath, &_database) == SQLITE_OK)
     {
-        NSString *insertSQL = [NSString stringWithFormat:@"UPDATE places SET name=\'%@\', description=\'%@\', photo=\'%@\', startdate=\'%@\', enddate=\'%@\', latitude=\'%f\', longitude=\'%f\' WHERE id=%lld", place.name, place.description, place.photo, [_format stringFromDate:place.startDate], [_format stringFromDate:place.endDate], place.latlng.latitude, place.latlng.longitude, place.uniqueId];
+        NSString *insertSQL = [NSString stringWithFormat:@"UPDATE places SET name=\'%@\', description=\'%@\', photo=\'%@\', startdate=\'%@\', enddate=\'%@\', latitude=\'%f\', longitude=\'%f\' WHERE id=%lld", place.name, place.info, place.photo, [_format stringFromDate:place.startDate], [_format stringFromDate:place.endDate], place.latlng.latitude, place.latlng.longitude, place.uniqueId];
         //NSLog(@"%@", insertSQL);
         const char *insert_stmt = [insertSQL UTF8String];
         sqlite3_prepare_v2(_database, insert_stmt, -1, &statement, NULL);
@@ -396,7 +396,7 @@ static TripsDatabase *_database;
     sqlite3_stmt    *statement;
     if (sqlite3_open(dbpath, &_database) == SQLITE_OK)
     {
-        NSString *insertSQL = [NSString stringWithFormat:@"INSERT INTO MEMORIES (placeid, name, description, photo, date, latitude, longitude) VALUES (\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%f\", \"%f\")", memory.placeId, memory.name, memory.description, memory.photo, [_format stringFromDate:memory.date], memory.latlng.latitude, memory.latlng.longitude];
+        NSString *insertSQL = [NSString stringWithFormat:@"INSERT INTO MEMORIES (placeid, name, description, photo, date, latitude, longitude) VALUES (\"%@\", \"%@\", \"%@\", \"%@\", \"%@\", \"%f\", \"%f\")", memory.placeId, memory.name, memory.info, memory.photo, [_format stringFromDate:memory.date], memory.latlng.latitude, memory.latlng.longitude];
         //NSLog(@"%@", insertSQL);
         const char *insert_stmt = [insertSQL UTF8String];
         sqlite3_prepare_v2(_database, insert_stmt, -1, &statement, NULL);
@@ -416,7 +416,7 @@ static TripsDatabase *_database;
     sqlite3_stmt    *statement;
     if (sqlite3_open(dbpath, &_database) == SQLITE_OK)
     {
-        NSString *insertSQL = [NSString stringWithFormat:@"UPDATE memories SET name=\'%@\', description=\'%@\', photo=\'%@\', date=\'%@\', latitude=\'%f\', longitude=\'%f\' WHERE id=%lld", memory.name, memory.description, memory.photo, [_format stringFromDate:memory.date], memory.latlng.latitude, memory.latlng.longitude, memory.uniqueId];
+        NSString *insertSQL = [NSString stringWithFormat:@"UPDATE memories SET name=\'%@\', description=\'%@\', photo=\'%@\', date=\'%@\', latitude=\'%f\', longitude=\'%f\' WHERE id=%lld", memory.name, memory.info, memory.photo, [_format stringFromDate:memory.date], memory.latlng.latitude, memory.latlng.longitude, memory.uniqueId];
         const char *insert_stmt = [insertSQL UTF8String];
         sqlite3_prepare_v2(_database, insert_stmt, -1, &statement, NULL);
         if (sqlite3_step(statement) == SQLITE_DONE) {

@@ -69,7 +69,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 
 - (IBAction)savePlace:(id)sender {
     _place.name = _nameField.text;
-    _place.description = _descriptionField.text;
+    _place.info = _descriptionField.text;
     _place.uniqueId = [[TripsDatabase database] addPlaceToJournal:_place];
     [_doneButton setTitle:@"Done"];
     [_saveButton setTitle:@"Place Saved" forState:UIControlStateDisabled];
