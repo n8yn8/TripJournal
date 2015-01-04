@@ -9,6 +9,10 @@
 #import "TripCollectionViewController.h"
 #import "TripsDatabase.h"
 #import <AssetsLibrary/AssetsLibrary.h>
+#import "GAI.h"
+#import "GAIFields.h"
+#import "GAITracker.h"
+#import "GAIDictionaryBuilder.h"
 
 @interface TripCollectionViewController ()
 
@@ -18,6 +22,13 @@
 @end
 
 @implementation TripCollectionViewController
+
+CGFloat animatedDistance;
+static const CGFloat KEYBOARD_ANIMATION_DURATION = 0.3;
+static const CGFloat MINIMUM_SCROLL_FRACTION = 0.2;
+static const CGFloat MAXIMUM_SCROLL_FRACTION = 0.8;
+static const CGFloat PORTRAIT_KEYBOARD_HEIGHT = 216;
+static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 
 NSIndexPath *deletePath;
 
@@ -34,6 +45,13 @@ NSIndexPath *deletePath;
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view.
+    
+    // This screen name value will remain set on the tracker and sent with
+    // hits until it is set to a new value or to nil.
+    [[GAI sharedInstance].defaultTracker set:kGAIScreenName value:@"TripCollectionView"];
+    // Send the screen view.
+    [[GAI sharedInstance].defaultTracker
+     send:[[GAIDictionaryBuilder createScreenView] build]];
     
     self.placesJournal = [[TripsDatabase database] placesJournal: [NSNumber numberWithLongLong:_selectedTrip.uniqueId]];
     
@@ -68,7 +86,7 @@ NSIndexPath *deletePath;
         
         UIAlertView *alert = [[UIAlertView alloc]
                               initWithTitle: @"Delete"
-                              message: @"Delete the selected Place?"
+                              message: @"Delete the selected Place? Only the reference to any photos will be deleted, not your original in the Photo Roll"
                               delegate: self
                               cancelButtonTitle:@"Cancel"
                               otherButtonTitles:@"OK", nil];
@@ -109,6 +127,7 @@ NSIndexPath *deletePath;
         ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *myasset)
         {
             [menuPhotoView setImage:[UIImage imageWithCGImage:[myasset thumbnail]]];
+            [menuPhotoView setContentMode:UIViewContentModeScaleAspectFit];
         };
         
         ALAssetsLibraryAccessFailureBlock failureblock  = ^(NSError *myerror)
@@ -241,12 +260,14 @@ NSIndexPath *deletePath;
             NSIndexPath *index = [indexPaths objectAtIndex:0];
             _chosenIndex = index.item;
             dvc.selectedPlace = [_placesJournal objectAtIndex:_chosenIndex];
+            dvc.selectedTrip = self.selectedTrip;
             dvc.tripCoverImage = self.tripCoverImage;
             
         } else if ([segue.identifier isEqualToString:@"NewPlace"]){
             _chosenIndex = _placesJournal.count;
             dvc.selectedPlace = [[Place alloc] init];
             dvc.selectedPlace.tripId = [NSNumber numberWithLongLong:self.selectedTrip.uniqueId];
+            dvc.selectedTrip = self.selectedTrip;
             dvc.tripCoverImage = self.tripCoverImage;
         }
     }
@@ -292,6 +313,69 @@ NSIndexPath *deletePath;
         [_headerView.description resignFirstResponder];
     }
     return YES;
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    CGRect textFieldRect =
+    [self.view.window convertRect:textField.bounds fromView:textField];
+    CGRect viewRect =
+    [self.view.window convertRect:self.view.bounds fromView:self.view];
+    
+    CGFloat midline = textFieldRect.origin.y + 0.5 * textFieldRect.size.height;
+    CGFloat numerator =
+    midline - viewRect.origin.y
+    - MINIMUM_SCROLL_FRACTION * viewRect.size.height;
+    CGFloat denominator =
+    (MAXIMUM_SCROLL_FRACTION - MINIMUM_SCROLL_FRACTION)
+    * viewRect.size.height;
+    CGFloat heightFraction = numerator / denominator;
+    
+    if (heightFraction < 0.0)
+    {
+        heightFraction = 0.0;
+    }
+    else if (heightFraction > 1.0)
+    {
+        heightFraction = 1.0;
+    }
+    
+    UIInterfaceOrientation orientation =
+    [[UIApplication sharedApplication] statusBarOrientation];
+    if (orientation == UIInterfaceOrientationPortrait ||
+        orientation == UIInterfaceOrientationPortraitUpsideDown)
+    {
+        animatedDistance = floor(PORTRAIT_KEYBOARD_HEIGHT * heightFraction);
+    }
+    else
+    {
+        animatedDistance = floor(LANDSCAPE_KEYBOARD_HEIGHT * heightFraction);
+    }
+    
+    CGRect viewFrame = self.view.frame;
+    viewFrame.origin.y -= animatedDistance;
+    
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationBeginsFromCurrentState:YES];
+    [UIView setAnimationDuration:KEYBOARD_ANIMATION_DURATION];
+    
+    [self.view setFrame:viewFrame];
+    
+    [UIView commitAnimations];
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    CGRect viewFrame = self.view.frame;
+    viewFrame.origin.y += animatedDistance;
+    
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationBeginsFromCurrentState:YES];
+    [UIView setAnimationDuration:KEYBOARD_ANIMATION_DURATION];
+    
+    [self.view setFrame:viewFrame];
+    
+    [UIView commitAnimations];
 }
 
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {

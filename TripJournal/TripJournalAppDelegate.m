@@ -7,14 +7,53 @@
 //
 
 #import "TripJournalAppDelegate.h"
-#import "TestFlight.h"
+#import "GAI.h"
+#import "GAIDictionaryBuilder.h"
+
+/** Google Analytics configuration constants **/
+static NSString *const kGaPropertyId = @"UA-51347872-1";
+static int const kGaDispatchPeriod = 20;
+//Don't send Google Analytics if in Degub mode.
+#ifdef DEBUG
+    static BOOL const kGaDryRun = YES;
+#else
+    static BOOL const kGaDryRun = NO;
+#endif
+
+
+@interface TripJournalAppDelegate ()
+
+- (void)initializeGoogleAnalytics;
+
+@end
 
 @implementation TripJournalAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [TestFlight takeOff:@"1a6f56c5-1e03-4c68-a9f2-03289f031452"];
+    if (!kGaDryRun) {
+        [self initializeGoogleAnalytics];
+    }
+    
+    
+    UIPageControl *pageControl = [UIPageControl appearance];
+    pageControl.pageIndicatorTintColor = [UIColor lightGrayColor];
+    pageControl.currentPageIndicatorTintColor = [UIColor blackColor];
+    //pageControl.backgroundColor = [UIColor whiteColor];
+    
     return YES;
+}
+
+- (void)initializeGoogleAnalytics {
+    NSLog(@"initializeGoogleAnalytics");
+    
+    [[GAI sharedInstance] setDispatchInterval:kGaDispatchPeriod];
+    [[GAI sharedInstance] setDryRun:kGaDryRun];
+    self.tracker = [[GAI sharedInstance] trackerWithTrackingId:kGaPropertyId];
+    // Optional: automatically send uncaught exceptions to Google Analytics.
+    [GAI sharedInstance].trackUncaughtExceptions = YES;
+    // Optional: set Logger to VERBOSE for debug information.
+    [[[GAI sharedInstance] logger] setLogLevel:kGAILogLevelVerbose];
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -37,6 +76,9 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    
+    //[GAI sharedInstance].optOut = ![[NSUserDefaults standardUserDefaults] boolForKey:@"allowTracking"];
+    
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application

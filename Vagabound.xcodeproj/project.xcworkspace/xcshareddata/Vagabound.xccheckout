@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>EF7A2F33-0E4F-4CEE-9BFA-27C7B78B4F97</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Vagabound</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>6872C57CE63178BEB9673046688CBBBF2F5D4C71</key>
+		<string>https://github.com/n8yn8/TripJournal.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Vagabound.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>6872C57CE63178BEB9673046688CBBBF2F5D4C71</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/n8yn8/TripJournal.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>6872C57CE63178BEB9673046688CBBBF2F5D4C71</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>6872C57CE63178BEB9673046688CBBBF2F5D4C71</string>
+			<key>IDESourceControlWCCName</key>
+			<string>TripJournal</string>
+		</dict>
+	</array>
+</dict>
+</plist>

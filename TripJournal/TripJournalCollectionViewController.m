@@ -8,10 +8,15 @@
 
 #import "TripJournalCollectionViewController.h"
 #import "TripCollectionViewController.h"
+#import "QuickAddViewController.h"
 #import "Trip.h"
 #import "TripsDatabase.h"
 #import <AssetsLibrary/AssetsLibrary.h>
-#import "TestFlight.h"
+#import "GAI.h"
+#import "GAIFields.h"
+#import "GAITracker.h"
+#import "GAIDictionaryBuilder.h"
+#import "PageCoverViewController.h"
 
 @interface TripJournalCollectionViewController ()
 @property (strong, nonatomic) NSDateFormatter *format;
@@ -21,6 +26,7 @@
 @implementation TripJournalCollectionViewController
 
 NSIndexPath *deletePath;
+NSUserDefaults *defaults;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -34,6 +40,16 @@ NSIndexPath *deletePath;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    NSLog(@"viewDidLoad");
+    
+    [self detectAppUse];
+    
+    // This screen name value will remain set on the tracker and sent with
+    // hits until it is set to a new value or to nil.
+    [[GAI sharedInstance].defaultTracker set:kGAIScreenName value:@"Home Screen"];
+    // Send the screen view.
+    [[GAI sharedInstance].defaultTracker
+     send:[[GAIDictionaryBuilder createScreenView] build]];
     
     self.tripsJournal = [TripsDatabase database].tripsJournal;
     
@@ -52,6 +68,45 @@ NSIndexPath *deletePath;
     // Dispose of any resources that can be recreated.
 }
 
+- (void)detectAppUse
+{
+    defaults = [NSUserDefaults standardUserDefaults];
+    
+    NSInteger uses = [defaults integerForKey:@"uses"];
+    BOOL facebookVisit = [defaults boolForKey:@"facebookVisit"];
+    BOOL appStoreVisit = [defaults boolForKey:@"appStoreVisit"];
+    NSLog(@"Uses = %ld", (long)uses);
+    
+    if (uses%5 == 0 && (!facebookVisit || !appStoreVisit)) {
+        UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Review me!"
+                                                          message:@"Don't forget to leave some feedback!"
+                                                         delegate:self
+                                                cancelButtonTitle:@"Later"
+                                                otherButtonTitles:nil];
+        
+        if (!facebookVisit) {
+            [message addButtonWithTitle:@"Facebook"];
+        }
+        if (!appStoreVisit) {
+            [message addButtonWithTitle:@"App Store"];
+        }
+        [message show];
+    }
+    
+    if (uses == 0) {
+        UIAlertView *message = [[UIAlertView alloc] initWithTitle:@"Welcome!"
+                                                          message:@"Start by adding a trip. Photos are referenced from their original location and are not imported. Deleting them "
+                                                         delegate:self
+                                                cancelButtonTitle:@"Thanks!"
+                                                otherButtonTitles:nil];
+        [message show];
+    }
+    
+    uses += 1;
+    [defaults setInteger:uses forKey:@"uses"];
+    [defaults synchronize];
+}
+
 -(void)handleLongPress:(UILongPressGestureRecognizer *)gestureRecognizer
 {
     if (gestureRecognizer.state != UIGestureRecognizerStateEnded) {
@@ -67,7 +122,7 @@ NSIndexPath *deletePath;
         
         UIAlertView *alert = [[UIAlertView alloc]
                               initWithTitle: @"Delete"
-                              message: @"Delete the selected Trip?"
+                              message: @"Delete the selected Trip? Only the reference to any photos will be deleted, not your original in the Photo Roll"
                               delegate: self
                               cancelButtonTitle:@"Cancel"
                               otherButtonTitles:@"OK", nil];
@@ -77,11 +132,23 @@ NSIndexPath *deletePath;
 
 - (void)alertView:(UIAlertView *)theAlert clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if ([[theAlert buttonTitleAtIndex:buttonIndex] isEqualToString:@"OK"]) {
+    NSString *title = [theAlert buttonTitleAtIndex:buttonIndex];
+    NSLog(@"Title = %@",title);
+    if ([title isEqualToString:@"OK"]) {
         long long deleteIndex = [[self.tripsJournal objectAtIndex:deletePath.item] uniqueId];
         [self.tripsJournal removeObjectAtIndex:deletePath.item];
         [[TripsDatabase database] deleteTrip:deleteIndex];
         [self.collectionView reloadData];
+    } else if ([title isEqualToString:@"Later"]) {
+        
+    } else if ([title isEqualToString:@"Facebook"]) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"fb://profile/671060982942066"]];
+        [defaults setBool:YES forKey:@"facebookVisit"];
+        [defaults synchronize];
+    } else if ([title isEqualToString:@"App Store"]) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=882999042"]];
+        [defaults setBool:YES forKey:@"appStoreVisit"];
+        [defaults synchronize];
     }
 }
 
@@ -109,6 +176,7 @@ NSIndexPath *deletePath;
         ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *myasset)
         {
             [menuPhotoView setImage:[UIImage imageWithCGImage:[myasset thumbnail]]];
+            [menuPhotoView setContentMode:UIViewContentModeScaleAspectFit];
         };
         
         ALAssetsLibraryAccessFailureBlock failureblock  = ^(NSError *myerror)
@@ -158,29 +226,65 @@ NSIndexPath *deletePath;
 -(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
     
     if (![segue.identifier isEqualToString:@"QuickAdd"] && ![segue.identifier isEqualToString:@"feedback"]) {
-        
-        //Get destination view controller
-        UINavigationController *navigationController = segue.destinationViewController;
-        TripCollectionViewController *dvc = [[navigationController viewControllers] objectAtIndex:0];
-        
-        //If a Trip is selected. Otherwise +Trip was selected.
-        if ([segue.identifier isEqualToString:@"TripDetails"]) {
+        if ([segue.identifier isEqualToString:@"AddPhotos"]) {
+            UINavigationController *navigationController = segue.destinationViewController;
+            PageCoverViewController *dvc = [[navigationController viewControllers] objectAtIndex:0];
+            dvc.urls = self.urls;
+        } else {
             
-            //Get item at selected path
-            NSArray *indexPaths = [self.collectionView indexPathsForSelectedItems];
-            NSIndexPath *index = [indexPaths objectAtIndex:0];
-            _chosenIndex = index.item;
-            dvc.selectedTrip = [_tripsJournal objectAtIndex:index.item];
-        } else if ([segue.identifier isEqualToString:@"AddTrip"]) {
-            dvc.selectedTrip = [[Trip alloc] init];
-            _chosenIndex = _tripsJournal.count;
+            //Get destination view controller
+            UINavigationController *navigationController = segue.destinationViewController;
+            TripCollectionViewController *dvc = [[navigationController viewControllers] objectAtIndex:0];
+            
+            //If a Trip is selected. Otherwise +Trip was selected.
+            if ([segue.identifier isEqualToString:@"TripDetails"]) {
+                
+                //Get item at selected path
+                NSArray *indexPaths = [self.collectionView indexPathsForSelectedItems];
+                NSIndexPath *index = [indexPaths objectAtIndex:0];
+                _chosenIndex = index.item;
+                dvc.selectedTrip = [_tripsJournal objectAtIndex:index.item];
+            } else if ([segue.identifier isEqualToString:@"AddTrip"]) {
+                dvc.selectedTrip = [[Trip alloc] init];
+                _chosenIndex = _tripsJournal.count;
+            }
         }
     }
 }
 
+- (IBAction)quickAdd:(id)sender {
+    
+    ELCImagePickerController *elcPicker = [[ELCImagePickerController alloc] initImagePicker];
+    elcPicker.maximumImagesCount = 40;
+    elcPicker.returnsOriginalImage = NO; //Only return the fullScreenImage, not the fullResolutionImage
+	elcPicker.imagePickerDelegate = self;
+    
+    [self presentViewController:elcPicker animated:YES completion:nil];
+}
+
+#pragma mark -
+#pragma mark ELCImagePickerControllerDelegate
+- (void)elcImagePickerController:(ELCImagePickerController *)picker didFinishPickingMediaWithInfo:(NSArray *)info {
+    [self dismissViewControllerAnimated:YES completion:^{[self processElcData:info];}];
+}
+
+- (void)elcImagePickerControllerDidCancel:(ELCImagePickerController *)picker {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)processElcData: (NSArray *)info{
+    _urls = [NSMutableArray arrayWithCapacity:[info count]];
+    for (NSDictionary *dict in info) {
+        NSURL *assetURL = [dict objectForKey:UIImagePickerControllerReferenceURL];
+        [_urls addObject:assetURL];
+	}
+    [self performSegueWithIdentifier:@"AddPhotos" sender:self];
+}
+
+
+
 - (IBAction)unwindToJournal:(UIStoryboardSegue *)unwindSegue
 {
-    
     TripCollectionViewController *source = [unwindSegue sourceViewController];
     Trip *item = source.selectedTrip;
     if (source.newTrip || (source.editedTrip && (_chosenIndex == _tripsJournal.count))) {
@@ -198,7 +302,7 @@ NSIndexPath *deletePath;
 }
 
 - (IBAction)cancel:(UIStoryboardSegue *)unwindSegue {
-    
+    //Do nothing.
 }
 
 @end

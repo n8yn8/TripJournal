@@ -9,6 +9,12 @@
 #import "QuickTripTableViewController.h"
 #import "TripsDatabase.h"
 #import "Trip.h"
+#import "QuickPlaceTableViewController.h"
+#import "NewTripViewController.h"
+#import "GAI.h"
+#import "GAIFields.h"
+#import "GAITracker.h"
+#import "GAIDictionaryBuilder.h"
 
 @interface QuickTripTableViewController ()
 
@@ -30,6 +36,13 @@ NSMutableArray *tripsJournal;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    // This screen name value will remain set on the tracker and sent with
+    // hits until it is set to a new value or to nil.
+    [[GAI sharedInstance].defaultTracker set:kGAIScreenName value:@"QuickTripTableView"];
+    // Send the screen view.
+    [[GAI sharedInstance].defaultTracker
+     send:[[GAIDictionaryBuilder createScreenView] build]];
     
     tripsJournal = [TripsDatabase database].tripsJournal;
     
@@ -74,7 +87,7 @@ NSMutableArray *tripsJournal;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    _selectedTrip = [tripsJournal objectAtIndex:indexPath.row];
+    
 }
 
 /*
@@ -115,13 +128,36 @@ NSMutableArray *tripsJournal;
 }
 */
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    if ([segue.identifier isEqualToString:@"tripSelected"]){
+        NSIndexPath *selectedIndexPath = [self.tableView indexPathForSelectedRow];
+        _selectedTrip = [tripsJournal objectAtIndex:selectedIndexPath.row];
+        NSLog(@"Selected Trip name = %@", _selectedTrip.name );
+        NSLog(@"prepareForSegue tripId = %lld", _selectedTrip.uniqueId);
+        UINavigationController *navigationController = segue.destinationViewController;
+        QuickPlaceTableViewController *dvc = [[navigationController viewControllers] objectAtIndex:0];
+        dvc.selectedTrip = _selectedTrip;
+    } else if ([segue.identifier isEqualToString:@"newTrip"]){
+        Trip *newTrip = [[Trip alloc] init];
+        UINavigationController *navigationController = segue.destinationViewController;
+        NewTripViewController *dvc = [[navigationController viewControllers] objectAtIndex:0];
+        dvc.trip = newTrip;
+    }
 }
-*/
 
+- (IBAction)backToTrip:(UIStoryboardSegue *)unwindSegue {
+}
+
+- (IBAction)newTripMade:(UIStoryboardSegue *)unwindSegue {
+    NewTripViewController *source = [unwindSegue sourceViewController];
+    if (source.isTripSaved) {
+        [tripsJournal addObject:source.trip];
+        [self.tableView reloadData];
+    }
+}
 @end

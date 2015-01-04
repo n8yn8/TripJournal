@@ -8,10 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "Place.h"
+#import "Trip.h"
 
 @interface QuickPlaceTableViewController : UITableViewController
 
-@property (nonatomic, strong) NSNumber *tripId;
+@property (nonatomic, strong) Trip *selectedTrip;
 @property (nonatomic, strong) Place *selectedPlace;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *backButton;
 
 @end

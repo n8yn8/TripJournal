@@ -10,16 +10,20 @@
 #import "JournalCollectionHeaderView.h"
 #import "MyAnnotation.h"
 #import "TripCollectionViewController.h"
+#import "ELCImagePickerController.h"
 #import <sqlite3.h>
 
-@interface TripJournalCollectionViewController : UICollectionViewController {
+@interface TripJournalCollectionViewController : UICollectionViewController <ELCImagePickerControllerDelegate, UINavigationControllerDelegate, UIAlertViewDelegate> {
     NSMutableArray *_tripsJournal;
 }
+
 
 @property (nonatomic, retain) NSMutableArray *tripsJournal;
 @property NSMutableArray *journalEntries;
 @property NSInteger chosenIndex;
 
+- (IBAction)quickAdd:(id)sender;
+@property (strong, nonatomic) NSMutableArray *urls;
 
 - (IBAction)unwindToJournal:(UIStoryboardSegue *)unwindSegue;
 - (IBAction)unwindToHome:(UIStoryboardSegue *)unwindSegue;

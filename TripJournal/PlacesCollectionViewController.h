@@ -11,6 +11,7 @@
 #import "PlacesCollectionHeaderView.h"
 #import "MemoryViewController.h"
 #import "Memory.h"
+#import "Trip.h"
 
 @interface PlacesCollectionViewController : UICollectionViewController
 {
@@ -20,6 +21,7 @@
 @property (nonatomic, assign, getter=isNewTrip) BOOL newPlace;
 @property (nonatomic, retain) NSMutableArray *memoriesJournal;
 @property (nonatomic, strong) Place *selectedPlace;
+@property (nonatomic, strong) Trip *selectedTrip;
 @property (nonatomic, strong) NSDate *tempStartDate;
 @property (nonatomic, strong) NSDate *tempEndDate;
 @property (nonatomic, strong) NSString *placeCoverImage;

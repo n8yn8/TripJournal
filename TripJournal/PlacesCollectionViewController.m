@@ -9,6 +9,10 @@
 #import "PlacesCollectionViewController.h"
 #import "TripsDatabase.h"
 #import <AssetsLibrary/AssetsLibrary.h>
+#import "GAI.h"
+#import "GAIFields.h"
+#import "GAITracker.h"
+#import "GAIDictionaryBuilder.h"
 
 @interface PlacesCollectionViewController ()
 
@@ -34,6 +38,13 @@ NSIndexPath *deletePath;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    // This screen name value will remain set on the tracker and sent with
+    // hits until it is set to a new value or to nil.
+    [[GAI sharedInstance].defaultTracker set:kGAIScreenName value:@"PlacesCollectionView"];
+    // Send the screen view.
+    [[GAI sharedInstance].defaultTracker
+     send:[[GAIDictionaryBuilder createScreenView] build]];
     
     self.memoriesJournal = [[TripsDatabase database] memoriesJournal:[NSNumber numberWithLongLong:_selectedPlace.uniqueId]];
     _chosenIndex = -1;
@@ -69,7 +80,7 @@ NSIndexPath *deletePath;
         
         UIAlertView *alert = [[UIAlertView alloc]
                               initWithTitle: @"Delete"
-                              message: @"Delete the selected Memory?"
+                              message: @"Delete the selected Memory? Only the reference to any photos will be deleted, not your original in the Photo Roll"
                               delegate: self
                               cancelButtonTitle:@"Cancel"
                               otherButtonTitles:@"OK", nil];
@@ -108,6 +119,7 @@ NSIndexPath *deletePath;
         ALAssetsLibraryAssetForURLResultBlock resultblock = ^(ALAsset *myasset)
         {
             [menuPhotoView setImage:[UIImage imageWithCGImage:[myasset thumbnail]]];
+            [menuPhotoView setContentMode:UIViewContentModeScaleAspectFit];
         };
         
         ALAssetsLibraryAccessFailureBlock failureblock  = ^(NSError *myerror)
@@ -254,11 +266,15 @@ NSIndexPath *deletePath;
             NSIndexPath *index = [indexPaths objectAtIndex:0];
             _chosenIndex = index.item;
             dvc.selectedMemory = [_memoriesJournal objectAtIndex: _chosenIndex];
+            dvc.selectedPlace = self.selectedPlace;
+            dvc.selectedTrip = self.selectedTrip;
             dvc.currentPlaceCover = self.placeCoverImage;
             dvc.currentTripCover = self.tripCoverImage;
         } else if ([segue.identifier isEqualToString:@"NewMemory"]) {
             dvc.selectedMemory = [[Memory alloc] init];
             dvc.selectedMemory.placeId = [NSNumber numberWithLongLong:self.selectedPlace.uniqueId];
+            dvc.selectedPlace = self.selectedPlace;
+            dvc.selectedTrip = self.selectedTrip;
             dvc.currentPlaceCover = self.placeCoverImage;
             dvc.currentTripCover = self.tripCoverImage;
         }
