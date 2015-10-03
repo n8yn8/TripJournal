@@ -189,7 +189,7 @@ static const CGFloat LANDSCAPE_KEYBOARD_HEIGHT = 162;
 
 -(BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     NSUInteger length = _memoryName.text.length - range.length + string.length;
-    if (length > 0) {
+    if (length > 0 || _currentImage) {
         _headBack.title = @"Save";
     } else {
         _headBack.title = @"Cancel";

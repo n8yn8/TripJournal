@@ -43,9 +43,9 @@ NSMutableArray *placesJournal;
      send:[[GAIDictionaryBuilder createScreenView] build]];
     
     self.navigationItem.title = _selectedTrip.name;
+    self.navigationItem.prompt = @"Select a Place";
     
     placesJournal = [[TripsDatabase database] placesJournal: [NSNumber numberWithLongLong:_selectedTrip.uniqueId]];
-    NSLog(@"QuickPlace tripId = %lld", _selectedTrip.uniqueId);
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
