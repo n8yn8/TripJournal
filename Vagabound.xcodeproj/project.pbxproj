@@ -438,7 +438,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = TripJournal;
-				LastUpgradeCheck = 0510;
+				LastUpgradeCheck = 0720;
 				ORGANIZATIONNAME = "Nathan Condell";
 				TargetAttributes = {
 					4370B7F11898D38F00907C5D = {
@@ -600,6 +600,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -661,13 +662,14 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TripJournal/Vagabound-Prefix.pch";
 				INFOPLIST_FILE = "TripJournal/Vagabound-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/TripJournal",
 					/Users/Nate/Documents/Development/SDKs/GoogleAnalyticsServicesiOS_3.08,
 					"$(PROJECT_DIR)/TripJournal/Library",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.n8yn8.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = Vagabound;
 				PROVISIONING_PROFILE = "9A45E465-0041-47C0-A43E-17DB014E606F";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -684,13 +686,14 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TripJournal/Vagabound-Prefix.pch";
 				INFOPLIST_FILE = "TripJournal/Vagabound-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/TripJournal",
 					/Users/Nate/Documents/Development/SDKs/GoogleAnalyticsServicesiOS_3.08,
 					"$(PROJECT_DIR)/TripJournal/Library",
 				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.n8yn8.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = Vagabound;
 				PROVISIONING_PROFILE = "9A45E465-0041-47C0-A43E-17DB014E606F";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -714,6 +717,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "TripJournalTests/VagaboundTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mm214.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = VagaboundTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
@@ -732,6 +736,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "TripJournal/TripJournal-Prefix.pch";
 				INFOPLIST_FILE = "TripJournalTests/VagaboundTests-Info.plist";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.mm214.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = VagaboundTests;
 				TEST_HOST = "$(BUNDLE_LOADER)";
 				WRAPPER_EXTENSION = xctest;
