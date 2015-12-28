@@ -251,9 +251,8 @@ NSUserDefaults *defaults;
 
 - (IBAction)quickAdd:(id)sender {
     
-    ELCImagePickerController *elcPicker = [[ELCImagePickerController alloc] initImagePicker];
+    ELCImagePickerController *elcPicker = [[ELCImagePickerController alloc] init];
     elcPicker.maximumImagesCount = 40;
-    elcPicker.returnsOriginalImage = NO; //Only return the fullScreenImage, not the fullResolutionImage
 	elcPicker.imagePickerDelegate = self;
     
     [self presentViewController:elcPicker animated:YES completion:nil];
